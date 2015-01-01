@@ -10,17 +10,14 @@
 		8EED7B460EA708EA1A8923B8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2870EDA7E24441B6BE243479 /* libPods.a */; };
 		A660769E1A4913AE0039B61D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A660769D1A4913AE0039B61D /* AppDelegate.swift */; };
 		A66076A01A4913AE0039B61D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A660769F1A4913AE0039B61D /* LoginViewController.swift */; };
-		A66076A31A4913AE0039B61D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A66076A11A4913AE0039B61D /* Main.storyboard */; };
 		A66076A51A4913AE0039B61D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A66076A41A4913AE0039B61D /* Images.xcassets */; };
 		A66076A81A4913AE0039B61D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A66076A61A4913AE0039B61D /* LaunchScreen.xib */; };
 		A66076B41A4913AE0039B61D /* seatedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66076B31A4913AE0039B61D /* seatedTests.swift */; };
-		A66076BE1A4D60290039B61D /* ApplicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66076BD1A4D60290039B61D /* ApplicationViewController.swift */; };
 		A66076C21A4EB5CD0039B61D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66076C11A4EB5CD0039B61D /* SignUpViewController.swift */; };
-		A66076C61A4EBC1D0039B61D /* IntroOneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66076C41A4EBC1D0039B61D /* IntroOneViewController.swift */; };
-		A66076C71A4EBC1D0039B61D /* IntroOneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A66076C51A4EBC1D0039B61D /* IntroOneViewController.xib */; };
-		A66076CC1A4EBC880039B61D /* IntroTwoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66076CA1A4EBC880039B61D /* IntroTwoViewController.swift */; };
-		A66076CD1A4EBC880039B61D /* IntroTwoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A66076CB1A4EBC880039B61D /* IntroTwoViewController.xib */; };
-		A6768C9E1A4ED86B0089DC80 /* IntroPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6768C9D1A4ED86B0089DC80 /* IntroPageViewController.swift */; };
+		A6CFF6031A53F4B900BBD8D3 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6CFF6021A53F4B900BBD8D3 /* Storyboard.storyboard */; };
+		A6CFF6051A53FB2E00BBD8D3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CFF6041A53FB2E00BBD8D3 /* RootViewController.swift */; };
+		A6CFF60E1A54CCED00BBD8D3 /* IntroContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CFF60C1A54CCED00BBD8D3 /* IntroContentViewController.swift */; };
+		A6CFF60F1A54CCED00BBD8D3 /* IntroContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CFF60D1A54CCED00BBD8D3 /* IntroContentViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,20 +37,17 @@
 		A660769C1A4913AE0039B61D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A660769D1A4913AE0039B61D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A660769F1A4913AE0039B61D /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		A66076A21A4913AE0039B61D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A66076A41A4913AE0039B61D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A66076A71A4913AE0039B61D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		A66076AD1A4913AE0039B61D /* seatedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = seatedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A66076B21A4913AE0039B61D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A66076B31A4913AE0039B61D /* seatedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = seatedTests.swift; sourceTree = "<group>"; };
-		A66076BD1A4D60290039B61D /* ApplicationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationViewController.swift; sourceTree = "<group>"; };
 		A66076C11A4EB5CD0039B61D /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		A66076C41A4EBC1D0039B61D /* IntroOneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IntroOneViewController.swift; path = "Intro Flow/IntroOneViewController.swift"; sourceTree = "<group>"; };
-		A66076C51A4EBC1D0039B61D /* IntroOneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = IntroOneViewController.xib; path = "Intro Flow/IntroOneViewController.xib"; sourceTree = "<group>"; };
-		A66076CA1A4EBC880039B61D /* IntroTwoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IntroTwoViewController.swift; path = "Intro Flow/IntroTwoViewController.swift"; sourceTree = "<group>"; };
-		A66076CB1A4EBC880039B61D /* IntroTwoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = IntroTwoViewController.xib; path = "Intro Flow/IntroTwoViewController.xib"; sourceTree = "<group>"; };
-		A6768C9D1A4ED86B0089DC80 /* IntroPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = IntroPageViewController.swift; path = "Intro Flow/IntroPageViewController.swift"; sourceTree = "<group>"; };
 		A6768CAA1A5123C30089DC80 /* seated-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "seated-Bridging-Header.h"; sourceTree = "<group>"; };
+		A6CFF6021A53F4B900BBD8D3 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		A6CFF6041A53FB2E00BBD8D3 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		A6CFF60C1A54CCED00BBD8D3 /* IntroContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroContentViewController.swift; sourceTree = "<group>"; };
+		A6CFF60D1A54CCED00BBD8D3 /* IntroContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroContentViewController.xib; sourceTree = "<group>"; };
 		AF58CAAD5538563E7608E5C3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,14 +112,14 @@
 			children = (
 				A66076C31A4EBBEC0039B61D /* Intro Flow */,
 				A660769D1A4913AE0039B61D /* AppDelegate.swift */,
-				A66076BD1A4D60290039B61D /* ApplicationViewController.swift */,
 				A660769F1A4913AE0039B61D /* LoginViewController.swift */,
 				A66076C11A4EB5CD0039B61D /* SignUpViewController.swift */,
-				A66076A11A4913AE0039B61D /* Main.storyboard */,
+				A6CFF6021A53F4B900BBD8D3 /* Storyboard.storyboard */,
 				A66076A41A4913AE0039B61D /* Images.xcassets */,
 				A66076A61A4913AE0039B61D /* LaunchScreen.xib */,
 				A660769B1A4913AE0039B61D /* Supporting Files */,
 				A6768CAA1A5123C30089DC80 /* seated-Bridging-Header.h */,
+				A6CFF6041A53FB2E00BBD8D3 /* RootViewController.swift */,
 			);
 			path = seated;
 			sourceTree = "<group>";
@@ -158,11 +152,8 @@
 		A66076C31A4EBBEC0039B61D /* Intro Flow */ = {
 			isa = PBXGroup;
 			children = (
-				A66076C41A4EBC1D0039B61D /* IntroOneViewController.swift */,
-				A66076C51A4EBC1D0039B61D /* IntroOneViewController.xib */,
-				A66076CA1A4EBC880039B61D /* IntroTwoViewController.swift */,
-				A66076CB1A4EBC880039B61D /* IntroTwoViewController.xib */,
-				A6768C9D1A4ED86B0089DC80 /* IntroPageViewController.swift */,
+				A6CFF60C1A54CCED00BBD8D3 /* IntroContentViewController.swift */,
+				A6CFF60D1A54CCED00BBD8D3 /* IntroContentViewController.xib */,
 			);
 			name = "Intro Flow";
 			sourceTree = "<group>";
@@ -249,11 +240,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A66076C71A4EBC1D0039B61D /* IntroOneViewController.xib in Resources */,
-				A66076A31A4913AE0039B61D /* Main.storyboard in Resources */,
-				A66076CD1A4EBC880039B61D /* IntroTwoViewController.xib in Resources */,
+				A6CFF60F1A54CCED00BBD8D3 /* IntroContentViewController.xib in Resources */,
 				A66076A81A4913AE0039B61D /* LaunchScreen.xib in Resources */,
 				A66076A51A4913AE0039B61D /* Images.xcassets in Resources */,
+				A6CFF6031A53F4B900BBD8D3 /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,13 +294,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A6768C9E1A4ED86B0089DC80 /* IntroPageViewController.swift in Sources */,
-				A66076CC1A4EBC880039B61D /* IntroTwoViewController.swift in Sources */,
 				A66076A01A4913AE0039B61D /* LoginViewController.swift in Sources */,
 				A660769E1A4913AE0039B61D /* AppDelegate.swift in Sources */,
 				A66076C21A4EB5CD0039B61D /* SignUpViewController.swift in Sources */,
-				A66076C61A4EBC1D0039B61D /* IntroOneViewController.swift in Sources */,
-				A66076BE1A4D60290039B61D /* ApplicationViewController.swift in Sources */,
+				A6CFF60E1A54CCED00BBD8D3 /* IntroContentViewController.swift in Sources */,
+				A6CFF6051A53FB2E00BBD8D3 /* RootViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,14 +321,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		A66076A11A4913AE0039B61D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				A66076A21A4913AE0039B61D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		A66076A61A4913AE0039B61D /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (

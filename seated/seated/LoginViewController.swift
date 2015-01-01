@@ -13,7 +13,6 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var signinButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,8 +23,7 @@ class LoginViewController: UIViewController {
         }
     }
 
-
-    @IBAction func signIn(sender: AnyObject) {
+    @IBAction func loginIn(sender: AnyObject) {
         
         PFUser.logInWithUsernameInBackground(self.emailTextField.text, password: self.passwordTextField.text) { (user, error) -> Void in
             if error == nil {

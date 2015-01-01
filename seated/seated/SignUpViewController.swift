@@ -15,8 +15,6 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var lastNameTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-
-    @IBOutlet weak var createAccountButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +32,7 @@ class SignUpViewController: UIViewController {
 
         newUser.signUpInBackgroundWithBlock { (success, error) -> Void in
             if success {
-                println("signup success!")
+                self.performSegueWithIdentifier("paymentsSegue", sender: self)
             }
             else {
                 println(error)

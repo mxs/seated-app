@@ -12,7 +12,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q0O-4O-eWR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-257" y="-52"/>
+            <point key="canvasLocation" x="-183" y="735"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="Hga-qe-DIL">
@@ -65,12 +65,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iKE-3S-6tQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="218" y="-57"/>
+            <point key="canvasLocation" x="200" y="-52"/>
         </scene>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="7Av-7u-7NO">
             <objects>
-                <viewController id="KT4-bl-0rq" sceneMemberID="viewController">
+                <viewController id="KT4-bl-0rq" customClass="LoginViewController" customModule="seated" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hKS-jq-5oi"/>
                         <viewControllerLayoutGuide type="bottom" id="1jl-7v-C0g"/>
@@ -90,6 +90,9 @@
                                 <state key="normal" title="Log In">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="loginIn:" destination="KT4-bl-0rq" eventType="touchUpInside" id="j0C-3o-3Gg"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wtb-iR-ESu">
                                 <rect key="frame" x="16" y="286" width="117" height="30"/>
@@ -109,14 +112,40 @@
                                     <segue destination="sV1-Xx-cng" kind="showDetail" id="YXN-d6-azq"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cCV-hJ-FUl">
+                                <rect key="frame" x="22" y="66" width="47" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zqe-r4-pg9">
+                                <rect key="frame" x="22" y="104" width="81" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jeA-dQ-Kdp">
+                                <rect key="frame" x="117" y="100" width="187" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hb6-Ke-0rC">
+                                <rect key="frame" x="117" y="62" width="187" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="hb6-Ke-0rC" id="LW4-rc-fRb"/>
+                        <outlet property="passwordTextField" destination="jeA-dQ-Kdp" id="KAc-SZ-Cda"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uJ1-TB-4O2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="686" y="27"/>
+            <point key="canvasLocation" x="692" y="-52"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="CJx-PZ-Aio">
@@ -162,12 +191,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ms-rF-BvW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1154" y="27"/>
+            <point key="canvasLocation" x="1124" y="-52"/>
         </scene>
-        <!--View Controller-->
+        <!--Sign Up View Controller-->
         <scene sceneID="eib-kD-My6">
             <objects>
-                <viewController id="sV1-Xx-cng" sceneMemberID="viewController">
+                <viewController id="sV1-Xx-cng" customClass="SignUpViewController" customModule="seated" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="LML-TG-gJ7"/>
                         <viewControllerLayoutGuide type="bottom" id="z7e-sj-HRs"/>
@@ -182,7 +211,8 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="nyx-mZ-Ew3" kind="show" id="WWK-1Z-2Kh"/>
+                                    <action selector="createAccount:" destination="sV1-Xx-cng" eventType="touchUpInside" id="cEH-Vo-mXd"/>
+                                    <segue destination="nyx-mZ-Ew3" kind="show" identifier="paymentsSegue" id="WWK-1Z-2Kh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ppI-n0-cMH">
@@ -194,12 +224,62 @@
                                     <segue destination="wdb-Gi-7sU" kind="unwind" unwindAction="prepareForSegueUnwind:" id="1d1-uD-VTV"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="First Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1zL-Ti-F1r">
+                                <rect key="frame" x="16" y="66" width="84" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Last Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U5R-JF-bgZ">
+                                <rect key="frame" x="16" y="105" width="83" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R5j-wm-Dvc">
+                                <rect key="frame" x="16" y="146" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TG4-tV-wjz">
+                                <rect key="frame" x="112" y="62" width="192" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EnU-iO-Ld2">
+                                <rect key="frame" x="112" y="101" width="192" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="muZ-N1-3kO">
+                                <rect key="frame" x="112" y="142" width="192" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8wl-gi-4Is">
+                                <rect key="frame" x="112" y="180" width="192" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xBa-2D-0qW">
+                                <rect key="frame" x="16" y="184" width="76" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <toolbarItems/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="muZ-N1-3kO" id="GdL-wc-6zT"/>
+                        <outlet property="firstNameTextField" destination="TG4-tV-wjz" id="hPR-md-BKs"/>
+                        <outlet property="lastNameTextField" destination="EnU-iO-Ld2" id="GnK-e7-csI"/>
+                        <outlet property="passwordTextField" destination="8wl-gi-4Is" id="4uc-DX-T0X"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K5f-t5-THj" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="wdb-Gi-7sU" userLabel="Exit" sceneMemberID="exit"/>
@@ -208,6 +288,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="fgN-bq-rfi"/>
+        <segue reference="YXN-d6-azq"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -1,21 +1,18 @@
 //
-//  IntroViewController.swift
+//  RestPasswordViewController.swift
 //  seated
 //
-//  Created by Michael Shang on 01/01/2015.
+//  Created by Michael Shang on 02/01/2015.
 //  Copyright (c) 2015 Michael Shang. All rights reserved.
 //
 
 import UIKit
 
-class IntroContentViewController: UIViewController {
+class RestPasswordViewController: UIViewController {
 
-    @IBOutlet weak var introLabel: UILabel!
-    
-    var introCopy:String?
+    @IBOutlet weak var emailTextField: UITextField!
     
     override func viewDidLoad() {
-        self.introLabel.text = self.introCopy
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -24,6 +21,10 @@ class IntroContentViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+
+    @IBAction func resetPassword(sender: AnyObject) {
     }
     
 }

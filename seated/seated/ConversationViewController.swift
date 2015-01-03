@@ -1,21 +1,16 @@
 //
-//  IntroViewController.swift
+//  ConversationViewController.swift
 //  seated
 //
-//  Created by Michael Shang on 01/01/2015.
+//  Created by Michael Shang on 03/01/2015.
 //  Copyright (c) 2015 Michael Shang. All rights reserved.
 //
 
 import UIKit
 
-class IntroContentViewController: UIViewController {
+class ConversationViewController: UIViewController {
 
-    @IBOutlet weak var introLabel: UILabel!
-    
-    var introCopy:String?
-    
     override func viewDidLoad() {
-        self.introLabel.text = self.introCopy
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
@@ -26,4 +21,9 @@ class IntroContentViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+
+    @IBAction func logout(sender: AnyObject) {
+        PFUser.logOut()
+        self.performSegueWithIdentifier("logoutSegue", sender: self)
+    }
 }

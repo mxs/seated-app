@@ -22,7 +22,6 @@ class RootViewController: UIViewController, UIPageViewControllerDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.vcs = self.createIntroContentViewControllers()
         self.pageControl.numberOfPages = self.introContentVCs.count
         if let pageVC = self.pageViewController {
             pageVC.setViewControllers([self.introContentVCs[0]], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
@@ -66,7 +65,6 @@ class RootViewController: UIViewController, UIPageViewControllerDataSource {
         var introContentVCs:[IntroContentViewController] = []
         for text in introTexts {
             var introContentVC = IntroContentViewController(nibName: "IntroContentViewController", bundle:NSBundle.mainBundle())
-            println(introContentVC.introLabel)
             introContentVC.introCopy = text
             introContentVCs.append(introContentVC)
         }

@@ -141,16 +141,17 @@
                     <connections>
                         <outlet property="emailTextField" destination="hb6-Ke-0rC" id="LW4-rc-fRb"/>
                         <outlet property="passwordTextField" destination="jeA-dQ-Kdp" id="KAc-SZ-Cda"/>
+                        <segue destination="e57-7E-9re" kind="show" identifier="loginSuccessSegue" id="hPp-1l-ybO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uJ1-TB-4O2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="692" y="-52"/>
         </scene>
-        <!--View Controller-->
+        <!--Payment View Controller-->
         <scene sceneID="CJx-PZ-Aio">
             <objects>
-                <viewController id="nyx-mZ-Ew3" sceneMemberID="viewController">
+                <viewController id="nyx-mZ-Ew3" customClass="PaymentViewController" customModule="seated" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Amk-t2-kRm"/>
                         <viewControllerLayoutGuide type="bottom" id="I50-da-MmJ"/>
@@ -160,13 +161,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Qz-7A-r3R">
-                                <rect key="frame" x="140" y="409" width="41" height="30"/>
+                                <rect key="frame" x="148" y="156" width="41" height="30"/>
                                 <state key="normal" title="Finish">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.99213939910000004" green="0.15624010560000001" blue="0.1387524903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
@@ -174,10 +175,43 @@
             </objects>
             <point key="canvasLocation" x="686" y="735"/>
         </scene>
-        <!--View Controller-->
+        <!--Conversation View Controller-->
+        <scene sceneID="X2t-Yg-Wdn">
+            <objects>
+                <viewController storyboardIdentifier="conversationViewController" id="e57-7E-9re" customClass="ConversationViewController" customModule="seated" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1iC-Qx-5VD"/>
+                        <viewControllerLayoutGuide type="bottom" id="Q6D-jP-Yta"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Niw-OO-ft1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qwM-aw-nEv">
+                                <rect key="frame" x="137" y="225" width="49" height="30"/>
+                                <state key="normal" title="Logout">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="logout:" destination="e57-7E-9re" eventType="touchUpInside" id="KrE-fa-bTJ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <segue destination="KT4-bl-0rq" kind="show" identifier="logoutSegue" id="8t6-N6-4gN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Nv-OG-R6t" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1233" y="690"/>
+        </scene>
+        <!--Rest Password View Controller-->
         <scene sceneID="9wn-Q8-cJr">
             <objects>
-                <viewController id="HNg-Dj-UL5" sceneMemberID="viewController">
+                <viewController id="HNg-Dj-UL5" customClass="RestPasswordViewController" customModule="seated" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8CJ-gZ-3tI"/>
                         <viewControllerLayoutGuide type="bottom" id="yZU-sG-EIN"/>
@@ -185,9 +219,28 @@
                     <view key="view" contentMode="scaleToFill" id="vga-mT-AJX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="57c-GY-4xb">
+                                <rect key="frame" x="104" y="248" width="112" height="30"/>
+                                <state key="normal" title="Reset Password">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetPassword:" destination="HNg-Dj-UL5" eventType="touchUpInside" id="qpL-3h-vxR"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gkW-ab-tPQ">
+                                <rect key="frame" x="27" y="106" width="277" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="emailTextField" destination="gkW-ab-tPQ" id="2ew-Z2-LOd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Ms-rF-BvW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -212,7 +265,7 @@
                                 </state>
                                 <connections>
                                     <action selector="createAccount:" destination="sV1-Xx-cng" eventType="touchUpInside" id="cEH-Vo-mXd"/>
-                                    <segue destination="nyx-mZ-Ew3" kind="show" identifier="paymentsSegue" id="WWK-1Z-2Kh"/>
+                                    <segue destination="nyx-mZ-Ew3" kind="show" id="XhR-7B-2s9"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ppI-n0-cMH">
@@ -288,6 +341,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="8t6-N6-4gN"/>
         <segue reference="YXN-d6-azq"/>
     </inferredMetricsTieBreakers>
 </document>

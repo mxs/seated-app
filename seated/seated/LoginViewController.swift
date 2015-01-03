@@ -28,9 +28,10 @@ class LoginViewController: UIViewController {
         PFUser.logInWithUsernameInBackground(self.emailTextField.text, password: self.passwordTextField.text) { (user, error) -> Void in
             if error == nil {
                 println("login success")
-                SKTUser.currentUser().firstName = user["firstName"] as String
-                SKTUser.currentUser().lastName = user["lastName"] as String
-                SupportKit.show()
+//                SKTUser.currentUser().firstName = user["firstName"] as String
+//                SKTUser.currentUser().lastName = user["lastName"] as String
+//                SupportKit.show()
+                self.performSegueWithIdentifier("loginSuccessSegue", sender: self)
             }
         }
         

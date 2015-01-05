@@ -161,15 +161,22 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Qz-7A-r3R">
-                                <rect key="frame" x="148" y="156" width="41" height="30"/>
+                                <rect key="frame" x="140" y="210" width="41" height="30"/>
                                 <state key="normal" title="Finish">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="finishPayment:" destination="nyx-mZ-Ew3" eventType="touchUpInside" id="RwU-lF-XAJ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.99213939910000004" green="0.15624010560000001" blue="0.1387524903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="finishButton" destination="9Qz-7A-r3R" id="U6s-s9-Dm3"/>
+                        <segue destination="e57-7E-9re" kind="showDetail" identifier="paymentSetupSuccessSegue" id="VkK-Ge-RjD"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k8b-ai-I4l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -264,8 +271,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="createAccount:" destination="sV1-Xx-cng" eventType="touchUpInside" id="cEH-Vo-mXd"/>
-                                    <segue destination="nyx-mZ-Ew3" kind="show" id="XhR-7B-2s9"/>
+                                    <segue destination="nyx-mZ-Ew3" kind="show" id="0pL-aq-jkC"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ppI-n0-cMH">
@@ -341,7 +347,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="8t6-N6-4gN"/>
+        <segue reference="VkK-Ge-RjD"/>
         <segue reference="YXN-d6-azq"/>
+        <segue reference="8t6-N6-4gN"/>
     </inferredMetricsTieBreakers>
 </document>

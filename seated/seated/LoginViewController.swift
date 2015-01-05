@@ -33,6 +33,9 @@ class LoginViewController: UIViewController {
 //                SupportKit.show()
                 self.performSegueWithIdentifier("loginSuccessSegue", sender: self)
             }
+            else {
+                //TODO: handle login fail error
+            }
         }
         
     }

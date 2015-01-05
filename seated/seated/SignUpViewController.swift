@@ -18,26 +18,18 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
 
-    @IBAction func createAccount(sender: UIButton) {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         var newUser:PFUser = PFUser()
         newUser.username = emailTextField.text
         newUser.email = emailTextField.text
         newUser.password = passwordTextField.text
         newUser["firstName"] = firstNameTextField.text
         newUser["lastName"] = lastNameTextField.text
-
-        newUser.signUpInBackgroundWithBlock { (success, error) -> Void in
-            if success {
-                self.performSegueWithIdentifier("paymentsSegue", sender: self)
-            }
-            else {
-                println(error)
-            }
-
+        
+        if segue.destinationViewController.isKindOfClass(PaymentViewController) {
+            (segue.destinationViewController as PaymentViewController).newUser = newUser
         }
         
     }

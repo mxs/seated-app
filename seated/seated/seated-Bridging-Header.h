@@ -4,3 +4,4 @@
 #import <Parse/Parse.h>
 #import <SupportKit/SupportKit.h>
 #import "PTKView.h"
+#import <Stripe/Stripe.h>

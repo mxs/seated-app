@@ -73,6 +73,8 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
                     self.newUser?.signUpInBackgroundWithBlock({ (success, error) -> Void in
                         if success {
                             //:TODO show alert with success then segue
+                            
+                            self.createFirebaseUser(self.newUser!)
                             self.performSegueWithIdentifier("paymentSetupSuccessSegue", sender: self)
                         }
                         else {
@@ -82,5 +84,15 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
                 }
             }
         }
+    }
+    
+    func createFirebaseUser(user:PFUser) -> Void {
+        let stripeIdKey = "stripeCustomerId"
+        let usersRef = Firebase(url:"https://seatedapp.firebaseio.com/\(user[stripeIdKey])")
+        usersRef.setValue([
+            "email":user.email,
+            "firstName:":user["firstName"],
+            "lastName:":user["lastName"]
+        ])
     }
 }

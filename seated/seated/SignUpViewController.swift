@@ -21,12 +21,12 @@ class SignUpViewController: UIViewController {
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        var newUser:PFUser = PFUser()
+        var newUser = SeatedUser()
         newUser.username = emailTextField.text
         newUser.email = emailTextField.text
         newUser.password = passwordTextField.text
-        newUser["firstName"] = firstNameTextField.text
-        newUser["lastName"] = lastNameTextField.text
+        newUser.firstName = firstNameTextField.text
+        newUser.lastName = lastNameTextField.text
         
         if segue.destinationViewController.isKindOfClass(PaymentViewController) {
             (segue.destinationViewController as PaymentViewController).newUser = newUser

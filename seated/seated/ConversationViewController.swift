@@ -8,24 +8,35 @@
 
 import UIKit
 
-class ConversationViewController: UIViewController {
+class ConversationViewController: JSQMessagesViewController {
     
     let seatbotId = "seatbot"
     let welcomeMessage = "Hi there, welcome to seated!"
     var stripeCustomerId:String!
     var messagesRef:Firebase!
+    var messages = [JSQMessage]()
+    var outgoingMessageBubbleImage:JSQMessagesBubbleImage!
+    var incomingMessageBubbleImage:JSQMessagesBubbleImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
 //        Firebase.setOption("persistence", to: true)
 
-        self.stripeCustomerId = PFUser.currentUser()["stripeCustomerId"] as String
+        self.stripeCustomerId = SeatedUser.currentUser().stripeCustomerId
+        self.title = "Lets get you seated!"
+        self.senderId = self.stripeCustomerId
+        self.senderDisplayName = SeatedUser.currentUser().displayName
+        self.outgoingMessageBubbleImage = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
+        self.incomingMessageBubbleImage = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
+        self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
+        self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
+
         self.setupFirebase()
     }
     
     @IBAction func sendMessage(send:AnyObject) {
-        self.messagesRef.childByAutoId().setValue(["sender":self.stripeCustomerId, "text":"stand by me"])
+        self.messagesRef.childByAutoId().setValue(["sender":self.stripeCustomerId, "text":"stand by me", "senderDisplayName":SeatedUser.currentUser().displayName])
     }
     
     @IBAction func logout(sender: AnyObject) {
@@ -51,7 +62,14 @@ class ConversationViewController: UIViewController {
     func observeMessagesForConversation(conversationId:String) -> Firebase {
         self.messagesRef = Firebase(url: "https://seatedapp.firebaseio.com/messages/\(conversationId)")
         self.messagesRef.observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) -> Void in
-            println(snapshot.value)
+              println(snapshot.value)
+            let senderId = snapshot.value["sender"] as String
+            let senderDisplayName = snapshot.value["senderDisplayName"] as String
+            let text = snapshot.value["text"] as String
+            let message = JSQMessage(senderId: senderId, displayName: senderDisplayName, text: text)
+            self.messages.append(message)
+            self.finishReceivingMessage()
+          
         })
         return self.messagesRef
     }
@@ -91,15 +109,61 @@ class ConversationViewController: UIViewController {
     }
     
     func generateConversationId(otherUserId:String) -> String {
-        let userStripeId = PFUser.currentUser()["stripeCustomerId"] as String
+        return self.stripeCustomerId < otherUserId ? "\(self.stripeCustomerId)-\(otherUserId)" : "\(otherUserId)-\(self.stripeCustomerId)"
+    }
+
+    
+    //MARK: - JSQMessageViewController Overrides
+    
+    override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
+        JSQSystemSoundPlayer.jsq_playMessageSentSound()
         
-        if userStripeId < otherUserId {
-            return userStripeId + "-" + otherUserId
+        self.messagesRef.childByAutoId().setValue(["sender":senderId, "text":text, "senderDisplayName":senderDisplayName])
+        
+        finishSendingMessage()
+    }
+    
+    
+    //MARK: - JSQMessagesCollectionViewDataSource
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
+        return self.messages[indexPath.item]
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageBubbleImageDataSource! {
+        let message = self.messages[indexPath.item] as JSQMessage
+        if message.senderId == self.senderId {
+            return self.outgoingMessageBubbleImage
         }
         else {
-            return otherUserId + "-" + userStripeId
+            return self.incomingMessageBubbleImage
         }
-
     }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource! {
+        return nil
+    }
+    
+    
+    //MARK: - UICollectionViewDataSource
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.messages.count
+    }
+    
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as JSQMessagesCollectionViewCell
+        let message = self.messages[indexPath.item] as JSQMessage
+        if message.senderId == self.senderId {
+            cell.textView.textColor = UIColor.blackColor()
+        }
+        else {
+            cell.textView.textColor = UIColor.whiteColor()
+        }
+        
+        cell.textView.linkTextAttributes = [NSForegroundColorAttributeName: cell.textView.textColor, NSUnderlineStyleAttributeName:1] //NSUnderlineStyle.StyleSingle
+        
+        return cell
+    }
+    
     
 }

@@ -13,7 +13,7 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
 
     @IBOutlet var paymentView:PTKView!
     @IBOutlet weak var finishButton: UIButton!
-    var newUser:PFUser?
+    var newUser:SeatedUser?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,7 +68,7 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
                 println(result)
                 
                 if self.newUser != nil {
-                    self.newUser!["stripeCustomerId"] = result["id"] as String
+                    self.newUser?.stripeCustomerId = result["id"] as String
                     
                     self.newUser?.signUpInBackgroundWithBlock({ (success, error) -> Void in
                         if success {
@@ -86,9 +86,8 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
         }
     }
     
-    func createFirebaseUser(user:PFUser) -> Void {
-        let stripeIdKey = "stripeCustomerId"
-        let usersRef = Firebase(url:"https://seatedapp.firebaseio.com/\(user[stripeIdKey])")
+    func createFirebaseUser(user:SeatedUser) -> Void {
+        let usersRef = Firebase(url:"https://seatedapp.firebaseio.com/\(user.stripeCustomerId)")
         usersRef.setValue([
             "email":user.email,
             "firstName:":user["firstName"],

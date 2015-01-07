@@ -208,9 +208,6 @@
                                 <state key="normal" title="Send">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="sendMessage:" destination="e57-7E-9re" eventType="touchUpInside" id="ucE-S7-kUD"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4fP-he-A2P">
                                 <rect key="frame" x="122" y="149" width="78" height="30"/>
@@ -235,6 +232,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="sendMessageButton" destination="WBD-jG-Sie" id="ZKG-ue-gIJ"/>
                         <segue destination="KT4-bl-0rq" kind="show" identifier="logoutSegue" id="8t6-N6-4gN"/>
                     </connections>
                 </viewController>

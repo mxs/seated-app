@@ -9,11 +9,11 @@
 import UIKit
 
 class ConversationViewController: UIViewController {
-
+    
     let seatbotId = "seatbot"
     let welcomeMessage = "Hi there, welcome to seated!"
-    var connected:Bool!
     var stripeCustomerId:String!
+    var messagesRef:Firebase!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,36 +21,24 @@ class ConversationViewController: UIViewController {
 //        Firebase.setOption("persistence", to: true)
 
         self.stripeCustomerId = PFUser.currentUser()["stripeCustomerId"] as String
-        
-        var connectedRef = Firebase(url:"https://seatedapp.firebaseio.com/.info/connected")
-        connectedRef.observeEventType(.Value, withBlock: { snapshot in
-            self.connected = snapshot.value as? Bool!
-            if self.connected != nil && self.connected! {
-                println("Connected")
-            } else {
-                println("Not connected")
-            }
-        })
-        
-//        let ref = Firebase(url:"https://seatedapp.firebaseio.com/conversations")
-//        ref.authAnonymouslyWithCompletionBlock { error, authData in
-//            if error != nil {
-//                println(error)
-//            }
-//            else {
-//                println(authData)
-//            }
-//        }
+        self.setupFirebase()
     }
     
     @IBAction func sendMessage(send:AnyObject) {
-        self.sendGreetingMessageFromSeatBot("cus_5SKZlCsS64s4iK-seatbot")
+        self.messagesRef.childByAutoId().setValue(["sender":self.stripeCustomerId, "text":"stand by me"])
     }
     
+    @IBAction func logout(sender: AnyObject) {
+        PFUser.logOut()
+        self.performSegueWithIdentifier("logoutSegue", sender: self)
+    }
+    
+    //TODO: Remove
     @IBAction func createConversation(sender: AnyObject) {
-        self.currentConversationExists()
+        self.setupFirebase()
     }
     
+    //TODO: Remove
     @IBAction func createBob(sender: AnyObject) {
         let usersRef = Firebase(url:"https://seatedapp.firebaseio.com/users/\(self.stripeCustomerId)")
         usersRef.setValue([
@@ -60,27 +48,29 @@ class ConversationViewController: UIViewController {
         ])
     }
     
-    func sendGreetingMessageFromSeatBot(conversationId:String) -> Void {
-        let messagesRef = Firebase(url: "https://seatedapp.firebaseio.com/messages/\(conversationId)")
-        messagesRef.observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) -> Void in
+    func observeMessagesForConversation(conversationId:String) -> Firebase {
+        self.messagesRef = Firebase(url: "https://seatedapp.firebaseio.com/messages/\(conversationId)")
+        self.messagesRef.observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) -> Void in
             println(snapshot.value)
         })
-        messagesRef.childByAutoId().setValue(["sender:":self.seatbotId, "text":self.welcomeMessage])
+        return self.messagesRef
     }
     
-    func currentConversationExists() -> Void {
+    // Sets up new user or starts listening to messages in current conversations
+    func setupFirebase() -> Void {
 
         let userConversationsRef = Firebase(url:"https://seatedapp.firebaseio.com/users/\(self.stripeCustomerId)/conversations")
         userConversationsRef.observeSingleEventOfType(FEventType.Value, withBlock: { (snapshot) -> Void in
             if snapshot.hasChildren() {
-                println(snapshot.value)
+                //assume only one conversation for user
+                let conversationId = (snapshot.value as NSDictionary).allKeys[0] as String
+                self.observeMessagesForConversation(conversationId)
             }
             else {
                 println("snapshot is empty")
                 self.startConversationWithSeatBot(userConversationsRef)
             }
         })
-        
     }
     
     func startConversationWithSeatBot(userConversationsRef:Firebase) -> Void {
@@ -92,6 +82,12 @@ class ConversationViewController: UIViewController {
         
         let conversationRef = Firebase(url: "https://seatedapp.firebaseio.com/conversations")
         conversationRef.childByAppendingPath("\(conversationId)/participants").setValue([self.stripeCustomerId:true, self.seatbotId:true])
+        
+        //sets self.messagesRef
+        self.observeMessagesForConversation(conversationId)
+        
+        //Send first welcome message
+        self.messagesRef.childByAutoId().setValue(["sender:":self.seatbotId, "text":self.welcomeMessage])
     }
     
     func generateConversationId(otherUserId:String) -> String {
@@ -106,9 +102,4 @@ class ConversationViewController: UIViewController {
 
     }
     
-
-    @IBAction func logout(sender: AnyObject) {
-        PFUser.logOut()
-        self.performSegueWithIdentifier("logoutSegue", sender: self)
-    }
 }

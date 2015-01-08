@@ -193,52 +193,14 @@
                     <view key="view" contentMode="scaleToFill" id="Niw-OO-ft1">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qwM-aw-nEv">
-                                <rect key="frame" x="137" y="225" width="49" height="30"/>
-                                <state key="normal" title="Logout">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="logout:" destination="e57-7E-9re" eventType="touchUpInside" id="KrE-fa-bTJ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WBD-jG-Sie">
-                                <rect key="frame" x="143" y="187" width="36" height="30"/>
-                                <state key="normal" title="Send">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4fP-he-A2P">
-                                <rect key="frame" x="122" y="149" width="78" height="30"/>
-                                <state key="normal" title="Create Bob">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="createBob:" destination="e57-7E-9re" eventType="touchUpInside" id="XQq-MU-Vmj"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O2e-13-ilQ">
-                                <rect key="frame" x="114" y="106" width="95" height="30"/>
-                                <state key="normal" title="Create Convo">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="createConversation:" destination="e57-7E-9re" eventType="touchUpInside" id="sOC-BM-0aA"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Qpu-nk-lA5"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <segue destination="KT4-bl-0rq" kind="show" identifier="logoutSegue" id="8t6-N6-4gN"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Nv-OG-R6t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1765" y="690"/>
+            <point key="canvasLocation" x="1767" y="735"/>
         </scene>
         <!--Rest Password View Controller-->
         <scene sceneID="9wn-Q8-cJr">
@@ -373,7 +335,7 @@
         <!--Navigation Controller-->
         <scene sceneID="PRC-Cm-PiV">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0Nr-Qa-J3X" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="conversationNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="0Nr-Qa-J3X" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TDI-ad-NId">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -386,12 +348,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s6O-iU-oWk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1233" y="690"/>
+            <point key="canvasLocation" x="1233" y="735"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="8t6-N6-4gN"/>
+        <segue reference="fgN-bq-rfi"/>
         <segue reference="hPp-1l-ybO"/>
-        <segue reference="YXN-d6-azq"/>
     </inferredMetricsTieBreakers>
 </document>

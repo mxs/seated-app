@@ -23,8 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var user = PFUser.currentUser()
         if (user != nil) {
             let storyBoard = UIStoryboard(name: "Storyboard", bundle: NSBundle.mainBundle())
-            let conversationVC = storyBoard.instantiateViewControllerWithIdentifier("conversationViewController") as UIViewController
-            self.window?.rootViewController = conversationVC
+            let conversationNavigationVC = storyBoard.instantiateViewControllerWithIdentifier("conversationNavigationController") as UINavigationController
+            self.window?.rootViewController = conversationNavigationVC
         }
         return true
     }

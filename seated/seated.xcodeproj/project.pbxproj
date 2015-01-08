@@ -15,6 +15,7 @@
 		A66076B41A4913AE0039B61D /* seatedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66076B31A4913AE0039B61D /* seatedTests.swift */; };
 		A66076C21A4EB5CD0039B61D /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66076C11A4EB5CD0039B61D /* SignUpViewController.swift */; };
 		A6657E551A5CE7C800B64EDA /* SeatedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6657E541A5CE7C800B64EDA /* SeatedUser.swift */; };
+		A6657E5A1A5E574E00B64EDA /* incoming-avatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6657E591A5E574E00B64EDA /* incoming-avatar@2x.png */; };
 		A6A240071A55262400E2327F /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A240061A55262400E2327F /* PaymentViewController.swift */; };
 		A6A240091A56A52700E2327F /* RestPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A240081A56A52700E2327F /* RestPasswordViewController.swift */; };
 		A6A2400B1A58004E00E2327F /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2400A1A58004E00E2327F /* ConversationViewController.swift */; };
@@ -48,6 +49,7 @@
 		A66076B31A4913AE0039B61D /* seatedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = seatedTests.swift; sourceTree = "<group>"; };
 		A66076C11A4EB5CD0039B61D /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		A6657E541A5CE7C800B64EDA /* SeatedUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeatedUser.swift; sourceTree = "<group>"; };
+		A6657E591A5E574E00B64EDA /* incoming-avatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "incoming-avatar@2x.png"; sourceTree = "<group>"; };
 		A6768CAA1A5123C30089DC80 /* seated-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "seated-Bridging-Header.h"; sourceTree = "<group>"; };
 		A6A240061A55262400E2327F /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		A6A240081A56A52700E2327F /* RestPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestPasswordViewController.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 		A660769A1A4913AE0039B61D /* seated */ = {
 			isa = PBXGroup;
 			children = (
+				A6657E561A5E503700B64EDA /* assets */,
 				A66076C31A4EBBEC0039B61D /* Intro Flow */,
 				A660769D1A4913AE0039B61D /* AppDelegate.swift */,
 				A660769F1A4913AE0039B61D /* LoginViewController.swift */,
@@ -168,6 +171,15 @@
 				A6CFF60D1A54CCED00BBD8D3 /* IntroContentViewController.xib */,
 			);
 			name = "Intro Flow";
+			sourceTree = "<group>";
+		};
+		A6657E561A5E503700B64EDA /* assets */ = {
+			isa = PBXGroup;
+			children = (
+				A6657E591A5E574E00B64EDA /* incoming-avatar@2x.png */,
+			);
+			name = assets;
+			path = ../../assets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -254,6 +266,7 @@
 			files = (
 				A6CFF60F1A54CCED00BBD8D3 /* IntroContentViewController.xib in Resources */,
 				A66076A81A4913AE0039B61D /* LaunchScreen.xib in Resources */,
+				A6657E5A1A5E574E00B64EDA /* incoming-avatar@2x.png in Resources */,
 				A66076A51A4913AE0039B61D /* Images.xcassets in Resources */,
 				A6CFF6031A53F4B900BBD8D3 /* Storyboard.storyboard in Resources */,
 			);

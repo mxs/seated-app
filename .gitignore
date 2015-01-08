@@ -26,5 +26,5 @@ DerivedData
 # Pods/
 
 # My Custom Ignores
-# Frameworks/
-# .DS_Store
+Frameworks/
+.DS_Store

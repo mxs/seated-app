@@ -17,19 +17,20 @@ class ConversationViewController: JSQMessagesViewController {
     var messages = [JSQMessage]()
     var outgoingMessageBubbleImage:JSQMessagesBubbleImage!
     var incomingMessageBubbleImage:JSQMessagesBubbleImage!
+    var incomingMessageAvatarImage:JSQMessagesAvatarImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        Firebase.setOption("persistence", to: true)
-
+//        Firebase.setOption("persistenc", to: true)
+        
         self.stripeCustomerId = SeatedUser.currentUser().stripeCustomerId
         self.title = "Lets get you seated!"
         self.senderId = self.stripeCustomerId
         self.senderDisplayName = SeatedUser.currentUser().displayName
         self.outgoingMessageBubbleImage = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
         self.incomingMessageBubbleImage = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
-        self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
+        self.incomingMessageAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(UIImage(named: "incoming-avatar"), diameter: 80)
         self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
 
         self.setupFirebase()
@@ -141,6 +142,10 @@ class ConversationViewController: JSQMessagesViewController {
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource! {
+        let message = self.messages[indexPath.item] as JSQMessage
+        if message.senderId != self.senderId {
+            return self.incomingMessageAvatarImage
+        }
         return nil
     }
     

@@ -33,32 +33,17 @@ class ConversationViewController: JSQMessagesViewController {
         self.incomingMessageAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(UIImage(named: "incoming-avatar"), diameter: 40)
         self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSize(width:40.0, height:40.0)
         self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.jsq_defaultTypingIndicatorImage(), style: UIBarButtonItemStyle.Bordered, target: self, action: "showSettings")
 
         self.setupFirebase()
     }
     
+    func showSettings() {
+        self.performSegueWithIdentifier("settingsSegue", sender: self)
+    }
+    
     @IBAction func sendMessage(send:AnyObject) {
         self.messagesRef.childByAutoId().setValue(["sender":self.stripeCustomerId, "text":"stand by me", "senderDisplayName":SeatedUser.currentUser().displayName])
-    }
-    
-    @IBAction func logout(sender: AnyObject) {
-        PFUser.logOut()
-        self.performSegueWithIdentifier("logoutSegue", sender: self)
-    }
-    
-    //TODO: Remove
-    @IBAction func createConversation(sender: AnyObject) {
-        self.setupFirebase()
-    }
-    
-    //TODO: Remove
-    @IBAction func createBob(sender: AnyObject) {
-        let usersRef = Firebase(url:"https://seatedapp.firebaseio.com/users/\(self.stripeCustomerId)")
-        usersRef.setValue([
-            "email":"bobby@gmail.com",
-            "firstName:":"Bobby",
-            "lastName:":"Valentino"
-        ])
     }
     
     func observeMessagesForConversation(conversationId:String) -> Firebase {

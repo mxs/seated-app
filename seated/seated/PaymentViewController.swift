@@ -48,7 +48,7 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
 //            card.expYear = self.paymentView.card.expYear
 //            card.cvc = self.paymentView.card.cvc
             
-            Stripe.createTokenWithCard(card, completion: { (token, error) -> Void in
+            STPAPIClient.sharedClient().createTokenWithCard(card, completion: { (token, error) -> Void in
                 if error != nil {
                     //TODO: handle create Strip token with card error
                 }

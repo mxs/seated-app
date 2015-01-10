@@ -22,7 +22,7 @@ class ConversationViewController: JSQMessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        Firebase.setOption("persistenc", to: true)
+        Firebase.setOption("persistence", to: true)
         
         self.stripeCustomerId = SeatedUser.currentUser().stripeCustomerId
         self.title = "Lets get you seated!"
@@ -64,18 +64,21 @@ class ConversationViewController: JSQMessagesViewController {
     
     // Sets up new user or starts listening to messages in current conversations
     func setupFirebase() -> Void {
-
+        var firstRun = true
         let userConversationsRef = Firebase(url:"https://seatedapp.firebaseio.com/users/\(self.stripeCustomerId)/conversations")
-        userConversationsRef.observeSingleEventOfType(FEventType.Value, withBlock: { (snapshot) -> Void in
-            if snapshot.hasChildren() {
-                //assume only one conversation for user
-                let conversationId = (snapshot.value as NSDictionary).allKeys[0] as String
-                self.observeMessagesForConversation(conversationId)
+        userConversationsRef.observeEventType(FEventType.Value, withBlock: { (snapshot) -> Void in
+            if firstRun { //HACK to get around this: http://stackoverflow.com/a/24516952/919533
+                if snapshot.hasChildren() {
+                    //assume only one conversation for user
+                    let conversationId = (snapshot.value as NSDictionary).allKeys[0] as String
+                    self.observeMessagesForConversation(conversationId)
+                }
+                else {
+                    self.startConversationWithSeatBot(userConversationsRef)
+                }
+                firstRun = false
             }
-            else {
-                println("snapshot is empty")
-                self.startConversationWithSeatBot(userConversationsRef)
-            }
+            
         })
     }
     

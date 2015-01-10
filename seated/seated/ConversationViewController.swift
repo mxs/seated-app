@@ -93,7 +93,7 @@ class ConversationViewController: JSQMessagesViewController {
         self.observeMessagesForConversation(conversationId)
         
         //Send first welcome message
-        self.messagesRef.childByAutoId().setValue(["sender:":self.seatbotId, "text":self.welcomeMessage])
+        self.messagesRef.childByAutoId().setValue(["sender":self.seatbotId, "text":self.welcomeMessage, "senderDisplayName":"Seat Bot"])
     }
     
     func generateConversationId(otherUserId:String) -> String {

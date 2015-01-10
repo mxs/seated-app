@@ -26,6 +26,7 @@ class ConversationViewController: JSQMessagesViewController {
         
         self.stripeCustomerId = SeatedUser.currentUser().stripeCustomerId
         self.title = "Lets get you seated!"
+        self.inputToolbar.contentView.leftBarButtonItem = nil
         self.senderId = self.stripeCustomerId
         self.senderDisplayName = SeatedUser.currentUser().displayName
         self.outgoingMessageBubbleImage = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())

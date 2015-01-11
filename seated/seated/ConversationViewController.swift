@@ -43,10 +43,6 @@ class ConversationViewController: JSQMessagesViewController {
         self.performSegueWithIdentifier("settingsSegue", sender: self)
     }
     
-    @IBAction func sendMessage(send:AnyObject) {
-        self.messagesRef.childByAutoId().setValue(["sender":self.stripeCustomerId, "text":"stand by me", "senderDisplayName":SeatedUser.currentUser().displayName])
-    }
-    
     func observeMessagesForConversation(conversationId:String) -> Firebase {
         self.messagesRef = Firebase(url: "https://seatedapp.firebaseio.com/messages/\(conversationId)")
         self.messagesRef.observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) -> Void in
@@ -141,6 +137,7 @@ class ConversationViewController: JSQMessagesViewController {
     
     
     //MARK: - UICollectionViewDataSource
+    
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.messages.count
     }

@@ -16,18 +16,20 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        var userDefaults = NSUserDefaults.standardUserDefaults()
-        if userDefaults.boolForKey("installed") {
-            
-        }
     }
 
     @IBAction func loginIn(sender: AnyObject) {
         
         PFUser.logInWithUsernameInBackground(self.emailTextField.text, password: self.passwordTextField.text) { (user, error) -> Void in
             if error == nil {
-                self.performSegueWithIdentifier("loginSuccessSegue", sender: self)
+                let seatedUser = user as SeatedUser
+                if seatedUser.stripeCustomerId.isEmpty {
+                    UnsubscribedHelper.sharedInstance.userNoLongerSubscribed()
+                }
+                else {
+                    self.performSegueWithIdentifier("loginSuccessSegue", sender: self)
+                }
+
             }
             else {
                 //TODO: handle login fail error

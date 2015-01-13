@@ -22,7 +22,11 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
         self.paymentView.delegate = self
         self.view.addSubview(self.paymentView)
         
-        //TODO: finishButton shoudl be disabled by default
+        if self.newUser == nil {
+            self.newUser = SeatedUser.currentUser()
+        }
+        
+        //TODO: finishButton should be disabled by default
 //        self.finishButton.enabled = false
 
     }
@@ -60,7 +64,10 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
     }
     
     func createSubscriptWithToken(token: STPToken) -> Void {
-        PFCloud.callFunctionInBackground("createCustomerAndSubscribe", withParameters: ["tokenId":token.tokenId]) { (result, error) -> Void in
+        var params = ["tokenId" : token.tokenId]
+        params["trial"] = self.newUser!.isAuthenticated() ? "no" : "yes" // params have to be [NSObject : AnyObject] and Bool is NOT AnyObject type
+        
+        PFCloud.callFunctionInBackground("createCustomerAndSubscribe", withParameters: params) { (result, error) -> Void in
             if error != nil {
                 //TODO: handle create Strip customer and subscription error
             }
@@ -79,17 +86,29 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
                         }
                     }
                     
-                    self.newUser?.signUpInBackgroundWithBlock({ (success, error) -> Void in
-                        if success {
-                            //:TODO show alert with success then segue
-                            
-                            self.createFirebaseUser(self.newUser!)
-                            self.performSegueWithIdentifier("paymentSetupSuccessSegue", sender: self)
-                        }
-                        else {
-                            //TODO: handle create Parse customer error
-                        }
-                    })
+                    if self.newUser!.isAuthenticated() { //user re-subscribed
+                        self.newUser?.saveInBackgroundWithBlock({ (saved, error) -> Void in
+                            if error != nil {
+                                self.newUser?.saveEventually()
+                            }
+                        })
+                        self.createFirebaseUser(self.newUser!)
+                        self.performSegueWithIdentifier("paymentSetupSuccessSegue", sender: self)
+                    }
+                    else {
+                        self.newUser?.signUpInBackgroundWithBlock({ (success, error) -> Void in
+                            if success {
+                                //:TODO show alert with success then segue
+                                
+                                self.createFirebaseUser(self.newUser!)
+                                self.performSegueWithIdentifier("paymentSetupSuccessSegue", sender: self)
+                            }
+                            else {
+                                //TODO: handle create Parse customer error
+                            }
+                        })
+                    }
+                    
                 }
             }
         }

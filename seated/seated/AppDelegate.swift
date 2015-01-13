@@ -20,13 +20,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Stripe.setDefaultPublishableKey("pk_test_p4io3YSiR5p1F4f5XsGmtxSN")
         
         var user = SeatedUser.currentUser()
+
         if (user != nil) {
             
             if user.stripeCustomerId.isEmpty {
-                self.userNoLongerSubscribed()
+                UnsubscribedHelper.sharedInstance.userNoLongerSubscribed()
             }
             else {
-                PFCloud.callFunctionInBackground("checkSubscriptionStatus", withParameters: ["objectId": user.objectId, "stripeCustomerId":"cus_5V74WS57SzQvJF", "subscriptionId":user.subscriptionId], block: { (result, error) -> Void in
+                PFCloud.callFunctionInBackground("checkSubscriptionStatus", withParameters: ["objectId": user.objectId, "stripeCustomerId":user.stripeCustomerId, "subscriptionId":user.subscriptionId], block: { (result, error) -> Void in
 
                     if error == nil {
                         //always update the user from server incase fields change from Parse Cloud function checkSubscriptionStatus call
@@ -36,8 +37,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                         //check if user is still subscribed by checkign for stripCustomerId field
                         if result != nil && (result as SeatedUser).stripeCustomerId == "" {
-                            self.userNoLongerSubscribed()
+                            UnsubscribedHelper.sharedInstance.userNoLongerSubscribed()
                         }
+                    }
+                    else {
+                        //TODO: show error here
+                        println(error)
                     }
                     
                 })
@@ -70,12 +75,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-    
-    func userNoLongerSubscribed() {
-        
-    }
-
-
+    }    
 }
 

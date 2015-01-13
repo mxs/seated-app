@@ -24,7 +24,7 @@ class SeatedUser: PFUser, PFSubclassing {
         }
     }
 
-    dynamic var firstName:String {
+    var firstName:String {
         get {
             return self["firstName"] as String
         }
@@ -33,7 +33,7 @@ class SeatedUser: PFUser, PFSubclassing {
         }
     }
 
-    dynamic var lastName:String {
+    var lastName:String {
         get {
             return self["lastName"] as String
         }
@@ -42,8 +42,17 @@ class SeatedUser: PFUser, PFSubclassing {
         }
     }
     
-    dynamic var displayName:String {
+    var displayName:String {
         return "\(self.firstName) \(self.lastName)"
+    }
+    
+    var subscriptionId:String {
+        get {
+            return self["subscriptionId"] as String
+        }
+        set {
+            self["subscriptionId"] = newValue
+        }
     }
     
 }

@@ -65,10 +65,19 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
                 //TODO: handle create Strip customer and subscription error
             }
             else {
-                println(result)
                 
                 if self.newUser != nil {
                     self.newUser?.stripeCustomerId = result["id"] as String
+                    let subscriptions = result["subscriptions"] as NSDictionary
+                    if let dataArray = subscriptions["data"] as? NSArray {
+                        if dataArray.count > 0 {
+                            if let data = dataArray[0] as? NSDictionary {
+                                if let subscriptionId = data["id"] as? String {
+                                    self.newUser?.subscriptionId = subscriptionId
+                                }
+                            }
+                        }
+                    }
                     
                     self.newUser?.signUpInBackgroundWithBlock({ (success, error) -> Void in
                         if success {
@@ -87,11 +96,11 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
     }
     
     func createFirebaseUser(user:SeatedUser) -> Void {
-        let usersRef = Firebase(url:"https://seatedapp.firebaseio.com/\(user.stripeCustomerId)")
+        let usersRef = Firebase(url:"https://seatedapp.firebaseio.com/users/\(user.stripeCustomerId)")
         usersRef.setValue([
             "email":user.email,
-            "firstName:":user["firstName"],
-            "lastName:":user["lastName"]
+            "firstName":user["firstName"],
+            "lastName":user["lastName"]
         ])
     }
 }

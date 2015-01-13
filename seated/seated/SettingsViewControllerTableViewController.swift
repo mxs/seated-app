@@ -19,6 +19,19 @@ class SettingsViewControllerTableViewController: UITableViewController, UIAlertV
         alertView.show()
     }
     
+    @IBAction func cancelSubscription(sender: AnyObject) {
+        PFCloud.callFunctionInBackground("cancelSubscription",
+            withParameters: ["stripeCustomerId": SeatedUser.currentUser().stripeCustomerId, "subscriptionId":SeatedUser.currentUser().subscriptionId]) { (result, error) -> Void in
+                if error != nil {
+                    //TODO: display error
+                }
+                else {
+                    PFUser.logOut()
+                }
+        }
+
+    }
+    
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex == 1 {
             PFUser.logOut()

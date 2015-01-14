@@ -101,7 +101,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="HNg-Dj-UL5" kind="show" id="j2B-bn-04J"/>
+                                    <segue destination="HNg-Dj-UL5" kind="presentation" id="j2B-bn-04J"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wDX-a5-UVy">
@@ -304,10 +304,10 @@
             </objects>
             <point key="canvasLocation" x="1698" y="724"/>
         </scene>
-        <!--Rest Password View Controller-->
+        <!--Reset Password View Controller-->
         <scene sceneID="9wn-Q8-cJr">
             <objects>
-                <viewController id="HNg-Dj-UL5" customClass="RestPasswordViewController" customModule="seated" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="HNg-Dj-UL5" customClass="ResetPasswordViewController" customModule="seated" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8CJ-gZ-3tI"/>
                         <viewControllerLayoutGuide type="bottom" id="yZU-sG-EIN"/>

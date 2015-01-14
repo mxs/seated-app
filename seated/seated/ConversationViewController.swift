@@ -19,6 +19,7 @@ class ConversationViewController: JSQMessagesViewController {
     var outgoingMessageBubbleImage:JSQMessagesBubbleImage!
     var incomingMessageBubbleImage:JSQMessagesBubbleImage!
     var incomingMessageAvatarImage:JSQMessagesAvatarImage!
+    var alertController: UIAlertController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +38,20 @@ class ConversationViewController: JSQMessagesViewController {
         self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.jsq_defaultTypingIndicatorImage(), style: UIBarButtonItemStyle.Bordered, target: self, action: "showSettings")
 
-        self.setupFirebase()
+        //User's subscription is no longer valid
+        if self.stripeCustomerId == "" {
+            self.alertController = UnsubscribedHelper.sharedInstance.userNoLongerSubscribed()
+        }
+        else {
+            self.setupFirebase()
+        }
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if let alertController = self.alertController {
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
     }
     
     func showSettings() {

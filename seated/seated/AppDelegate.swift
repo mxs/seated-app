@@ -1,4 +1,4 @@
-//
+
 //  AppDelegate.swift
 //  seated
 //
@@ -23,34 +23,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         if (user != nil) {
             
-            if user.stripeCustomerId.isEmpty {
-                UnsubscribedHelper.sharedInstance.userNoLongerSubscribed()
-            }
-            else {
-                PFCloud.callFunctionInBackground("checkSubscriptionStatus", withParameters: ["objectId": user.objectId, "stripeCustomerId":user.stripeCustomerId, "subscriptionId":user.subscriptionId], block: { (result, error) -> Void in
+            PFCloud.callFunctionInBackground("checkSubscriptionStatus", withParameters: ["objectId": user.objectId, "stripeCustomerId":user.stripeCustomerId, "subscriptionId":user.subscriptionId], block: { (result, error) -> Void in
 
-                    if error == nil {
-                        //always update the user from server incase fields change from Parse Cloud function checkSubscriptionStatus call
-                        user.fetchInBackgroundWithBlock({ (fetchedUser, error) -> Void in
-                            //do nothing as the call it self will update local current user
-                        })
+                if error == nil {
+                    //always update the user from server incase fields change from Parse Cloud function checkSubscriptionStatus call
+                    user.fetchInBackgroundWithBlock({ (fetchedUser, error) -> Void in
+                        //do nothing as the call it self will update local current user
+                    })
                         
-                        //check if user is still subscribed by checkign for stripCustomerId field
-                        if result != nil && (result as SeatedUser).stripeCustomerId == "" {
-                            UnsubscribedHelper.sharedInstance.userNoLongerSubscribed()
-                        }
+                    //check if user is still subscribed by checkign for stripCustomerId field
+                    if result != nil && (result as SeatedUser).stripeCustomerId == "" {
+                        UnsubscribedHelper.sharedInstance.userNoLongerSubscribed()
                     }
-                    else {
-                        //TODO: show error here
-                        println(error)
-                    }
+                }
+                else {
+                    //TODO: show error here
+                    println(error)
+                }
                     
-                })
-                
-                let storyBoard = UIStoryboard(name: "Storyboard", bundle: NSBundle.mainBundle())
-                let conversationNavigationVC = storyBoard.instantiateViewControllerWithIdentifier("conversationNavigationController") as UINavigationController
-                self.window?.rootViewController = conversationNavigationVC
-            }
+            })
+            
+            let storyBoard = UIStoryboard(name: "Storyboard", bundle: NSBundle.mainBundle())
+            let conversationNavigationVC = storyBoard.instantiateViewControllerWithIdentifier("conversationNavigationController") as UINavigationController
+            self.window?.rootViewController = conversationNavigationVC
+
         }
         return true
     }

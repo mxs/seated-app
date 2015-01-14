@@ -8,15 +8,24 @@
 
 import UIKit
 
-class SettingsViewControllerTableViewController: UITableViewController, UIAlertViewDelegate {
+class SettingsViewControllerTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     @IBAction func logout(sender: AnyObject) {
-        let alertView = UIAlertView(title: "", message: "Are you sure?", delegate: self, cancelButtonTitle: "Cancel", otherButtonTitles: "Log out")
-        alertView.show()
+        let alertController = UIAlertController(title: "Are you sure?", message: "", preferredStyle: .Alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler:nil)
+        let yesAction = UIAlertAction(title: "Log out", style: .Default) { (action) -> Void in
+            println(action)
+            PFUser.logOut()
+            Firebase(url: "https://seatedapp.firebaseio.com/").unauth()
+            self.performSegueWithIdentifier("logoutSegue", sender: self)
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(yesAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     @IBAction func cancelSubscription(sender: AnyObject) {
@@ -30,13 +39,5 @@ class SettingsViewControllerTableViewController: UITableViewController, UIAlertV
                 }
         }
 
-    }
-    
-    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
-        if buttonIndex == 1 {
-            PFUser.logOut()
-            Firebase(url: "https://seatedapp.firebaseio.com/").unauth()
-            self.performSegueWithIdentifier("logoutSegue", sender: self)
-        }
     }
 }

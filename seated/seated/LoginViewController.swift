@@ -22,13 +22,7 @@ class LoginViewController: UIViewController {
         
         PFUser.logInWithUsernameInBackground(self.emailTextField.text, password: self.passwordTextField.text) { (user, error) -> Void in
             if error == nil {
-                let seatedUser = user as SeatedUser
-                if seatedUser.stripeCustomerId.isEmpty {
-                    UnsubscribedHelper.sharedInstance.userNoLongerSubscribed()
-                }
-                else {
-                    self.performSegueWithIdentifier("loginSuccessSegue", sender: self)
-                }
+                self.performSegueWithIdentifier("loginSuccessSegue", sender: self)
             }
             else {
                 //TODO: handle login fail error

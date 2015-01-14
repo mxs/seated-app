@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UnsubscribedHelper: NSObject, UIAlertViewDelegate {
+class UnsubscribedHelper: NSObject {
     
     class var sharedInstance: UnsubscribedHelper {
         struct Static {
@@ -23,33 +23,29 @@ class UnsubscribedHelper: NSObject, UIAlertViewDelegate {
         return Static.instance!
     }
     
-    func userNoLongerSubscribed() {
-        let alertView = UIAlertView(title: "Subscription Expired", message: "Your subscription has expired, would you like to re-subscribe?", delegate: self, cancelButtonTitle: "No", otherButtonTitles: "Yes")
-        alertView.show()
-    }
-    
-    //MARK: - UIAlertViewDelegate
-    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+    func userNoLongerSubscribed() -> UIAlertController {
         
         let storyBoard = UIStoryboard(name: "Storyboard", bundle: NSBundle.mainBundle())
         let window = UIApplication.sharedApplication().delegate?.window!
-        if buttonIndex == 0 {
+        
+        let alertController = UIAlertController(title: "Subscription Expired", message: "Would you like to re-subscribe?", preferredStyle: .Alert)
+        let noAction = UIAlertAction(title: "No", style: .Cancel) { (action) -> Void in
             SeatedUser.logOut()
-            
-            //no need to reset rootViewController if we are already there
-            if window!.rootViewController!.presentedViewController != nil {
-                let rootVC = storyBoard.instantiateInitialViewController() as RootViewController
-                window!.rootViewController = rootVC
-            }
-        }
-        else {
             let rootVC = storyBoard.instantiateInitialViewController() as RootViewController
             window!.rootViewController = rootVC
-
-            window!.rootViewController!.performSegueWithIdentifier("rootToPaymentSegue", sender: self)
-//            let paymentVC = storyBoard.instantiateViewControllerWithIdentifier("paymentViewController") as UIViewController
-//            window!.rootViewController = paymentVC
         }
+        
+        let yesAction = UIAlertAction(title: "Yes", style: .Default) { (action) -> Void in
+            let rootVC = storyBoard.instantiateInitialViewController() as RootViewController
+            window!.rootViewController = rootVC
+            window!.rootViewController!.performSegueWithIdentifier("rootToPaymentSegue", sender: self)
+        }
+        
+        alertController.addAction(noAction)
+        alertController.addAction(yesAction)
+
+        return alertController
+        
     }
 
 }

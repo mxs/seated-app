@@ -35,6 +35,7 @@ class SettingsViewControllerTableViewController: UITableViewController, UIAlertV
     func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex == 1 {
             PFUser.logOut()
+            Firebase(url: "https://seatedapp.firebaseio.com/").unauth()
             self.performSegueWithIdentifier("logoutSegue", sender: self)
         }
     }

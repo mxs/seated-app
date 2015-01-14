@@ -64,7 +64,7 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
     }
     
     func createSubscriptWithToken(token: STPToken) -> Void {
-        var params = ["tokenId" : token.tokenId]
+        var params = ["tokenId" : token.tokenId, "email": self.newUser?.email]
         params["trial"] = self.newUser!.isAuthenticated() ? "no" : "yes" // params have to be [NSObject : AnyObject] and Bool is NOT AnyObject type
         
         PFCloud.callFunctionInBackground("createCustomerAndSubscribe", withParameters: params) { (result, error) -> Void in
@@ -120,6 +120,6 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
             "email":user.email,
             "firstName":user["firstName"],
             "lastName":user["lastName"]
-        ])
+            ])
     }
 }

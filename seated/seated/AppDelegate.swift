@@ -18,6 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         Parse.setApplicationId("m8LgO3jYklu06JwdSXqwDh0WpC4hQXei4iDRl5CO", clientKey: "Yz7k5c4YGQ0SGtCM0xFVVNJXwmor0E5c8x6tGh3V")
         Stripe.setDefaultPublishableKey("pk_test_p4io3YSiR5p1F4f5XsGmtxSN")
+        Firebase(url: "https://seatedapp.firebaseio.com/").authAnonymouslyWithCompletionBlock { (error, authData) -> Void in
+            if error != nil {
+                //TODO: show error for Firebase anonymous login fail
+            }
+        }
         
         var user = SeatedUser.currentUser()
 

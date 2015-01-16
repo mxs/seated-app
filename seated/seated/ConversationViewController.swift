@@ -111,9 +111,9 @@ class ConversationViewController: JSQMessagesViewController {
     func startConversationWithSeatBot(userConversationsRef:Firebase) -> Void {
 
         self.conversationId = self.generateConversationId(seatbotId)
-        userConversationsRef.setValue([conversationId:true])
+        userConversationsRef.childByAppendingPath(self.conversationId).setValue(true)
         let seatbotConversationRef = Firebase(url: "https://seatedapp.firebaseio.com/users/\(self.seatbotId)/conversations")
-        seatbotConversationRef.setValue([conversationId:true])
+        seatbotConversationRef.childByAppendingPath(self.conversationId).setValue(true)
         
         let conversationRef = Firebase(url: "https://seatedapp.firebaseio.com/conversations")
         conversationRef.childByAppendingPath("\(conversationId)/participants").setValue([self.stripeCustomerId:true, self.seatbotId:true])

@@ -10,11 +10,13 @@ import UIKit
 
 class ConversationViewController: JSQMessagesViewController {
     
+    let kFirebaseServerValueTimestamp = [".sv":"timestamp"]
     let seatbotId = "seatbot"
     let welcomeMessage = "Hi there, welcome to seated!"
     var stripeCustomerId:String!
     var conversationId:String!
     var messagesRef:Firebase!
+    var conversationRef:Firebase!
     var messages = [JSQMessage]()
     var outgoingMessageBubbleImage:JSQMessagesBubbleImage!
     var incomingMessageBubbleImage:JSQMessagesBubbleImage!
@@ -97,6 +99,7 @@ class ConversationViewController: JSQMessagesViewController {
                 if snapshot.hasChildren() {
                     //assume only one conversation for user
                     self.conversationId = (snapshot.value as NSDictionary).allKeys[0] as String
+                    self.conversationRef = Firebase(url: "https://seatedapp.firebaseio.com/conversations/\(self.conversationId)")
                     self.observeMessagesForConversation(self.conversationId)
                 }
                 else {
@@ -115,14 +118,17 @@ class ConversationViewController: JSQMessagesViewController {
         let seatbotConversationRef = Firebase(url: "https://seatedapp.firebaseio.com/users/\(self.seatbotId)/conversations")
         seatbotConversationRef.childByAppendingPath(self.conversationId).setValue(true)
         
-        let conversationRef = Firebase(url: "https://seatedapp.firebaseio.com/conversations")
-        conversationRef.childByAppendingPath("\(conversationId)/participants").setValue([self.stripeCustomerId:true, self.seatbotId:true])
+        self.conversationRef = Firebase(url: "https://seatedapp.firebaseio.com/conversations/\(self.conversationId)")
+        conversationRef.childByAppendingPath("/title").setValue(SeatedUser.currentUser().displayName)
+        conversationRef.childByAppendingPath("/lastMessage").setValue(self.welcomeMessage)
+        conversationRef.childByAppendingPath("/participants").setValue([self.stripeCustomerId:true, self.seatbotId:true])
+
         
         //sets self.messagesRef
         self.observeMessagesForConversation(self.conversationId)
         
         //Send first welcome message
-        self.messagesRef.childByAutoId().setValue(["sender":self.seatbotId, "text":self.welcomeMessage, "senderDisplayName":"Seat Bot"])
+        self.messagesRef.childByAutoId().setValue(["sender":self.seatbotId, "text":self.welcomeMessage, "senderDisplayName":"Seat Bot", "timestamp":self.kFirebaseServerValueTimestamp])
     }
     
     func generateConversationId(otherUserId:String) -> String {
@@ -130,7 +136,9 @@ class ConversationViewController: JSQMessagesViewController {
     }
     
     func sendMessage(senderId:String!, text:String!, senderDisplayName:String!) -> Void {
-        self.messagesRef.childByAutoId().setValue(["sender":senderId, "text":text, "senderDisplayName":senderDisplayName])
+        self.messagesRef.childByAutoId().setValue(["sender":senderId, "text":text, "senderDisplayName":senderDisplayName, "timestamp":self.kFirebaseServerValueTimestamp])
+        self.conversationRef.updateChildValues(["lastMessage":text])
+        self.conversationRef.updateChildValues(["lastMessageTime": self.kFirebaseServerValueTimestamp])
         finishSendingMessage()
     }
 

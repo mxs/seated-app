@@ -93,7 +93,7 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
                             }
                         })
                         self.createFirebaseUser(self.newUser!)
-                        self.performSegueWithIdentifier("paymentSetupSuccessSegue", sender: self)
+
                     }
                     else {
                         self.newUser?.signUpInBackgroundWithBlock({ (success, error) -> Void in
@@ -101,7 +101,6 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
                                 //:TODO show alert with success then segue
                                 
                                 self.createFirebaseUser(self.newUser!)
-                                self.performSegueWithIdentifier("paymentSetupSuccessSegue", sender: self)
                             }
                             else {
                                 //TODO: handle create Parse customer error
@@ -115,11 +114,25 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
     }
     
     func createFirebaseUser(user:SeatedUser) -> Void {
-        let usersRef = Firebase(url:"https://seatedapp.firebaseio.com/users/\(user.stripeCustomerId)")
-        usersRef.setValue([
+        let userRef = Firebase(url:"https://seatedapp.firebaseio.com/users/\(user.stripeCustomerId)")
+        let userValues = [
             "email":user.email,
             "firstName":user["firstName"],
             "lastName":user["lastName"]
-            ])
+        ]
+        
+        if userRef.authData == nil {
+            userRef.authAnonymouslyWithCompletionBlock({ (error, authData) -> Void in
+                if error == nil {
+                    userRef.setValue(userValues)
+                    self.performSegueWithIdentifier("paymentSetupSuccessSegue", sender: self)
+                }
+            })
+        }
+        else {
+            userRef.setValue(userValues)
+            self.performSegueWithIdentifier("paymentSetupSuccessSegue", sender: self)
+        }
     }
+    
 }

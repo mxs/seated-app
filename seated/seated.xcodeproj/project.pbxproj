@@ -10,6 +10,9 @@
 		8EED7B460EA708EA1A8923B8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2870EDA7E24441B6BE243479 /* libPods.a */; };
 		A613E6091A64E4E90089F62D /* UnsubscribedHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A613E6081A64E4E90089F62D /* UnsubscribedHelper.swift */; };
 		A652E6301A6888E3003F503F /* Admin.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A652E62F1A6888E3003F503F /* Admin.storyboard */; };
+		A652E6331A68BE28003F503F /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A652E6321A68BE28003F503F /* ConversationListViewController.swift */; };
+		A652E6351A6C7C65003F503F /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A652E6341A6C7C65003F503F /* Conversation.swift */; };
+		A652E6371A6CD6F4003F503F /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A652E6361A6CD6F4003F503F /* ConversationTableViewCell.swift */; };
 		A660769E1A4913AE0039B61D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A660769D1A4913AE0039B61D /* AppDelegate.swift */; };
 		A66076A01A4913AE0039B61D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A660769F1A4913AE0039B61D /* LoginViewController.swift */; };
 		A66076A51A4913AE0039B61D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A66076A41A4913AE0039B61D /* Images.xcassets */; };
@@ -43,6 +46,9 @@
 		2870EDA7E24441B6BE243479 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A613E6081A64E4E90089F62D /* UnsubscribedHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsubscribedHelper.swift; sourceTree = "<group>"; };
 		A652E62F1A6888E3003F503F /* Admin.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Admin.storyboard; sourceTree = "<group>"; };
+		A652E6321A68BE28003F503F /* ConversationListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
+		A652E6341A6C7C65003F503F /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
+		A652E6361A6CD6F4003F503F /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
 		A66076981A4913AE0039B61D /* seated.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = seated.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A660769C1A4913AE0039B61D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A660769D1A4913AE0039B61D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -103,6 +109,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A652E6311A68BE06003F503F /* Admin */ = {
+			isa = PBXGroup;
+			children = (
+				A652E6341A6C7C65003F503F /* Conversation.swift */,
+				A652E6321A68BE28003F503F /* ConversationListViewController.swift */,
+				A652E6361A6CD6F4003F503F /* ConversationTableViewCell.swift */,
+			);
+			name = Admin;
+			sourceTree = "<group>";
+		};
 		A660768F1A4913AE0039B61D = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +142,7 @@
 		A660769A1A4913AE0039B61D /* seated */ = {
 			isa = PBXGroup;
 			children = (
+				A652E6311A68BE06003F503F /* Admin */,
 				A6657E561A5E503700B64EDA /* assets */,
 				A66076C31A4EBBEC0039B61D /* Intro Flow */,
 				A660769D1A4913AE0039B61D /* AppDelegate.swift */,
@@ -338,8 +355,11 @@
 				A6657E551A5CE7C800B64EDA /* SeatedUser.swift in Sources */,
 				A613E6091A64E4E90089F62D /* UnsubscribedHelper.swift in Sources */,
 				A66076C21A4EB5CD0039B61D /* SignUpViewController.swift in Sources */,
+				A652E6331A68BE28003F503F /* ConversationListViewController.swift in Sources */,
+				A652E6371A6CD6F4003F503F /* ConversationTableViewCell.swift in Sources */,
 				A6CFF60E1A54CCED00BBD8D3 /* IntroContentViewController.swift in Sources */,
 				A6CFF6051A53FB2E00BBD8D3 /* RootViewController.swift in Sources */,
+				A652E6351A6C7C65003F503F /* Conversation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

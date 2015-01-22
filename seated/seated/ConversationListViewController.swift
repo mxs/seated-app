@@ -18,19 +18,34 @@ class ConversationListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.conversationsRef = Firebase(url: "https://seatedapp.firebaseio.com/users/seatbot/conversations")
+        Firebase.setOption("persistence", to: true)
+        
+        self.conversationsRef = Firebase(url: "https://seatedapp.firebaseio.com/users/\(SeatedUser.currentUser().stripeCustomerId)/conversations")
+        let authData = self.conversationsRef.authData
+        if authData == nil {
+            self.conversationsRef.authAnonymouslyWithCompletionBlock({ (error, authData) -> Void in
+                if error == nil {
+                    self.observeConversationValueEvent()
+                }
+            })
+        }
+        else {
+            self.observeConversationValueEvent()
+        }
+    }
+    
+    func observeConversationValueEvent() -> Void {
         self.conversationsRef.observeEventType(FEventType.Value, withBlock: { (snapshot) -> Void in
             if snapshot.value != nil {
-                println(snapshot.value.count)
                 let dic = snapshot.value as NSDictionary
                 let keys = dic.allKeys
                 self.conversationCount = keys.count
+
                 for conversationId in keys {
                     self.getConversation(conversationId as String)
                 }
             }
         })
-        
     }
 
     func getConversation(conversationId:String) -> Void {
@@ -57,7 +72,7 @@ class ConversationListViewController: UITableViewController {
         })
     }
     
-    //MARK: - TableViewDataSource
+    //MARK: - UITableViewDataSource
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.conversations.count
@@ -72,6 +87,19 @@ class ConversationListViewController: UITableViewController {
         cell.timeStampLabel.text = conversation.lastMessageTimePretty
         
         return cell
+    }
+    
+    //MARK: - UITableViewDelegate
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier("conversationSegue", sender: indexPath)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "conversationSegue" {
+            var vc = segue.destinationViewController as ConversationViewController
+            vc.conversation = self.conversations[(sender as NSIndexPath).row]
+        }
     }
 
 }

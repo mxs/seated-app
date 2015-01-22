@@ -75,7 +75,9 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
                 
                 if self.newUser != nil {
                     self.newUser?.stripeCustomerId = result["id"] as String
+                    self.newUser?.isAdmin = false
                     let subscriptions = result["subscriptions"] as NSDictionary
+                    
                     if let dataArray = subscriptions["data"] as? NSArray {
                         if dataArray.count > 0 {
                             if let data = dataArray[0] as? NSDictionary {

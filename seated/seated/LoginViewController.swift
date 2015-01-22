@@ -22,7 +22,14 @@ class LoginViewController: UIViewController {
         
         PFUser.logInWithUsernameInBackground(self.emailTextField.text, password: self.passwordTextField.text) { (user, error) -> Void in
             if error == nil {
-                self.performSegueWithIdentifier("loginSuccessSegue", sender: self)
+                let loggedInUser = user as SeatedUser
+                if loggedInUser.isAdmin {
+                    self.performSegueWithIdentifier("adminLoginSuccessSegue", sender: self)
+                }
+                else {
+                    self.performSegueWithIdentifier("customerLoginSuccessSegue", sender: self)
+                }
+
             }
             else {
                 //TODO: handle login fail error

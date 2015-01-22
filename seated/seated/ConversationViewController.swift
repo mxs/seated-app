@@ -17,6 +17,7 @@ class ConversationViewController: JSQMessagesViewController {
     var conversationId:String!
     var messagesRef:Firebase!
     var conversationRef:Firebase!
+    var conversation:Conversation?
     var messages = [JSQMessage]()
     var outgoingMessageBubbleImage:JSQMessagesBubbleImage!
     var incomingMessageBubbleImage:JSQMessagesBubbleImage!
@@ -29,15 +30,25 @@ class ConversationViewController: JSQMessagesViewController {
         Firebase.setOption("persistence", to: true)
         
         self.stripeCustomerId = SeatedUser.currentUser().stripeCustomerId
-        self.title = "Lets get you seated!"
+        if self.conversation != nil { //admin mode
+            self.title = self.conversation?.title
+            self.conversationId = self.conversation?.id
+            self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero
+            self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero
+        }
+        else {
+            self.title = "Lets get you seated!"
+           
+            self.incomingMessageAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(UIImage(named: "incoming-avatar"), diameter: 40)
+            self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSize(width:40.0, height:40.0)
+            self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero
+        }
+        
+        self.outgoingMessageBubbleImage = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
+        self.incomingMessageBubbleImage = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
         self.inputToolbar.contentView.leftBarButtonItem = nil
         self.senderId = self.stripeCustomerId
         self.senderDisplayName = SeatedUser.currentUser().displayName
-        self.outgoingMessageBubbleImage = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
-        self.incomingMessageBubbleImage = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
-        self.incomingMessageAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(UIImage(named: "incoming-avatar"), diameter: 40)
-        self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSize(width:40.0, height:40.0)
-        self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.jsq_defaultTypingIndicatorImage(), style: UIBarButtonItemStyle.Bordered, target: self, action: "showSettings")
 
         //User's subscription is no longer valid
@@ -47,6 +58,12 @@ class ConversationViewController: JSQMessagesViewController {
         else {
             self.setupFirebase()
         }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        self.messagesRef.removeAllObservers()
+        self.conversationRef.removeAllObservers()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -82,7 +99,6 @@ class ConversationViewController: JSQMessagesViewController {
         if authData == nil {
             userConversationsRef.authAnonymouslyWithCompletionBlock({ (error, authData) -> Void in
                 if error == nil {
-                    println("auth ok")
                     self.getUserConversations(userConversationsRef)
                 }
             })
@@ -97,8 +113,11 @@ class ConversationViewController: JSQMessagesViewController {
         userConversationsRef.observeEventType(FEventType.Value, withBlock: { (snapshot) -> Void in
             if firstRun { //HACK to get around this: http://stackoverflow.com/a/24516952/919533
                 if snapshot.hasChildren() {
-                    //assume only one conversation for user
-                    self.conversationId = (snapshot.value as NSDictionary).allKeys[0] as String
+
+                    //assume only one conversation for customer
+                    if self.conversationId == nil && !SeatedUser.currentUser().isAdmin {
+                        self.conversationId = (snapshot.value as NSDictionary).allKeys[0] as String
+                    }
                     self.conversationRef = Firebase(url: "https://seatedapp.firebaseio.com/conversations/\(self.conversationId)")
                     self.observeMessagesForConversation(self.conversationId)
                 }
@@ -200,10 +219,10 @@ class ConversationViewController: JSQMessagesViewController {
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as JSQMessagesCollectionViewCell
         let message = self.messages[indexPath.item] as JSQMessage
         if message.senderId == self.senderId {
-            cell.textView.textColor = UIColor.blackColor()
+            cell.textView.textColor = UIColor.whiteColor()
         }
         else {
-            cell.textView.textColor = UIColor.whiteColor()
+            cell.textView.textColor = UIColor.blackColor()
         }
         
         cell.textView.linkTextAttributes = [NSForegroundColorAttributeName: cell.textView.textColor, NSUnderlineStyleAttributeName:1] //NSUnderlineStyle.StyleSingle

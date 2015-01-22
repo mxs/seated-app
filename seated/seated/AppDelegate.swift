@@ -22,32 +22,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var user = SeatedUser.currentUser()
 
         if (user != nil) {
-            let storyBoard = UIStoryboard(name: "Customer", bundle: NSBundle.mainBundle())
+            let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
             var rootNavigationVC:UINavigationController
             if user.isAdmin {
                 rootNavigationVC = storyBoard.instantiateViewControllerWithIdentifier("conversationListNavigationController") as UINavigationController
             }
             else {
                 
-                PFCloud.callFunctionInBackground("checkSubscriptionStatus", withParameters: ["objectId": user.objectId, "stripeCustomerId":user.stripeCustomerId, "subscriptionId":user.subscriptionId], block: { (result, error) -> Void in
-                    
-                    if error == nil {
-                        //always update the user from server incase fields change from Parse Cloud function checkSubscriptionStatus call
-                        user.fetchInBackgroundWithBlock({ (fetchedUser, error) -> Void in
-                            //do nothing as the call it self will update local current user
-                        })
-                        
-                        //check if user is still subscribed by checkign for stripCustomerId field
-                        if result != nil && (result as SeatedUser).stripeCustomerId == "" {
-                            UnsubscribedHelper.sharedInstance.userNoLongerSubscribed()
-                        }
-                    }
-                    else {
-                        //TODO: show error here
-                        println(error)
-                    }
-                    
-                })
+                //            PFCloud.callFunctionInBackground("checkSubscriptionStatus", withParameters: ["objectId": user.objectId, "stripeCustomerId":user.stripeCustomerId, "subscriptionId":user.subscriptionId], block: { (result, error) -> Void in
+                //
+                //                if error == nil {
+                //                    //always update the user from server incase fields change from Parse Cloud function checkSubscriptionStatus call
+                //                    user.fetchInBackgroundWithBlock({ (fetchedUser, error) -> Void in
+                //                        //do nothing as the call it self will update local current user
+                //                    })
+                //
+                //                    //check if user is still subscribed by checkign for stripCustomerId field
+                //                    if result != nil && (result as SeatedUser).stripeCustomerId == "" {
+                //                        UnsubscribedHelper.sharedInstance.userNoLongerSubscribed()
+                //                    }
+                //                }
+                //                else {
+                //                    //TODO: show error here
+                //                    println(error)
+                //                }
+                
+                //            })
 
                 rootNavigationVC = storyBoard.instantiateViewControllerWithIdentifier("conversationNavigationController") as UINavigationController
             }

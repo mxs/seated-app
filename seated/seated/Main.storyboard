@@ -470,12 +470,20 @@
                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="peo-mk-RLX">
+                                            <rect key="frame" x="291" y="26" width="21" height="21"/>
+                                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="lastMessageLabel" destination="N7j-pC-mXy" id="RZm-Cv-2oh"/>
                                     <outlet property="timeStampLabel" destination="AhX-0b-0wl" id="Hq8-fT-hsj"/>
                                     <outlet property="titleLabel" destination="tNN-9b-ovc" id="IDV-fK-4cS"/>
+                                    <outlet property="unreadCountLabel" destination="peo-mk-RLX" id="HaG-54-iPh"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -493,7 +501,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cXY-Gg-ng2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1732" y="-52"/>
+            <point key="canvasLocation" x="1732" y="-53"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Kpb-Wi-c1f">

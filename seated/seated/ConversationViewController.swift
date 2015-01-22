@@ -140,7 +140,9 @@ class ConversationViewController: JSQMessagesViewController {
         self.conversationRef = Firebase(url: "https://seatedapp.firebaseio.com/conversations/\(self.conversationId)")
         conversationRef.childByAppendingPath("/title").setValue(SeatedUser.currentUser().displayName)
         conversationRef.childByAppendingPath("/lastMessage").setValue(self.welcomeMessage)
-        conversationRef.childByAppendingPath("/participants").setValue([self.stripeCustomerId:true, self.seatbotId:true])
+        conversationRef.childByAppendingPath("/lastMessageTime").setValue(self.kFirebaseServerValueTimestamp)
+        conversationRef.childByAppendingPath("/participants/\(self.stripeCustomerId)").setValue(["unread-count":0])
+        conversationRef.childByAppendingPath("/participants/\(self.seatbotId)").setValue(["unread-count":0])
 
         
         //sets self.messagesRef
@@ -158,7 +160,34 @@ class ConversationViewController: JSQMessagesViewController {
         self.messagesRef.childByAutoId().setValue(["sender":senderId, "text":text, "senderDisplayName":senderDisplayName, "timestamp":self.kFirebaseServerValueTimestamp])
         self.conversationRef.updateChildValues(["lastMessage":text])
         self.conversationRef.updateChildValues(["lastMessageTime": self.kFirebaseServerValueTimestamp])
+        incrementUnreadCount()
         finishSendingMessage()
+    }
+    
+    func incrementUnreadCount() -> Void {
+        var recipientId:String?
+        if self.conversation != nil { //admin mode
+            for stripeCustomerId in self.conversation!.participants.allKeys {
+                if stripeCustomerId as? String != self.stripeCustomerId {
+                    recipientId = stripeCustomerId as? String
+                }
+            }
+        }
+        else {
+            recipientId = self.seatbotId
+        }
+
+        let unreadRef = self.conversationRef.childByAppendingPath("/participants/\(recipientId!)/unread-count")
+        unreadRef.runTransactionBlock { (currentData:FMutableData!) -> FTransactionResult! in
+            var count = currentData.value as? Int
+            if count == nil {
+                count = 0
+            }
+            else {
+                currentData.value = count! + 1
+            }
+            return FTransactionResult.successWithValue(currentData)
+        }
     }
 
     

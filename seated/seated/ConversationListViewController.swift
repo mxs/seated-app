@@ -21,6 +21,7 @@ class ConversationListViewController: UITableViewController {
         Firebase.setOption("persistence", to: true)
         
         self.conversationsRef = Firebase(url: "https://seatedapp.firebaseio.com/users/\(SeatedUser.currentUser().stripeCustomerId)/conversations")
+        
         let authData = self.conversationsRef.authData
         if authData == nil {
             self.conversationsRef.authAnonymouslyWithCompletionBlock({ (error, authData) -> Void in
@@ -36,7 +37,8 @@ class ConversationListViewController: UITableViewController {
     
     func observeConversationValueEvent() -> Void {
         self.conversationsRef.observeEventType(FEventType.Value, withBlock: { (snapshot) -> Void in
-            if snapshot.value != nil {
+            if snapshot.hasChildren() {
+                
                 let dic = snapshot.value as NSDictionary
                 let keys = dic.allKeys
                 self.conversationCount = keys.count
@@ -51,11 +53,14 @@ class ConversationListViewController: UITableViewController {
     func getConversation(conversationId:String) -> Void {
         let conversationRef = Firebase(url: "https://seatedapp.firebaseio.com/conversations/\(conversationId)")
         conversationRef.observeSingleEventOfType(FEventType.Value, withBlock: { (snapshot) -> Void in
-            if snapshot.value != nil {
+            if snapshot.hasChildren() {
                 let title = snapshot.value["title"] as String
                 let lastMessage = snapshot.value["lastMessage"] as String
                 let lastMessageTime = snapshot.value["lastMessageTime"] as Int
-                var conversation = Conversation(id: conversationId, title: title, lastMessage: lastMessage, lastMesasgeTime: lastMessageTime)
+                let participants = snapshot.value["participants"] as NSDictionary
+                
+                var conversation = Conversation(id: conversationId, title: title, lastMessage: lastMessage, lastMesasgeTime: lastMessageTime, participants:participants)
+
                 self.conversations.append(conversation)
                 
                 if self.conversations.count == self.conversationCount {
@@ -85,6 +90,7 @@ class ConversationListViewController: UITableViewController {
         cell.lastMessageLabel.text = conversation.lastMessage
         cell.titleLabel.text = conversation.title
         cell.timeStampLabel.text = conversation.lastMessageTimePretty
+        cell.unreadCountLabel.text = String(conversation.unreadCountForParticipant(SeatedUser.currentUser().stripeCustomerId))
         
         return cell
     }

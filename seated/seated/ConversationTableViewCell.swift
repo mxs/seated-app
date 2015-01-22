@@ -13,6 +13,7 @@ class ConversationTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var lastMessageLabel: UILabel!
     @IBOutlet weak var timeStampLabel: UILabel!
+    @IBOutlet weak var unreadCountLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

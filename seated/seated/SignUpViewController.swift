@@ -48,7 +48,6 @@ class SignUpViewController: UIViewController {
     func checkIfUserAlreadyExists() -> Void {
         var query = PFUser.query()
         query.whereKey("email", equalTo: self.emailTextField.text)
-        println(self.emailTextField.text)
         query.findObjectsInBackgroundWithBlock { (results, error) -> Void in
             if error == nil {
                 if results.count == 0 {

@@ -55,4 +55,13 @@ class SeatedUser: PFUser, PFSubclassing {
         }
     }
     
+    var isAdmin:Bool {
+        get {
+            return self["isAdmin"] as Bool
+        }
+        set {
+            self["isAdmin"] = newValue
+        }
+    }
+    
 }

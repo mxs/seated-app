@@ -17,6 +17,7 @@ class ConversationViewController: JSQMessagesViewController {
     var conversationId:String!
     var messagesRef:Firebase!
     var conversationRef:Firebase!
+    var unreadCountRef:Firebase!
     var conversation:Conversation?
     var messages = [JSQMessage]()
     var outgoingMessageBubbleImage:JSQMessagesBubbleImage!
@@ -64,6 +65,7 @@ class ConversationViewController: JSQMessagesViewController {
         super.didReceiveMemoryWarning()
         self.messagesRef.removeAllObservers()
         self.conversationRef.removeAllObservers()
+        self.unreadCountRef.removeAllObservers()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -71,28 +73,12 @@ class ConversationViewController: JSQMessagesViewController {
         if let alertController = self.alertController {
             self.presentViewController(alertController, animated: true, completion: nil)
         }
-    }
-    
-    func showSettings() {
-        self.performSegueWithIdentifier("settingsSegue", sender: self)
-    }
-    
-    func observeMessagesForConversation(conversationId:String) -> Firebase {
-        self.messagesRef = Firebase(url: "https://seatedapp.firebaseio.com/messages/\(conversationId)")
-        self.messagesRef.observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) -> Void in
-            let senderId = snapshot.value["sender"] as String
-            let senderDisplayName = snapshot.value["senderDisplayName"] as String
-            let text = snapshot.value["text"] as String
-            let message = JSQMessage(senderId: senderId, displayName: senderDisplayName, text: text)
-            self.messages.append(message)
-            self.finishReceivingMessage()
-        })
-        return self.messagesRef
+        
+        clearUnreadCount()
     }
     
     // Sets up new user or starts listening to messages in current conversations
     func setupFirebase() -> Void {
-        
         let userConversationsRef = Firebase(url:"https://seatedapp.firebaseio.com/users/\(self.stripeCustomerId)/conversations")
         let authData = userConversationsRef.authData
         
@@ -113,7 +99,7 @@ class ConversationViewController: JSQMessagesViewController {
         userConversationsRef.observeEventType(FEventType.Value, withBlock: { (snapshot) -> Void in
             if firstRun { //HACK to get around this: http://stackoverflow.com/a/24516952/919533
                 if snapshot.hasChildren() {
-
+                    
                     //assume only one conversation for customer
                     if self.conversationId == nil && !SeatedUser.currentUser().isAdmin {
                         self.conversationId = (snapshot.value as NSDictionary).allKeys[0] as String
@@ -131,7 +117,7 @@ class ConversationViewController: JSQMessagesViewController {
     }
     
     func startConversationWithSeatBot(userConversationsRef:Firebase) -> Void {
-
+        
         self.conversationId = self.generateConversationId(seatbotId)
         userConversationsRef.childByAppendingPath(self.conversationId).setValue(true)
         let seatbotConversationRef = Firebase(url: "https://seatedapp.firebaseio.com/users/\(self.seatbotId)/conversations")
@@ -143,13 +129,43 @@ class ConversationViewController: JSQMessagesViewController {
         conversationRef.childByAppendingPath("/lastMessageTime").setValue(self.kFirebaseServerValueTimestamp)
         conversationRef.childByAppendingPath("/participants/\(self.stripeCustomerId)").setValue(["unread-count":0])
         conversationRef.childByAppendingPath("/participants/\(self.seatbotId)").setValue(["unread-count":0])
-
+        
         
         //sets self.messagesRef
         self.observeMessagesForConversation(self.conversationId)
         
         //Send first welcome message
         self.messagesRef.childByAutoId().setValue(["sender":self.seatbotId, "text":self.welcomeMessage, "senderDisplayName":"Seat Bot", "timestamp":self.kFirebaseServerValueTimestamp])
+    }
+
+    
+    func observeMessagesForConversation(conversationId:String) -> Firebase {
+        self.messagesRef = Firebase(url: "https://seatedapp.firebaseio.com/messages/\(conversationId)")
+        self.messagesRef.observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) -> Void in
+            let senderId = snapshot.value["sender"] as String
+            let senderDisplayName = snapshot.value["senderDisplayName"] as String
+            let text = snapshot.value["text"] as String
+            let message = JSQMessage(senderId: senderId, displayName: senderDisplayName, text: text)
+            self.messages.append(message)
+            self.finishReceivingMessage()
+        })
+        
+        self.observeUnreadCount()
+        
+        return self.messagesRef
+    }
+    
+    func observeUnreadCount() {
+        self.unreadCountRef = Firebase(url:"https://seatedapp.firebaseio.com/conversations/\(self.conversationId)/participants/\(self.stripeCustomerId)/unread-count")
+        self.unreadCountRef.observeEventType(FEventType.Value, withBlock: { (snapshot) -> Void in
+            
+            //only clear if current view is the top view and count is greater than zero
+            if self.view.window != nil {
+                if snapshot.value as Int > 0 {
+                    self.clearUnreadCount()
+                }
+            }
+        })
     }
     
     func generateConversationId(otherUserId:String) -> String {
@@ -188,6 +204,19 @@ class ConversationViewController: JSQMessagesViewController {
             }
             return FTransactionResult.successWithValue(currentData)
         }
+    }
+    
+    func clearUnreadCount() {
+        if self.unreadCountRef != nil {
+            self.unreadCountRef.runTransactionBlock { (currentData:FMutableData!) -> FTransactionResult! in
+                currentData.value = 0
+                return FTransactionResult.successWithValue(currentData)
+            }
+        }
+    }
+    
+    func showSettings() {
+        self.performSegueWithIdentifier("settingsSegue", sender: self)
     }
 
     

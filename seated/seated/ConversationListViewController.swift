@@ -52,7 +52,7 @@ class ConversationListViewController: UITableViewController {
 
     func getConversation(conversationId:String) -> Void {
         let conversationRef = Firebase(url: "https://seatedapp.firebaseio.com/conversations/\(conversationId)")
-        conversationRef.observeSingleEventOfType(FEventType.Value, withBlock: { (snapshot) -> Void in
+        conversationRef.observeEventType(FEventType.Value, withBlock: { (snapshot) -> Void in
             if snapshot.hasChildren() {
                 let title = snapshot.value["title"] as String
                 let lastMessage = snapshot.value["lastMessage"] as String
@@ -61,7 +61,14 @@ class ConversationListViewController: UITableViewController {
                 
                 var conversation = Conversation(id: conversationId, title: title, lastMessage: lastMessage, lastMesasgeTime: lastMessageTime, participants:participants)
 
-                self.conversations.append(conversation)
+                let index = find(self.conversations, conversation)
+                
+                if index == nil { // new conversation
+                    self.conversations.append(conversation)
+                }
+                else { //updates to exisiting conversation
+                    self.conversations[index!] = conversation
+                }
                 
                 if self.conversations.count == self.conversationCount {
                     

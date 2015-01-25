@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Conversation: NSObject {
+class Conversation: NSObject, Equatable {
     let id:String!
     let title:String!
     let dateFormatter:NSDateFormatter!
@@ -46,3 +46,8 @@ class Conversation: NSObject {
 
     }
 }
+
+func ==(lhs: Conversation, rhs: Conversation) -> Bool {
+    return lhs.id == rhs.id
+}
+

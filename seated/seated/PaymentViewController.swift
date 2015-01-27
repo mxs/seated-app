@@ -101,7 +101,7 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
                         self.newUser?.signUpInBackgroundWithBlock({ (success, error) -> Void in
                             if success {
                                 //:TODO show alert with success then segue
-                                
+                                self.setUpPushNotification(self.newUser!.stripeCustomerId)
                                 self.createFirebaseUser(self.newUser!)
                             }
                             else {
@@ -134,6 +134,16 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
         else {
             userRef.setValue(userValues)
             self.performSegueWithIdentifier("paymentSetupSuccessSegue", sender: self)
+        }
+    }
+    
+    func setUpPushNotification(stripeCustomerId:String) {
+        let currentInstallation = PFInstallation.currentInstallation()
+        currentInstallation.channels.append(stripeCustomerId)
+        currentInstallation.saveInBackgroundWithBlock { (success, error) -> Void in
+            if error != nil {
+                //TODO: Handle error
+            }
         }
     }
     

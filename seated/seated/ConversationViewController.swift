@@ -177,7 +177,28 @@ class ConversationViewController: JSQMessagesViewController {
         self.conversationRef.updateChildValues(["lastMessage":text])
         self.conversationRef.updateChildValues(["lastMessageTime": self.kFirebaseServerValueTimestamp])
         incrementUnreadCount()
+        sendPushNotification(text)
         finishSendingMessage()
+    }
+    
+    func sendPushNotification(message:String) {
+        self.conversationRef.childByAppendingPath("/participants").observeSingleEventOfType(FEventType.Value, withBlock: { (snapshot) -> Void in
+            if snapshot.hasChildren() {
+                let participants = snapshot.value.allKeys as [String]
+                for participant in participants {
+                    if participant != self.stripeCustomerId {
+                        var push = PFPush()
+                        push.setChannel(participant)
+                        push.setData(["alert":message, "badge":"Increment"])
+                        push.sendPushInBackgroundWithBlock { (success, error) -> Void in
+                            //success
+                        }
+                        
+                    }
+                }
+            }
+        })
+
     }
     
     func incrementUnreadCount() -> Void {

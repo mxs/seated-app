@@ -19,8 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.setApplicationId("m8LgO3jYklu06JwdSXqwDh0WpC4hQXei4iDRl5CO", clientKey: "Yz7k5c4YGQ0SGtCM0xFVVNJXwmor0E5c8x6tGh3V")
         Stripe.setDefaultPublishableKey("pk_test_p4io3YSiR5p1F4f5XsGmtxSN")
 
+        let userNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Sound | UIUserNotificationType.Badge
+        let notificationSettings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
+        application.registerUserNotificationSettings(notificationSettings)
+        application.registerForRemoteNotifications()
+        
         var user = SeatedUser.currentUser()
-
         if (user != nil) {
             let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
             var rootNavigationVC:UINavigationController
@@ -29,25 +33,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
             else {
                 
-                //            PFCloud.callFunctionInBackground("checkSubscriptionStatus", withParameters: ["objectId": user.objectId, "stripeCustomerId":user.stripeCustomerId, "subscriptionId":user.subscriptionId], block: { (result, error) -> Void in
-                //
-                //                if error == nil {
-                //                    //always update the user from server incase fields change from Parse Cloud function checkSubscriptionStatus call
-                //                    user.fetchInBackgroundWithBlock({ (fetchedUser, error) -> Void in
-                //                        //do nothing as the call it self will update local current user
-                //                    })
-                //
-                //                    //check if user is still subscribed by checkign for stripCustomerId field
-                //                    if result != nil && (result as SeatedUser).stripeCustomerId == "" {
-                //                        UnsubscribedHelper.sharedInstance.userNoLongerSubscribed()
-                //                    }
-                //                }
-                //                else {
-                //                    //TODO: show error here
-                //                    println(error)
-                //                }
-                
-                //            })
+                PFCloud.callFunctionInBackground("checkSubscriptionStatus", withParameters: ["objectId": user.objectId, "stripeCustomerId":user.stripeCustomerId, "subscriptionId":user.subscriptionId], block: { (result, error) -> Void in
+                    
+                    if error == nil {
+                        //always update the user from server incase fields change from Parse Cloud function checkSubscriptionStatus call
+                        user.fetchInBackgroundWithBlock({ (fetchedUser, error) -> Void in
+                            //do nothing as the call it self will update local current user
+                        })
+                        
+                        //check if user is still subscribed by checkign for stripCustomerId field
+                        if result != nil && (result as SeatedUser).stripeCustomerId == "" {
+                            UnsubscribedHelper.sharedInstance.userNoLongerSubscribed()
+                        }
+                    }
+                    else {
+                        //TODO: show error here
+                        println(error)
+                    }
+                    
+                })
 
                 rootNavigationVC = storyBoard.instantiateViewControllerWithIdentifier("conversationNavigationController") as UINavigationController
             }
@@ -57,7 +61,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-
+    
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        var currentInstallation = PFInstallation.currentInstallation()
+        currentInstallation.setDeviceTokenFromData(deviceToken)
+        currentInstallation.channels = ["global"]
+        if SeatedUser.currentUser() != nil {
+            currentInstallation.channels.append(SeatedUser.currentUser().stripeCustomerId)
+        }
+        
+        currentInstallation.saveInBackgroundWithBlock { (success, error) -> Void in
+            if error != nil {
+                //TODO: handle error
+            }
+        }
+    }
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -73,7 +92,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        var currentInstallation = PFInstallation.currentInstallation()
+        currentInstallation.badge = 0
+        currentInstallation.saveEventually()
     }
 
     func applicationWillTerminate(application: UIApplication) {

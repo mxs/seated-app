@@ -29,7 +29,7 @@ class ResetPasswordViewController: UIViewController {
         
             let alertController = UIAlertController(title: "Password Reset", message: "Instructions sent to email.", preferredStyle: .Alert)
             let okAction = UIAlertAction(title: "OK", style: .Cancel, handler: { (action) -> Void in
-                println("OK")
+                //ok
             })
             alertController.addAction(okAction)
             self.presentViewController(alertController, animated: true, completion: nil)

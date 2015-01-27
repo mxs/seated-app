@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="B1q-h8-pd0">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Page View Controller-->
@@ -12,7 +14,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q0O-4O-eWR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-183" y="735"/>
+            <point key="canvasLocation" x="-567" y="735"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="Hga-qe-DIL">
@@ -32,15 +34,6 @@
                                     <segue destination="U6m-dC-lcy" kind="embed" identifier="pageViewControllerSegue" id="BtO-gA-QG8"/>
                                 </connections>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eKq-tr-JxW">
-                                <rect key="frame" x="53" y="513" width="55" height="30"/>
-                                <state key="normal" title="Sign Up">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="sV1-Xx-cng" kind="show" id="fgN-bq-rfi"/>
-                                </connections>
-                            </button>
                             <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="x83-XQ-7S0">
                                 <rect key="frame" x="141" y="458" width="39" height="37"/>
                                 <color key="pageIndicatorTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -55,10 +48,60 @@
                                     <segue destination="KT4-bl-0rq" kind="show" id="Iim-Et-V9x"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eKq-tr-JxW">
+                                <rect key="frame" x="53" y="513" width="55" height="30"/>
+                                <state key="normal" title="Sign Up">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="sV1-Xx-cng" kind="show" id="fgN-bq-rfi"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="eKq-tr-JxW" firstAttribute="leading" secondItem="ctI-NW-Lhc" secondAttribute="leadingMargin" constant="38" id="Lbz-L9-H1x"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cmq-vd-ums" secondAttribute="trailing" constant="26" id="OlW-CV-rdm"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ues-cT-V6J" secondAttribute="trailing" constant="-16" id="P2A-B0-F1X">
+                                <variation key="widthClass=compact" constant="-16"/>
+                            </constraint>
+                            <constraint firstItem="PsR-t8-eap" firstAttribute="top" secondItem="ues-cT-V6J" secondAttribute="bottom" id="R1G-c1-R5U"/>
+                            <constraint firstItem="PsR-t8-eap" firstAttribute="top" secondItem="x83-XQ-7S0" secondAttribute="bottom" constant="73" id="UEy-lY-Z23"/>
+                            <constraint firstItem="ues-cT-V6J" firstAttribute="top" secondItem="ctI-NW-Lhc" secondAttribute="topMargin" id="UcQ-aJ-1N6"/>
+                            <constraint firstItem="PsR-t8-eap" firstAttribute="top" secondItem="cmq-vd-ums" secondAttribute="bottom" constant="25" id="a3W-d1-WB5"/>
+                            <constraint firstAttribute="centerX" secondItem="x83-XQ-7S0" secondAttribute="centerX" id="dtp-Ae-RxD"/>
+                            <constraint firstItem="PsR-t8-eap" firstAttribute="top" secondItem="eKq-tr-JxW" secondAttribute="bottom" constant="25" id="fDx-P9-6NH"/>
+                            <constraint firstItem="ues-cT-V6J" firstAttribute="leading" secondItem="ctI-NW-Lhc" secondAttribute="leadingMargin" constant="-16" id="gyX-JA-PgU"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="P2A-B0-F1X"/>
+                                <exclude reference="UcQ-aJ-1N6"/>
+                                <exclude reference="gyX-JA-PgU"/>
+                                <exclude reference="dtp-Ae-RxD"/>
+                                <exclude reference="Lbz-L9-H1x"/>
+                                <exclude reference="OlW-CV-rdm"/>
+                                <exclude reference="R1G-c1-R5U"/>
+                                <exclude reference="UEy-lY-Z23"/>
+                                <exclude reference="a3W-d1-WB5"/>
+                                <exclude reference="fDx-P9-6NH"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="P2A-B0-F1X"/>
+                                <include reference="UcQ-aJ-1N6"/>
+                                <include reference="gyX-JA-PgU"/>
+                                <include reference="dtp-Ae-RxD"/>
+                                <include reference="Lbz-L9-H1x"/>
+                                <include reference="OlW-CV-rdm"/>
+                                <include reference="R1G-c1-R5U"/>
+                                <include reference="UEy-lY-Z23"/>
+                                <include reference="a3W-d1-WB5"/>
+                                <include reference="fDx-P9-6NH"/>
+                            </mask>
+                        </variation>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="pageControl" destination="x83-XQ-7S0" id="015-bI-ogQ"/>
                         <segue destination="nyx-mZ-Ew3" kind="show" identifier="rootToPaymentSegue" id="9wQ-GA-mjV"/>
@@ -66,7 +109,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iKE-3S-6tQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="200" y="-52"/>
+            <point key="canvasLocation" x="109.5" y="-53"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="7Av-7u-7NO">
@@ -182,7 +225,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="k8b-ai-I4l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="572" y="735"/>
+            <point key="canvasLocation" x="520.5" y="735"/>
         </scene>
         <!--Conversation View Controller-->
         <scene sceneID="X2t-Yg-Wdn">
@@ -205,7 +248,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Nv-OG-R6t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1315" y="729"/>
+            <point key="canvasLocation" x="1575" y="729"/>
         </scene>
         <!--Settings View Controller Table View Controller-->
         <scene sceneID="6oW-nd-nZf">
@@ -303,7 +346,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4X5-mP-irV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1698" y="724"/>
+            <point key="canvasLocation" x="2169" y="735"/>
         </scene>
         <!--Reset Password View Controller-->
         <scene sceneID="9wn-Q8-cJr">
@@ -418,7 +461,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K5f-t5-THj" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="wdb-Gi-7sU" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="200" y="735"/>
+            <point key="canvasLocation" x="-19.5" y="735"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PRC-Cm-PiV">
@@ -436,7 +479,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s6O-iU-oWk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="937" y="735"/>
+            <point key="canvasLocation" x="1032" y="729"/>
         </scene>
         <!--Conversation List View Controller-->
         <scene sceneID="M9c-Cx-SMn">
@@ -523,9 +566,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="VqZ-xE-plc"/>
-        <segue reference="hPp-1l-ybO"/>
-        <segue reference="YXN-d6-azq"/>
+        <segue reference="lhI-Ys-E09"/>
+        <segue reference="VkK-Ge-RjD"/>
         <segue reference="8W0-cl-TbP"/>
+        <segue reference="YXN-d6-azq"/>
     </inferredMetricsTieBreakers>
 </document>

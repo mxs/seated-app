@@ -23,6 +23,15 @@ class LoginViewController: UIViewController {
         PFUser.logInWithUsernameInBackground(self.emailTextField.text, password: self.passwordTextField.text) { (user, error) -> Void in
             if error == nil {
                 let loggedInUser = user as SeatedUser
+                
+                let currentInstallation = PFInstallation.currentInstallation()
+                currentInstallation.channels.append(loggedInUser.stripeCustomerId)
+                currentInstallation.saveInBackgroundWithBlock({ (success, error) -> Void in
+                    if error != nil {
+                        //TODO: handle error
+                    }
+                })
+                
                 if loggedInUser.isAdmin {
                     self.performSegueWithIdentifier("adminLoginSuccessSegue", sender: self)
                 }

@@ -6,3 +6,4 @@
 #import "PTKView.h"
 #import <Stripe/Stripe.h>
 #import <JSQMessagesViewController/JSQMessages.h>
+#import <JSQMessagesViewController/UIDevice+JSQMessages.h>

@@ -25,7 +25,7 @@ class UnsubscribedHelper: NSObject {
     
     func userNoLongerSubscribed() -> UIAlertController {
         
-        let storyBoard = UIStoryboard(name: "Customer", bundle: NSBundle.mainBundle())
+        let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let window = UIApplication.sharedApplication().delegate?.window!
         
         let alertController = UIAlertController(title: "Subscription Expired", message: "Would you like to re-subscribe?", preferredStyle: .Alert)

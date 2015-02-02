@@ -22,6 +22,7 @@
 		A6657E5A1A5E574E00B64EDA /* incoming-avatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6657E591A5E574E00B64EDA /* incoming-avatar@2x.png */; };
 		A6657E5C1A5FB6E700B64EDA /* SettingsViewControllerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6657E5B1A5FB6E700B64EDA /* SettingsViewControllerTableViewController.swift */; };
 		A691A9961A7F6CEB0037CCF1 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A691A9951A7F6CEB0037CCF1 /* UIColorExtension.swift */; };
+		A691A9981A7F9A700037CCF1 /* intro-background.png in Resources */ = {isa = PBXBuildFile; fileRef = A691A9971A7F9A700037CCF1 /* intro-background.png */; };
 		A6A240071A55262400E2327F /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A240061A55262400E2327F /* PaymentViewController.swift */; };
 		A6A240091A56A52700E2327F /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A240081A56A52700E2327F /* ResetPasswordViewController.swift */; };
 		A6A2400B1A58004E00E2327F /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2400A1A58004E00E2327F /* ConversationViewController.swift */; };
@@ -63,6 +64,7 @@
 		A6657E5B1A5FB6E700B64EDA /* SettingsViewControllerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewControllerTableViewController.swift; sourceTree = "<group>"; };
 		A6768CAA1A5123C30089DC80 /* seated-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "seated-Bridging-Header.h"; sourceTree = "<group>"; };
 		A691A9951A7F6CEB0037CCF1 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		A691A9971A7F9A700037CCF1 /* intro-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-background.png"; sourceTree = "<group>"; };
 		A6A240061A55262400E2327F /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		A6A240081A56A52700E2327F /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		A6A2400A1A58004E00E2327F /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 		A6657E561A5E503700B64EDA /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				A691A9971A7F9A700037CCF1 /* intro-background.png */,
 				A6657E591A5E574E00B64EDA /* incoming-avatar@2x.png */,
 			);
 			name = assets;
@@ -293,6 +296,7 @@
 			files = (
 				A6CFF60F1A54CCED00BBD8D3 /* IntroContentViewController.xib in Resources */,
 				A66076A81A4913AE0039B61D /* LaunchScreen.xib in Resources */,
+				A691A9981A7F9A700037CCF1 /* intro-background.png in Resources */,
 				A6657E5A1A5E574E00B64EDA /* incoming-avatar@2x.png in Resources */,
 				A66076A51A4913AE0039B61D /* Images.xcassets in Resources */,
 				A6CFF6031A53F4B900BBD8D3 /* Main.storyboard in Resources */,

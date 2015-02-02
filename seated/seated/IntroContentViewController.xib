@@ -18,12 +18,27 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D1v-4Q-N3U">
                     <rect key="frame" x="84" y="172" width="152" height="76"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="D1v-4Q-N3U" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="150" id="rBm-Gc-QU2"/>
+                <constraint firstAttribute="centerX" secondItem="D1v-4Q-N3U" secondAttribute="centerX" id="uVc-0w-GTf"/>
+            </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="rBm-Gc-QU2"/>
+                    <exclude reference="uVc-0w-GTf"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="constraints">
+                    <include reference="rBm-Gc-QU2"/>
+                    <include reference="uVc-0w-GTf"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="562" y="398.5"/>
         </view>
     </objects>

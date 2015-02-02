@@ -84,5 +84,9 @@ class RootViewController: UIViewController, UIPageViewControllerDataSource {
     @IBAction func prepareForSegueUnwind(storyBoardSegue:UIStoryboardSegue) {
         
     }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
 
 }

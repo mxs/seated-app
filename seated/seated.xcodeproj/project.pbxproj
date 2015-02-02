@@ -21,6 +21,7 @@
 		A6657E551A5CE7C800B64EDA /* SeatedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6657E541A5CE7C800B64EDA /* SeatedUser.swift */; };
 		A6657E5A1A5E574E00B64EDA /* incoming-avatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6657E591A5E574E00B64EDA /* incoming-avatar@2x.png */; };
 		A6657E5C1A5FB6E700B64EDA /* SettingsViewControllerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6657E5B1A5FB6E700B64EDA /* SettingsViewControllerTableViewController.swift */; };
+		A691A9961A7F6CEB0037CCF1 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A691A9951A7F6CEB0037CCF1 /* UIColorExtension.swift */; };
 		A6A240071A55262400E2327F /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A240061A55262400E2327F /* PaymentViewController.swift */; };
 		A6A240091A56A52700E2327F /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A240081A56A52700E2327F /* ResetPasswordViewController.swift */; };
 		A6A2400B1A58004E00E2327F /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2400A1A58004E00E2327F /* ConversationViewController.swift */; };
@@ -61,6 +62,7 @@
 		A6657E591A5E574E00B64EDA /* incoming-avatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "incoming-avatar@2x.png"; sourceTree = "<group>"; };
 		A6657E5B1A5FB6E700B64EDA /* SettingsViewControllerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewControllerTableViewController.swift; sourceTree = "<group>"; };
 		A6768CAA1A5123C30089DC80 /* seated-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "seated-Bridging-Header.h"; sourceTree = "<group>"; };
+		A691A9951A7F6CEB0037CCF1 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		A6A240061A55262400E2327F /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		A6A240081A56A52700E2327F /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		A6A2400A1A58004E00E2327F /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				A6657E541A5CE7C800B64EDA /* SeatedUser.swift */,
 				A6657E5B1A5FB6E700B64EDA /* SettingsViewControllerTableViewController.swift */,
 				A613E6081A64E4E90089F62D /* UnsubscribedHelper.swift */,
+				A691A9951A7F6CEB0037CCF1 /* UIColorExtension.swift */,
 			);
 			path = seated;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 			files = (
 				A66076A01A4913AE0039B61D /* LoginViewController.swift in Sources */,
 				A6A240071A55262400E2327F /* PaymentViewController.swift in Sources */,
+				A691A9961A7F6CEB0037CCF1 /* UIColorExtension.swift in Sources */,
 				A6A2400B1A58004E00E2327F /* ConversationViewController.swift in Sources */,
 				A6657E5C1A5FB6E700B64EDA /* SettingsViewControllerTableViewController.swift in Sources */,
 				A6A240091A56A52700E2327F /* ResetPasswordViewController.swift in Sources */,

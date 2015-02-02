@@ -25,12 +25,16 @@ class LoginViewController: UIViewController {
                 let loggedInUser = user as SeatedUser
                 
                 let currentInstallation = PFInstallation.currentInstallation()
+                if currentInstallation.channels == nil {
+                    currentInstallation.channels = ["global"]
+                }
                 currentInstallation.channels.append(loggedInUser.stripeCustomerId)
                 currentInstallation.saveInBackgroundWithBlock({ (success, error) -> Void in
                     if error != nil {
                         //TODO: handle error
                     }
                 })
+                
                 
                 if loggedInUser.isAdmin {
                     self.performSegueWithIdentifier("adminLoginSuccessSegue", sender: self)

@@ -13,6 +13,10 @@ class ConversationViewController: JSQMessagesViewController {
     let kFirebaseServerValueTimestamp = [".sv":"timestamp"]
     let seatbotId = "seatbot"
     let welcomeMessage = "Hi there, welcome to seated!"
+    let conversationTextColour = UIColor(rgba: "#494949")
+//    let conversationPrimaryColour = UIColor(rgba: "#ffe174")
+    let conversationPrimaryColour = UIColor(rgba: "#ffdb61")
+    
     var stripeCustomerId:String!
     var conversationId:String!
     var messagesRef:Firebase!
@@ -27,6 +31,11 @@ class ConversationViewController: JSQMessagesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var navBar = self.navigationController?.navigationBar
+        navBar?.barTintColor = self.conversationPrimaryColour
+        navBar?.tintColor = self.conversationTextColour
+        navBar?.titleTextAttributes = [NSForegroundColorAttributeName: self.conversationTextColour]
         
         Firebase.setOption("persistence", to: true)
         
@@ -44,8 +53,8 @@ class ConversationViewController: JSQMessagesViewController {
             self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSize(width:40.0, height:40.0)
             self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero
         }
-        
-        self.outgoingMessageBubbleImage = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
+
+        self.outgoingMessageBubbleImage = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(self.conversationPrimaryColour)
         self.incomingMessageBubbleImage = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
         self.inputToolbar.contentView.leftBarButtonItem = nil
         self.senderId = self.stripeCustomerId
@@ -298,7 +307,7 @@ class ConversationViewController: JSQMessagesViewController {
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as JSQMessagesCollectionViewCell
         let message = self.messages[indexPath.item] as JSQMessage
         if message.senderId == self.senderId {
-            cell.textView.textColor = UIColor.whiteColor()
+            cell.textView.textColor = self.conversationTextColour
         }
         else {
             cell.textView.textColor = UIColor.blackColor()

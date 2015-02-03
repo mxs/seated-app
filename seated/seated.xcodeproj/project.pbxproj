@@ -30,6 +30,7 @@
 		A6CFF6051A53FB2E00BBD8D3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CFF6041A53FB2E00BBD8D3 /* RootViewController.swift */; };
 		A6CFF60E1A54CCED00BBD8D3 /* IntroContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CFF60C1A54CCED00BBD8D3 /* IntroContentViewController.swift */; };
 		A6CFF60F1A54CCED00BBD8D3 /* IntroContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CFF60D1A54CCED00BBD8D3 /* IntroContentViewController.xib */; };
+		A6F161881A8047390055359B /* transparent-seated-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6F161871A8047390055359B /* transparent-seated-logo@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		A6CFF6041A53FB2E00BBD8D3 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		A6CFF60C1A54CCED00BBD8D3 /* IntroContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroContentViewController.swift; sourceTree = "<group>"; };
 		A6CFF60D1A54CCED00BBD8D3 /* IntroContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroContentViewController.xib; sourceTree = "<group>"; };
+		A6F161871A8047390055359B /* transparent-seated-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transparent-seated-logo@2x.png"; sourceTree = "<group>"; };
 		AF58CAAD5538563E7608E5C3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -204,6 +206,7 @@
 		A6657E561A5E503700B64EDA /* assets */ = {
 			isa = PBXGroup;
 			children = (
+				A6F161871A8047390055359B /* transparent-seated-logo@2x.png */,
 				A691A9971A7F9A700037CCF1 /* intro-background.png */,
 				A6657E591A5E574E00B64EDA /* incoming-avatar@2x.png */,
 			);
@@ -300,6 +303,7 @@
 				A6657E5A1A5E574E00B64EDA /* incoming-avatar@2x.png in Resources */,
 				A66076A51A4913AE0039B61D /* Images.xcassets in Resources */,
 				A6CFF6031A53F4B900BBD8D3 /* Main.storyboard in Resources */,
+				A6F161881A8047390055359B /* transparent-seated-logo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

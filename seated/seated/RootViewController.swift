@@ -12,6 +12,12 @@ class RootViewController: UIViewController, UIPageViewControllerDataSource {
     
     @IBOutlet weak var pageControl: UIPageControl!
     
+    let introMainCopyOne = "No more chasing dinner reservations."
+    let introMainCopyTwo = "Need some ideas?"
+    let introMainCopyThree = "Give it a try!"
+    let introSubtextOne = "Send us a message and we will get your booked."
+    let introSubtextTwo = "We can provide suggestions based on cuisine and location, always here to help."
+    let introSubtextThree = "Help with something other than dinner reservations? You might be pleasantly surprised."
     var pageViewController:UIPageViewController?
     var introContentVCs: [IntroContentViewController]!
     
@@ -61,15 +67,19 @@ class RootViewController: UIViewController, UIPageViewControllerDataSource {
     }
     
     func createIntroContentViewControllers() -> [IntroContentViewController] {
-        let introTexts = ["Intro One", "Intro Two", "Intro Three"]
+        let introMainCopies = [self.introMainCopyOne, self.introMainCopyTwo, self.introMainCopyThree]
+        let introSubtexts = [self.introSubtextOne, self.introSubtextTwo, self.introSubtextThree]
         var introContentVCs:[IntroContentViewController] = []
-        for text in introTexts {
+        for var i = 0; i < introMainCopies.count; i++ {
+            let mainCopy = introMainCopies[i]
+            let subtext = introSubtexts[i]
             var introContentVC = IntroContentViewController(nibName: "IntroContentViewController", bundle:NSBundle.mainBundle())
-            introContentVC.introCopy = text
+            introContentVC.introMainCopy = mainCopy
+            introContentVC.introSubText = subtext
             introContentVCs.append(introContentVC)
         }
+        
         return introContentVCs
-
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

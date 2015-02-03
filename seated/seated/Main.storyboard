@@ -60,8 +60,11 @@
                                     <segue destination="sV1-Xx-cng" kind="show" id="fgN-bq-rfi"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-background.png" translatesAutoresizingMaskIntoConstraints="NO" id="P5h-g0-e20">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="transparent-seated-logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="HXP-qU-4nQ">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="117" y="80" width="86" height="80"/>
+                                </variation>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -75,6 +78,7 @@
                             <constraint firstItem="PsR-t8-eap" firstAttribute="top" secondItem="ues-cT-V6J" secondAttribute="bottom" id="R1G-c1-R5U"/>
                             <constraint firstItem="PsR-t8-eap" firstAttribute="top" secondItem="x83-XQ-7S0" secondAttribute="bottom" constant="73" id="UEy-lY-Z23"/>
                             <constraint firstItem="ues-cT-V6J" firstAttribute="top" secondItem="ctI-NW-Lhc" secondAttribute="topMargin" id="UcQ-aJ-1N6"/>
+                            <constraint firstAttribute="centerY" secondItem="HXP-qU-4nQ" secondAttribute="centerY" constant="150" id="YEz-NN-fh7"/>
                             <constraint firstItem="ues-cT-V6J" firstAttribute="trailing" secondItem="9Zx-0b-IHT" secondAttribute="trailing" constant="-9" id="ZRC-wS-ur9"/>
                             <constraint firstItem="PsR-t8-eap" firstAttribute="top" secondItem="cmq-vd-ums" secondAttribute="bottom" constant="25" id="a3W-d1-WB5"/>
                             <constraint firstItem="ues-cT-V6J" firstAttribute="top" secondItem="9Zx-0b-IHT" secondAttribute="top" constant="4" id="djm-Sw-9iQ"/>
@@ -82,11 +86,12 @@
                             <constraint firstItem="PsR-t8-eap" firstAttribute="top" secondItem="eKq-tr-JxW" secondAttribute="bottom" constant="25" id="fDx-P9-6NH"/>
                             <constraint firstItem="ues-cT-V6J" firstAttribute="leading" secondItem="ctI-NW-Lhc" secondAttribute="leadingMargin" constant="-16" id="gyX-JA-PgU"/>
                             <constraint firstItem="ues-cT-V6J" firstAttribute="leading" secondItem="9Zx-0b-IHT" secondAttribute="leading" constant="9" id="ikW-bh-g9s"/>
+                            <constraint firstAttribute="centerX" secondItem="HXP-qU-4nQ" secondAttribute="centerX" id="ikz-Fi-aON"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="9Zx-0b-IHT"/>
-                                <exclude reference="P5h-g0-e20"/>
+                                <exclude reference="HXP-qU-4nQ"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="ASe-ul-xYI"/>
@@ -96,6 +101,8 @@
                                 <exclude reference="djm-Sw-9iQ"/>
                                 <exclude reference="gyX-JA-PgU"/>
                                 <exclude reference="ikW-bh-g9s"/>
+                                <exclude reference="YEz-NN-fh7"/>
+                                <exclude reference="ikz-Fi-aON"/>
                                 <exclude reference="dtp-Ae-RxD"/>
                                 <exclude reference="Lbz-L9-H1x"/>
                                 <exclude reference="OlW-CV-rdm"/>
@@ -108,7 +115,7 @@
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="9Zx-0b-IHT"/>
-                                <exclude reference="P5h-g0-e20"/>
+                                <include reference="HXP-qU-4nQ"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="ASe-ul-xYI"/>
@@ -118,6 +125,8 @@
                                 <include reference="djm-Sw-9iQ"/>
                                 <include reference="gyX-JA-PgU"/>
                                 <include reference="ikW-bh-g9s"/>
+                                <include reference="YEz-NN-fh7"/>
+                                <include reference="ikz-Fi-aON"/>
                                 <include reference="dtp-Ae-RxD"/>
                                 <include reference="Lbz-L9-H1x"/>
                                 <include reference="OlW-CV-rdm"/>
@@ -136,7 +145,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iKE-3S-6tQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="109.5" y="-53"/>
+            <point key="canvasLocation" x="108" y="-104"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="7Av-7u-7NO">
@@ -304,7 +313,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Q6D-jP-Yta"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Niw-OO-ft1">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -323,7 +332,7 @@
             <objects>
                 <tableViewController id="Rqa-4I-Nje" customClass="SettingsViewControllerTableViewController" customModule="seated" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="xHy-y5-Xjt">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -554,7 +563,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="conversationList" hidesBottomBarWhenPushed="YES" id="2mI-G1-cQH" customClass="ConversationListViewController" customModule="seated" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="54" sectionHeaderHeight="22" sectionFooterHeight="22" id="84k-4S-cmg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -635,6 +644,7 @@
     </scenes>
     <resources>
         <image name="intro-background.png" width="502" height="892"/>
+        <image name="transparent-seated-logo.png" width="86" height="80"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="VqZ-xE-plc"/>

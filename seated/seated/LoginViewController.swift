@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -28,6 +28,7 @@ class LoginViewController: UIViewController {
         self.passwordTextField.secureTextEntry = true
         self.passwordTextField.backgroundColor = UIColor.whiteColor()
         self.passwordTextField.textColor = self.textColor
+        self.passwordTextField.delegate = self
         self.emailTextField.backgroundColor = UIColor.whiteColor()
         self.emailTextField.textColor = self.textColor
         
@@ -72,7 +73,11 @@ class LoginViewController: UIViewController {
                 //TODO: handle login fail error
             }
         }
-        
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.loginIn(self)
+        return false
     }
 }
 

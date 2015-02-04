@@ -30,9 +30,6 @@
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
-                    <variation key="widthClass=compact" misplaced="YES">
-                        <rect key="frame" x="85" y="319" width="151" height="21"/>
-                    </variation>
                 </label>
             </subviews>
             <constraints>
@@ -50,13 +47,13 @@
                     <exclude reference="QLg-kX-sSh"/>
                 </mask>
                 <mask key="constraints">
+                    <exclude reference="2bS-Zl-rmQ"/>
+                    <exclude reference="czH-0d-mpp"/>
+                    <exclude reference="j6L-oC-Xmd"/>
                     <exclude reference="YtU-7c-0FR"/>
                     <exclude reference="edn-xM-DBy"/>
                     <exclude reference="kjy-Jy-gQq"/>
                     <exclude reference="uVc-0w-GTf"/>
-                    <exclude reference="2bS-Zl-rmQ"/>
-                    <exclude reference="czH-0d-mpp"/>
-                    <exclude reference="j6L-oC-Xmd"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
@@ -64,13 +61,13 @@
                     <include reference="QLg-kX-sSh"/>
                 </mask>
                 <mask key="constraints">
+                    <include reference="2bS-Zl-rmQ"/>
+                    <include reference="czH-0d-mpp"/>
+                    <include reference="j6L-oC-Xmd"/>
                     <include reference="YtU-7c-0FR"/>
                     <include reference="edn-xM-DBy"/>
                     <include reference="kjy-Jy-gQq"/>
                     <include reference="uVc-0w-GTf"/>
-                    <include reference="2bS-Zl-rmQ"/>
-                    <include reference="czH-0d-mpp"/>
-                    <include reference="j6L-oC-Xmd"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="562" y="398"/>

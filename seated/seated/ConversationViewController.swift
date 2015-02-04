@@ -13,9 +13,9 @@ class ConversationViewController: JSQMessagesViewController {
     let kFirebaseServerValueTimestamp = [".sv":"timestamp"]
     let seatbotId = "seatbot"
     let welcomeMessage = "Hi there, welcome to seated!"
-    let conversationTextColour = UIColor(rgba: "#494949")
+    let conversationTextColour = UIColor(rgb: "#494949")
 //    let conversationPrimaryColour = UIColor(rgba: "#ffe174")
-    let conversationPrimaryColour = UIColor(rgba: "#ffdb61")
+    let conversationPrimaryColour = UIColor(rgb: "#ffdb61")
     
     var stripeCustomerId:String!
     var conversationId:String!

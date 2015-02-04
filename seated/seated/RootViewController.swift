@@ -88,6 +88,12 @@ class RootViewController: UIViewController, UIPageViewControllerDataSource {
             destVC.dataSource = self
             self.pageViewController = destVC
         }
+        else if segue.identifier == "loginSegue" {
+            let backgroundImage = takeSnapshotAndBlur(self.view)
+            var destVC = segue.destinationViewController as LoginViewController
+            destVC.backgroundImage = backgroundImage
+        }
+        
     }
     
     //Only used to unwind segues to this view controller
@@ -97,6 +103,15 @@ class RootViewController: UIViewController, UIPageViewControllerDataSource {
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    func takeSnapshotAndBlur(view:UIView) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(self.view.bounds.size, true, 1)
+        view.drawViewHierarchyInRect(view.bounds, afterScreenUpdates: true)
+        let screenshot = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        let blurImage = screenshot.applyBlurWithRadius(30, tintColor: UIColor.whiteColor().colorWithAlphaComponent(0.2), saturationDeltaFactor: 1.5, maskImage: nil)
+        return blurImage
     }
 
 }

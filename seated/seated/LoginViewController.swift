@@ -13,10 +13,34 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
+    var backgroundImageView: UIImageView!
+    var backgroundImage:UIImage?
+    let textColor = UIColor(rgb: "#494949")
+    let primaryColour = UIColor(rgb: "#ffdb61")
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.backgroundImageView = UIImageView(image: self.backgroundImage)
+        self.view.addSubview(self.backgroundImageView)
+        self.view.sendSubviewToBack(self.backgroundImageView)
+        
         self.passwordTextField.secureTextEntry = true
+        self.passwordTextField.backgroundColor = UIColor.whiteColor()
+        self.passwordTextField.textColor = self.textColor
+        self.emailTextField.backgroundColor = UIColor.whiteColor()
+        self.emailTextField.textColor = self.textColor
+        
+        self.loginButton.setTitleColor(self.textColor, forState: UIControlState.Normal)
+        self.loginButton.setBackgroundImage(UIImage.imageWithColor(self.primaryColour), forState: UIControlState.Normal)
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.emailTextField.becomeFirstResponder()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.emailTextField.resignFirstResponder()
     }
 
     @IBAction func loginIn(sender: AnyObject) {
@@ -35,7 +59,6 @@ class LoginViewController: UIViewController {
                         //TODO: handle error
                     }
                 })
-                
                 
                 if loggedInUser.isAdmin {
                     self.performSegueWithIdentifier("adminLoginSuccessSegue", sender: self)

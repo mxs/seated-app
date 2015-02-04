@@ -10,6 +10,12 @@ import UIKit
 
 class SeatedTextField: UITextField {
 
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        self.backgroundColor = UIColor.whiteColor()
+        self.textColor = UIColor.textColour()
+    }
+    
     override func textRectForBounds(bounds: CGRect) -> CGRect {
         return CGRectInset(bounds, 10.0, 10.0);
     }

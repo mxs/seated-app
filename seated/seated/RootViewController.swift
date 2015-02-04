@@ -11,6 +11,7 @@ import UIKit
 class RootViewController: UIViewController, UIPageViewControllerDataSource {
     
     @IBOutlet weak var pageControl: UIPageControl!
+    @IBOutlet weak var signupButton: UIButton!
     
     let introMainCopyOne = "No more chasing dinner reservations."
     let introMainCopyTwo = "Need some ideas?"
@@ -32,6 +33,12 @@ class RootViewController: UIViewController, UIPageViewControllerDataSource {
         if let pageVC = self.pageViewController {
             pageVC.setViewControllers([self.introContentVCs[0]], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
         }
+        
+        self.signupButton.setTitleColor(UIColor.textColour(), forState: UIControlState.Normal)
+        self.signupButton.setBackgroundImage(UIImage.imageWithColor(UIColor.primaryColour()), forState: UIControlState.Normal)
+        self.signupButton.layer.cornerRadius = 5.0
+        self.signupButton.layer.masksToBounds = true
+
     }
     
     // MARK: - UIPageViewControllerDataSource
@@ -88,12 +95,10 @@ class RootViewController: UIViewController, UIPageViewControllerDataSource {
             destVC.dataSource = self
             self.pageViewController = destVC
         }
-        else if segue.identifier == "loginSegue" {
-            let backgroundImage = takeSnapshotAndBlur(self.view)
-            var destVC = segue.destinationViewController as LoginViewController
-            destVC.backgroundImage = backgroundImage
+        else if segue.destinationViewController.conformsToProtocol(BlurBackgroundProtocol) {
+            var destVC = segue.destinationViewController as? BlurBackgroundProtocol
+            destVC?.blurredBackgroundImage = takeSnapshotAndBlur(self.view)
         }
-        
     }
     
     //Only used to unwind segues to this view controller

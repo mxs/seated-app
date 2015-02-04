@@ -36,6 +36,7 @@
 		A6F161901A80A81F0055359B /* SeatedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1618F1A80A81F0055359B /* SeatedTextField.swift */; };
 		A6F161931A821C3A0055359B /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F161921A821C3A0055359B /* UIImageExtension.swift */; };
 		A6F161951A8235880055359B /* ios7-close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6F161941A8235880055359B /* ios7-close@2x.png */; };
+		A6F161971A8250A50055359B /* BlurBackgroundProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F161961A8250A50055359B /* BlurBackgroundProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		A6F1618F1A80A81F0055359B /* SeatedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeatedTextField.swift; sourceTree = "<group>"; };
 		A6F161921A821C3A0055359B /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		A6F161941A8235880055359B /* ios7-close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7-close@2x.png"; sourceTree = "<group>"; };
+		A6F161961A8250A50055359B /* BlurBackgroundProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlurBackgroundProtocol.swift; path = seated/BlurBackgroundProtocol.swift; sourceTree = "<group>"; };
 		AF58CAAD5538563E7608E5C3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -139,6 +141,7 @@
 		A660768F1A4913AE0039B61D = {
 			isa = PBXGroup;
 			children = (
+				A6F161961A8250A50055359B /* BlurBackgroundProtocol.swift */,
 				A660769A1A4913AE0039B61D /* seated */,
 				A66076B01A4913AE0039B61D /* seatedTests */,
 				A66076991A4913AE0039B61D /* Products */,
@@ -400,6 +403,7 @@
 				A6A240091A56A52700E2327F /* ResetPasswordViewController.swift in Sources */,
 				A660769E1A4913AE0039B61D /* AppDelegate.swift in Sources */,
 				A6657E551A5CE7C800B64EDA /* SeatedUser.swift in Sources */,
+				A6F161971A8250A50055359B /* BlurBackgroundProtocol.swift in Sources */,
 				A613E6091A64E4E90089F62D /* UnsubscribedHelper.swift in Sources */,
 				A66076C21A4EB5CD0039B61D /* SignUpViewController.swift in Sources */,
 				A652E6331A68BE28003F503F /* ConversationListViewController.swift in Sources */,

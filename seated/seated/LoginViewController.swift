@@ -9,15 +9,22 @@
 import UIKit
 import Parse
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
+class LoginViewController: UIViewController, UITextFieldDelegate, BlurBackgroundProtocol {
 
-    @IBOutlet weak var emailTextField: UITextField!
-    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var emailTextField: SeatedTextField!
+    @IBOutlet weak var passwordTextField: SeatedTextField!
     @IBOutlet weak var loginButton: UIButton!
     var backgroundImageView: UIImageView!
     var backgroundImage:UIImage?
-    let textColor = UIColor(rgb: "#494949")
-    let primaryColour = UIColor(rgb: "#ffdb61")
+    
+    var blurredBackgroundImage:UIImage? {
+        get {
+            return self.backgroundImage
+        }
+        set {
+            self.backgroundImage = newValue
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,14 +33,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.view.sendSubviewToBack(self.backgroundImageView)
         
         self.passwordTextField.secureTextEntry = true
-        self.passwordTextField.backgroundColor = UIColor.whiteColor()
-        self.passwordTextField.textColor = self.textColor
         self.passwordTextField.delegate = self
-        self.emailTextField.backgroundColor = UIColor.whiteColor()
-        self.emailTextField.textColor = self.textColor
-        
-        self.loginButton.setTitleColor(self.textColor, forState: UIControlState.Normal)
-        self.loginButton.setBackgroundImage(UIImage.imageWithColor(self.primaryColour), forState: UIControlState.Normal)
+
+        self.loginButton.setTitleColor(UIColor.textColour(), forState: UIControlState.Normal)
+        self.loginButton.setBackgroundImage(UIImage.imageWithColor(UIColor.primaryColour()), forState: UIControlState.Normal)
+        self.loginButton.layer.cornerRadius = 5.0
+        self.loginButton.layer.masksToBounds = true
     }
     
     override func viewWillAppear(animated: Bool) {

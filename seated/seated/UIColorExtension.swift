@@ -42,4 +42,13 @@ extension UIColor {
     convenience init(rgb: String) {
         self.init(rgb: rgb, alpha: 1.0)
     }
+    
+    class func textColour() -> UIColor {
+        return UIColor(rgb: "#494949")
+    }
+    
+    class func primaryColour() -> UIColor {
+        return UIColor(rgb: "#ffdb61")
+    }
+    
 }

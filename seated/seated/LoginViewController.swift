@@ -17,6 +17,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, BlurBackground
     var backgroundImageView: UIImageView!
     var backgroundImage:UIImage?
     
+    //MARK: - BlurBackgroundProtocol
     var blurredBackgroundImage:UIImage? {
         get {
             return self.backgroundImage
@@ -80,9 +81,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate, BlurBackground
         }
     }
     
+    //MARK: UITextFieldDelegate
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         self.loginIn(self)
         return false
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "newUserSegue" {
+            if segue.destinationViewController.conformsToProtocol(BlurBackgroundProtocol) {
+                var destVC = segue.destinationViewController as BlurBackgroundProtocol
+                destVC.blurredBackgroundImage = self.blurredBackgroundImage
+            }
+        }
     }
 }
 

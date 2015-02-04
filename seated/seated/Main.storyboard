@@ -235,7 +235,7 @@
                                     <rect key="frame" x="237" y="169" width="67" height="28"/>
                                 </variation>
                                 <connections>
-                                    <segue destination="sV1-Xx-cng" kind="showDetail" id="YXN-d6-azq"/>
+                                    <segue destination="sV1-Xx-cng" kind="showDetail" identifier="newUserSegue" id="YXN-d6-azq"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="jeA-dQ-Kdp" customClass="SeatedTextField" customModule="seated" customModuleProvider="target">
@@ -878,7 +878,7 @@
         <image name="transparent-seated-logo.png" width="86" height="80"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fgN-bq-rfi"/>
+        <segue reference="YXN-d6-azq"/>
         <segue reference="VqZ-xE-plc"/>
         <segue reference="hPp-1l-ybO"/>
         <segue reference="8W0-cl-TbP"/>

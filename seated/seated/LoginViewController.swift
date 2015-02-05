@@ -52,6 +52,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, BlurBackground
 
     @IBAction func loginIn(sender: AnyObject) {
         
+        SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Black)
+        
         PFUser.logInWithUsernameInBackground(self.emailTextField.text, password: self.passwordTextField.text) { (user, error) -> Void in
             if error == nil {
                 let loggedInUser = user as SeatedUser
@@ -66,6 +68,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, BlurBackground
                         //TODO: handle error
                     }
                 })
+                
+                SVProgressHUD.dismiss()
                 
                 if loggedInUser.isAdmin {
                     self.performSegueWithIdentifier("adminLoginSuccessSegue", sender: self)

@@ -178,7 +178,6 @@
                     <connections>
                         <outlet property="pageControl" destination="x83-XQ-7S0" id="015-bI-ogQ"/>
                         <outlet property="signupButton" destination="eKq-tr-JxW" id="EF3-4B-szw"/>
-                        <segue destination="nyx-mZ-Ew3" kind="show" identifier="rootToPaymentSegue" id="9wQ-GA-mjV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iKE-3S-6tQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -383,40 +382,6 @@
             </objects>
             <point key="canvasLocation" x="736.5" y="-104"/>
         </scene>
-        <!--Payment View Controller-->
-        <scene sceneID="CJx-PZ-Aio">
-            <objects>
-                <viewController storyboardIdentifier="paymentViewController" id="nyx-mZ-Ew3" customClass="PaymentViewController" customModule="seated" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Amk-t2-kRm"/>
-                        <viewControllerLayoutGuide type="bottom" id="I50-da-MmJ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="jN3-xd-Wwa">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Qz-7A-r3R">
-                                <rect key="frame" x="140" y="210" width="41" height="30"/>
-                                <state key="normal" title="Finish">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="finishPayment:" destination="nyx-mZ-Ew3" eventType="touchUpInside" id="RwU-lF-XAJ"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.99213939910000004" green="0.15624010560000001" blue="0.1387524903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <outlet property="finishButton" destination="9Qz-7A-r3R" id="U6s-s9-Dm3"/>
-                        <segue destination="0Nr-Qa-J3X" kind="showDetail" identifier="paymentSetupSuccessSegue" id="VkK-Ge-RjD"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="k8b-ai-I4l" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="520.5" y="735"/>
-        </scene>
         <!--Conversation View Controller-->
         <scene sceneID="X2t-Yg-Wdn">
             <objects>
@@ -438,7 +403,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Nv-OG-R6t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1575" y="729"/>
+            <point key="canvasLocation" x="1260" y="735"/>
         </scene>
         <!--Settings View Controller Table View Controller-->
         <scene sceneID="6oW-nd-nZf">
@@ -591,7 +556,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="First Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="TG4-tV-wjz" customClass="SeatedTextField" customModule="seated" customModuleProvider="target">
                                 <rect key="frame" x="16" y="62" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no"/>
                                 <variation key="widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="16" y="50" width="288" height="22"/>
                                 </variation>
@@ -599,7 +564,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Last Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="EnU-iO-Ld2" customClass="SeatedTextField" customModule="seated" customModuleProvider="target">
                                 <rect key="frame" x="16" y="101" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no"/>
                                 <variation key="widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="16" y="72" width="288" height="22"/>
                                 </variation>
@@ -615,7 +580,7 @@
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8wl-gi-4Is" customClass="SeatedTextField" customModule="seated" customModuleProvider="target">
                                 <rect key="frame" x="16" y="180" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="join"/>
                                 <variation key="widthClass=compact" misplaced="YES">
                                     <rect key="frame" x="16" y="116" width="288" height="22"/>
                                 </variation>
@@ -638,7 +603,7 @@
                                     <constraint firstAttribute="height" constant="45" id="jqp-f9-rnY"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Next">
+                                <state key="normal" title="Start!">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -674,14 +639,9 @@
                             </constraint>
                             <constraint firstItem="EnU-iO-Ld2" firstAttribute="leading" secondItem="TG4-tV-wjz" secondAttribute="leading" id="IrQ-gh-L84"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cZr-Dc-VBh" secondAttribute="trailing" id="Iuz-e9-wem"/>
-                            <constraint firstItem="TG4-tV-wjz" firstAttribute="top" secondItem="CTa-yl-kMN" secondAttribute="bottom" constant="30" id="KeC-U3-aSS"/>
                             <constraint firstAttribute="centerX" secondItem="cZr-Dc-VBh" secondAttribute="centerX" id="M0l-40-fVv"/>
                             <constraint firstItem="EnU-iO-Ld2" firstAttribute="top" secondItem="TG4-tV-wjz" secondAttribute="bottom" constant="9" id="Pkp-iT-umo">
                                 <variation key="widthClass=compact" constant="0.0"/>
-                            </constraint>
-                            <constraint firstItem="TG4-tV-wjz" firstAttribute="top" secondItem="CTa-yl-kMN" secondAttribute="bottom" constant="30" id="Qet-ec-ikh"/>
-                            <constraint firstItem="TG4-tV-wjz" firstAttribute="top" secondItem="CTa-yl-kMN" secondAttribute="bottom" constant="30" id="Qjd-BZ-Znb">
-                                <variation key="widthClass=compact" constant="10"/>
                             </constraint>
                             <constraint firstItem="TG4-tV-wjz" firstAttribute="leading" secondItem="5KI-Tb-rqy" secondAttribute="leadingMargin" id="Tdp-px-yUd"/>
                             <constraint firstAttribute="trailingMargin" secondItem="CTa-yl-kMN" secondAttribute="trailing" id="VST-ok-WVG"/>
@@ -702,9 +662,6 @@
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="DS8-Zr-eEV"/>
-                                <exclude reference="KeC-U3-aSS"/>
-                                <exclude reference="Qet-ec-ikh"/>
-                                <exclude reference="Qjd-BZ-Znb"/>
                                 <exclude reference="Tdp-px-yUd"/>
                                 <exclude reference="XCr-ev-pMC"/>
                                 <exclude reference="gjE-fn-MwL"/>
@@ -730,9 +687,6 @@
                             </mask>
                             <mask key="constraints">
                                 <include reference="DS8-Zr-eEV"/>
-                                <exclude reference="KeC-U3-aSS"/>
-                                <exclude reference="Qet-ec-ikh"/>
-                                <exclude reference="Qjd-BZ-Znb"/>
                                 <include reference="Tdp-px-yUd"/>
                                 <include reference="XCr-ev-pMC"/>
                                 <include reference="gjE-fn-MwL"/>
@@ -762,7 +716,7 @@
                         <outlet property="lastNameTextField" destination="EnU-iO-Ld2" id="GnK-e7-csI"/>
                         <outlet property="nextButton" destination="cZr-Dc-VBh" id="bmt-yX-TSW"/>
                         <outlet property="passwordTextField" destination="8wl-gi-4Is" id="4uc-DX-T0X"/>
-                        <segue destination="nyx-mZ-Ew3" kind="show" identifier="signupToPaymentSegue" id="8W0-cl-TbP"/>
+                        <segue destination="0Nr-Qa-J3X" kind="presentation" identifier="signupCompleteSegue" id="6KX-g2-JJs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K5f-t5-THj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -786,7 +740,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s6O-iU-oWk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1032" y="729"/>
+            <point key="canvasLocation" x="696" y="735"/>
         </scene>
         <!--Conversation List View Controller-->
         <scene sceneID="M9c-Cx-SMn">
@@ -879,8 +833,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="YXN-d6-azq"/>
-        <segue reference="VqZ-xE-plc"/>
-        <segue reference="hPp-1l-ybO"/>
-        <segue reference="8W0-cl-TbP"/>
+        <segue reference="lhI-Ys-E09"/>
+        <segue reference="6KX-g2-JJs"/>
     </inferredMetricsTieBreakers>
 </document>

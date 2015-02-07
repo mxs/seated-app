@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8EED7B460EA708EA1A8923B8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2870EDA7E24441B6BE243479 /* libPods.a */; };
 		A613E6091A64E4E90089F62D /* UnsubscribedHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A613E6081A64E4E90089F62D /* UnsubscribedHelper.swift */; };
+		A62BCAF21A838FE3008AD5DE /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62BCAF11A838FE3008AD5DE /* Subscription.swift */; };
 		A652E6331A68BE28003F503F /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A652E6321A68BE28003F503F /* ConversationListViewController.swift */; };
 		A652E6351A6C7C65003F503F /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A652E6341A6C7C65003F503F /* Conversation.swift */; };
 		A652E6371A6CD6F4003F503F /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A652E6361A6CD6F4003F503F /* ConversationTableViewCell.swift */; };
@@ -53,6 +54,7 @@
 		237050A84A16FE74DB9A5323 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		2870EDA7E24441B6BE243479 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		A613E6081A64E4E90089F62D /* UnsubscribedHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsubscribedHelper.swift; sourceTree = "<group>"; };
+		A62BCAF11A838FE3008AD5DE /* Subscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
 		A652E6321A68BE28003F503F /* ConversationListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
 		A652E6341A6C7C65003F503F /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		A652E6361A6CD6F4003F503F /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
@@ -86,7 +88,7 @@
 		A6F1618F1A80A81F0055359B /* SeatedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeatedTextField.swift; sourceTree = "<group>"; };
 		A6F161921A821C3A0055359B /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		A6F161941A8235880055359B /* ios7-close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7-close@2x.png"; sourceTree = "<group>"; };
-		A6F161961A8250A50055359B /* BlurBackgroundProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlurBackgroundProtocol.swift; path = seated/BlurBackgroundProtocol.swift; sourceTree = "<group>"; };
+		A6F161961A8250A50055359B /* BlurBackgroundProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurBackgroundProtocol.swift; sourceTree = "<group>"; };
 		AF58CAAD5538563E7608E5C3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,6 +130,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A62BCAF01A838FBF008AD5DE /* Parse Models */ = {
+			isa = PBXGroup;
+			children = (
+				A6657E541A5CE7C800B64EDA /* SeatedUser.swift */,
+				A62BCAF11A838FE3008AD5DE /* Subscription.swift */,
+			);
+			name = "Parse Models";
+			sourceTree = "<group>";
+		};
 		A652E6311A68BE06003F503F /* Admin */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,7 +152,6 @@
 		A660768F1A4913AE0039B61D = {
 			isa = PBXGroup;
 			children = (
-				A6F161961A8250A50055359B /* BlurBackgroundProtocol.swift */,
 				A660769A1A4913AE0039B61D /* seated */,
 				A66076B01A4913AE0039B61D /* seatedTests */,
 				A66076991A4913AE0039B61D /* Products */,
@@ -162,10 +172,11 @@
 		A660769A1A4913AE0039B61D /* seated */ = {
 			isa = PBXGroup;
 			children = (
+				A62BCAF01A838FBF008AD5DE /* Parse Models */,
 				A6F161911A821C230055359B /* Extensions */,
 				A6F1618B1A809B7C0055359B /* Categories */,
 				A652E6311A68BE06003F503F /* Admin */,
-				A6657E561A5E503700B64EDA /* assets */,
+				A6657E561A5E503700B64EDA /* Assets */,
 				A66076C31A4EBBEC0039B61D /* Intro Flow */,
 				A660769D1A4913AE0039B61D /* AppDelegate.swift */,
 				A660769F1A4913AE0039B61D /* LoginViewController.swift */,
@@ -179,10 +190,10 @@
 				A6A240061A55262400E2327F /* PaymentViewController.swift */,
 				A6A240081A56A52700E2327F /* ResetPasswordViewController.swift */,
 				A6A2400A1A58004E00E2327F /* ConversationViewController.swift */,
-				A6657E541A5CE7C800B64EDA /* SeatedUser.swift */,
 				A6657E5B1A5FB6E700B64EDA /* SettingsViewControllerTableViewController.swift */,
 				A613E6081A64E4E90089F62D /* UnsubscribedHelper.swift */,
 				A6F1618F1A80A81F0055359B /* SeatedTextField.swift */,
+				A6F161961A8250A50055359B /* BlurBackgroundProtocol.swift */,
 			);
 			path = seated;
 			sourceTree = "<group>";
@@ -221,7 +232,7 @@
 			name = "Intro Flow";
 			sourceTree = "<group>";
 		};
-		A6657E561A5E503700B64EDA /* assets */ = {
+		A6657E561A5E503700B64EDA /* Assets */ = {
 			isa = PBXGroup;
 			children = (
 				A6F161941A8235880055359B /* ios7-close@2x.png */,
@@ -229,7 +240,7 @@
 				A691A9971A7F9A700037CCF1 /* intro-background.png */,
 				A6657E591A5E574E00B64EDA /* incoming-avatar@2x.png */,
 			);
-			name = assets;
+			name = Assets;
 			path = ../../assets;
 			sourceTree = "<group>";
 		};
@@ -406,6 +417,7 @@
 				A6F161971A8250A50055359B /* BlurBackgroundProtocol.swift in Sources */,
 				A613E6091A64E4E90089F62D /* UnsubscribedHelper.swift in Sources */,
 				A66076C21A4EB5CD0039B61D /* SignUpViewController.swift in Sources */,
+				A62BCAF21A838FE3008AD5DE /* Subscription.swift in Sources */,
 				A652E6331A68BE28003F503F /* ConversationListViewController.swift in Sources */,
 				A652E6371A6CD6F4003F503F /* ConversationTableViewCell.swift in Sources */,
 				A6CFF60E1A54CCED00BBD8D3 /* IntroContentViewController.swift in Sources */,

@@ -92,6 +92,12 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol {
         }
     }
     
+    func createSubscriptionObject(data:NSDictionary) -> Subscription {
+        var subscription:Subscription = Subscription()
+        subscription.update(data)
+        return subscription
+    }
+    
     func createStripeCustomerAndTrialSubscription(newUser:SeatedUser) -> Void {
         var params = ["email": newUser.email]
         
@@ -108,9 +114,7 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol {
                 if let dataArray = subscriptions["data"] as? NSArray {
                     if dataArray.count > 0 {
                         if let data = dataArray[0] as? NSDictionary {
-                            if let subscriptionId = data["id"] as? String {
-                                newUser.subscriptionId = subscriptionId
-                            }
+                            newUser.subscription = self.createSubscriptionObject(data)
                         }
                     }
                 }

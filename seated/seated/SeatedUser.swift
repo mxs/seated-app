@@ -46,12 +46,21 @@ class SeatedUser: PFUser, PFSubclassing {
         return "\(self.firstName) \(self.lastName)"
     }
     
-    var subscriptionId:String {
+    var cardId:String? {
         get {
-            return self["subscriptionId"] as String
+            return self["card_id"] as String?
         }
         set {
-            self["subscriptionId"] = newValue
+            self["card_id"] = newValue
+        }
+    }
+    
+    var cardLabel:String? {
+        get {
+            return self["card_label"] as String?
+        }
+        set {
+            self["card_label"] = newValue
         }
     }
     
@@ -61,6 +70,15 @@ class SeatedUser: PFUser, PFSubclassing {
         }
         set {
             self["isAdmin"] = newValue
+        }
+    }
+    
+    var subscription:Subscription {
+        get {
+            return self["subscription"] as Subscription
+        }
+        set {
+            self["subscription"] = newValue
         }
     }
     

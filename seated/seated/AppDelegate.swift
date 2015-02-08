@@ -16,9 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
+        Parse.enableLocalDatastore()
         Parse.setApplicationId("m8LgO3jYklu06JwdSXqwDh0WpC4hQXei4iDRl5CO", clientKey: "Yz7k5c4YGQ0SGtCM0xFVVNJXwmor0E5c8x6tGh3V")
         Stripe.setDefaultPublishableKey("pk_test_p4io3YSiR5p1F4f5XsGmtxSN")
-
+        
         let userNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Sound | UIUserNotificationType.Badge
         let notificationSettings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
         application.registerUserNotificationSettings(notificationSettings)
@@ -26,33 +27,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var user = SeatedUser.currentUser()
         if (user != nil) {
+            
+            //always update user from Parse
+            user.fetchInBackgroundWithBlock({ (result, error) -> Void in
+                println("from fetch: \(user)")
+                if error != nil {
+                    //TODO:Alert about fetch latest user info
+                }
+            })
+            
+            self.fetchStripeSubscription()
+            
             let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
             var rootNavigationVC:UINavigationController
             if user.isAdmin {
                 rootNavigationVC = storyBoard.instantiateViewControllerWithIdentifier("conversationListNavigationController") as UINavigationController
             }
             else {
-                
-                PFCloud.callFunctionInBackground("checkSubscriptionStatus", withParameters: ["objectId": user.objectId, "stripeCustomerId":user.stripeCustomerId, "subscriptionId":user.subscriptionId], block: { (result, error) -> Void in
-                    
-                    if error == nil {
-                        //always update the user from server incase fields change from Parse Cloud function checkSubscriptionStatus call
-                        user.fetchInBackgroundWithBlock({ (fetchedUser, error) -> Void in
-                            //do nothing as the call it self will update local current user
-                        })
-                        
-                        //check if user is still subscribed by checkign for stripCustomerId field
-                        if result != nil && (result as SeatedUser).stripeCustomerId == "" {
-                            UnsubscribedHelper.sharedInstance.userNoLongerSubscribed()
-                        }
-                    }
-                    else {
-                        //TODO: show error here
-                        println(error)
-                    }
-                    
-                })
-
                 rootNavigationVC = storyBoard.instantiateViewControllerWithIdentifier("conversationNavigationController") as UINavigationController
             }
             
@@ -99,6 +90,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }    
+    }
+    
+    func fetchStripeSubscription() {
+        let user = SeatedUser.currentUser()
+        var query = SeatedUser.query()
+        
+        // local query just to populate subscription property of user as SeatedUser.current() does not do that
+        query.fromLocalDatastore()
+        query.includeKey("subscription")
+        query.getObjectInBackgroundWithId(user.objectId, block: { (resultUser, error) -> Void in
+            let params = ["stripeCustomerId":user.stripeCustomerId, "subscriptionId":user.subscription.subscriptionId, "objectId":user.subscription.objectId]
+            // This cloud function pull in data from Stripe also updates the subscription in Parse so we don't need to save to Parse again
+            PFCloud.callFunctionInBackground("retrieveSubscription", withParameters:params, block: { (subscriptionData, error) -> Void in
+                if error == nil {
+                    user.subscription.update(subscriptionData as NSDictionary)
+                }
+                else {
+                    
+                }
+            })
+            
+        })
+        
+    }
 }
 

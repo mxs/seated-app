@@ -122,6 +122,8 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol {
                 newUser.signUpInBackgroundWithBlock({ (success, error) -> Void in
                     if success {
                         //:TODO show alert with success then segue
+                        newUser.pinInBackgroundWithBlock({ (success, error) -> Void in
+                        })
                         self.setUpPushNotification(newUser.stripeCustomerId)
                         self.createFirebaseUser(newUser)
                     }

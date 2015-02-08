@@ -14,6 +14,16 @@ class SeatedUser: PFUser, PFSubclassing {
         self.registerSubclass()
     }
     
+    func update(user:SeatedUser) -> Void {
+        self.stripeCustomerId = user.stripeCustomerId
+        self.firstName = user.firstName
+        self.lastName = user.lastName
+        self.cardId = user.cardId
+        self.cardLabel = user.cardLabel
+        self.isAdmin = user.isAdmin
+        self.subscription = user.subscription
+    }
+    
     var stripeCustomerId:String {
         get {
             return self["stripeCustomerId"] as String

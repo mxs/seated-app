@@ -65,7 +65,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, BlurBackground
                 currentInstallation.channels.append(loggedInUser.stripeCustomerId)
                 currentInstallation.saveInBackgroundWithBlock({ (success, error) -> Void in
                     if error != nil {
-                        //TODO: handle error
+                        currentInstallation.saveEventually()
                     }
                 })
                 
@@ -75,6 +75,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, BlurBackground
                     self.performSegueWithIdentifier("adminLoginSuccessSegue", sender: self)
                 }
                 else {
+                    SubscriptionHelper.sharedInstance.fetchStripeSubscription()
                     self.performSegueWithIdentifier("customerLoginSuccessSegue", sender: self)
                 }
 

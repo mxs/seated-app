@@ -63,7 +63,7 @@ class ConversationViewController: JSQMessagesViewController {
 
         //User's subscription is no longer valid
         if self.stripeCustomerId == "" {
-            self.alertController = UnsubscribedHelper.sharedInstance.userNoLongerSubscribed()
+            self.alertController = SubscriptionHelper.sharedInstance.userNoLongerSubscribed()
         }
         else {
             self.setupFirebase()

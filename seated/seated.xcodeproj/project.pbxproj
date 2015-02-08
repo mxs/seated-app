@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8EED7B460EA708EA1A8923B8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2870EDA7E24441B6BE243479 /* libPods.a */; };
-		A613E6091A64E4E90089F62D /* UnsubscribedHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A613E6081A64E4E90089F62D /* UnsubscribedHelper.swift */; };
+		A613E6091A64E4E90089F62D /* SubscriptionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A613E6081A64E4E90089F62D /* SubscriptionHelper.swift */; };
 		A62BCAF21A838FE3008AD5DE /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62BCAF11A838FE3008AD5DE /* Subscription.swift */; };
 		A652E6331A68BE28003F503F /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A652E6321A68BE28003F503F /* ConversationListViewController.swift */; };
 		A652E6351A6C7C65003F503F /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A652E6341A6C7C65003F503F /* Conversation.swift */; };
@@ -53,7 +53,7 @@
 /* Begin PBXFileReference section */
 		237050A84A16FE74DB9A5323 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		2870EDA7E24441B6BE243479 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		A613E6081A64E4E90089F62D /* UnsubscribedHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsubscribedHelper.swift; sourceTree = "<group>"; };
+		A613E6081A64E4E90089F62D /* SubscriptionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionHelper.swift; sourceTree = "<group>"; };
 		A62BCAF11A838FE3008AD5DE /* Subscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
 		A652E6321A68BE28003F503F /* ConversationListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
 		A652E6341A6C7C65003F503F /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
@@ -191,7 +191,7 @@
 				A6A240081A56A52700E2327F /* ResetPasswordViewController.swift */,
 				A6A2400A1A58004E00E2327F /* ConversationViewController.swift */,
 				A6657E5B1A5FB6E700B64EDA /* SettingsViewControllerTableViewController.swift */,
-				A613E6081A64E4E90089F62D /* UnsubscribedHelper.swift */,
+				A613E6081A64E4E90089F62D /* SubscriptionHelper.swift */,
 				A6F1618F1A80A81F0055359B /* SeatedTextField.swift */,
 				A6F161961A8250A50055359B /* BlurBackgroundProtocol.swift */,
 			);
@@ -415,7 +415,7 @@
 				A660769E1A4913AE0039B61D /* AppDelegate.swift in Sources */,
 				A6657E551A5CE7C800B64EDA /* SeatedUser.swift in Sources */,
 				A6F161971A8250A50055359B /* BlurBackgroundProtocol.swift in Sources */,
-				A613E6091A64E4E90089F62D /* UnsubscribedHelper.swift in Sources */,
+				A613E6091A64E4E90089F62D /* SubscriptionHelper.swift in Sources */,
 				A66076C21A4EB5CD0039B61D /* SignUpViewController.swift in Sources */,
 				A62BCAF21A838FE3008AD5DE /* Subscription.swift in Sources */,
 				A652E6331A68BE28003F503F /* ConversationListViewController.swift in Sources */,

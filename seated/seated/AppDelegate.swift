@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             })
             
-            self.fetchStripeSubscription()
+            SubscriptionHelper.sharedInstance.fetchStripeSubscription()
             
             let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
             var rootNavigationVC:UINavigationController
@@ -92,27 +92,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func fetchStripeSubscription() {
-        let user = SeatedUser.currentUser()
-        var query = SeatedUser.query()
-        
-        // local query just to populate subscription property of user as SeatedUser.current() does not do that
-        query.fromLocalDatastore()
-        query.includeKey("subscription")
-        query.getObjectInBackgroundWithId(user.objectId, block: { (resultUser, error) -> Void in
-            let params = ["stripeCustomerId":user.stripeCustomerId, "subscriptionId":user.subscription.subscriptionId, "objectId":user.subscription.objectId]
-            // This cloud function pull in data from Stripe also updates the subscription in Parse so we don't need to save to Parse again
-            PFCloud.callFunctionInBackground("retrieveSubscription", withParameters:params, block: { (subscriptionData, error) -> Void in
-                if error == nil {
-                    user.subscription.update(subscriptionData as NSDictionary)
-                }
-                else {
-                    
-                }
-            })
-            
-        })
-        
-    }
 }
 

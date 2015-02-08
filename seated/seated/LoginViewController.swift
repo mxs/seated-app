@@ -75,7 +75,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, BlurBackground
                     self.performSegueWithIdentifier("adminLoginSuccessSegue", sender: self)
                 }
                 else {
-                    SubscriptionHelper.sharedInstance.fetchStripeSubscription()
                     self.performSegueWithIdentifier("customerLoginSuccessSegue", sender: self)
                 }
 

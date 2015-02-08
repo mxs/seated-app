@@ -27,7 +27,6 @@ class ConversationViewController: JSQMessagesViewController {
     var outgoingMessageBubbleImage:JSQMessagesBubbleImage!
     var incomingMessageBubbleImage:JSQMessagesBubbleImage!
     var incomingMessageAvatarImage:JSQMessagesAvatarImage!
-    var alertController: UIAlertController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,13 +60,7 @@ class ConversationViewController: JSQMessagesViewController {
         self.senderDisplayName = SeatedUser.currentUser().displayName
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.jsq_defaultTypingIndicatorImage(), style: UIBarButtonItemStyle.Bordered, target: self, action: "showSettings")
 
-        //User's subscription is no longer valid
-        if self.stripeCustomerId == "" {
-            self.alertController = SubscriptionHelper.sharedInstance.userNoLongerSubscribed()
-        }
-        else {
-            self.setupFirebase()
-        }
+        self.setupFirebase()
     }
     
     override func didReceiveMemoryWarning() {
@@ -79,10 +72,9 @@ class ConversationViewController: JSQMessagesViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if let alertController = self.alertController {
-            self.presentViewController(alertController, animated: true, completion: nil)
+        if !SeatedUser.currentUser().isAdmin {
+            SubscriptionHelper.sharedInstance.fetchStripeSubscription(self)
         }
-        
         clearUnreadCount()
     }
     

@@ -391,7 +391,7 @@
         <!--Settings View Controller Table View Controller-->
         <scene sceneID="6oW-nd-nZf">
             <objects>
-                <tableViewController id="Rqa-4I-Nje" customClass="SettingsViewControllerTableViewController" customModule="seated" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="settingsViewController" id="Rqa-4I-Nje" customClass="SettingsViewControllerTableViewController" customModule="seated" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="xHy-y5-Xjt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="524"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -405,36 +405,24 @@
                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
-                                    <variation key="widthClass=compact" misplaced="YES">
-                                        <rect key="frame" x="14" y="18" width="296" height="22"/>
-                                    </variation>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$5 Monthly Subscription" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R18-Fv-Mfu">
                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
-                                    <variation key="widthClass=compact" misplaced="YES">
-                                        <rect key="frame" x="14" y="45" width="306" height="18"/>
-                                    </variation>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Next billing date" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vn1-sW-xaE">
                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
-                                    <variation key="widthClass=compact" misplaced="YES">
-                                        <rect key="frame" x="14" y="68" width="286" height="18"/>
-                                    </variation>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment Details Required" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IdI-OY-2xn">
                                     <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                     <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
-                                    <variation key="widthClass=compact" misplaced="YES">
-                                        <rect key="frame" x="14" y="91" width="178" height="18"/>
-                                    </variation>
                                 </label>
                             </subviews>
                             <constraints>
@@ -522,9 +510,6 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="15" y="11" width="161" height="21"/>
-                                                    </variation>
                                                 </label>
                                             </subviews>
                                             <constraints>
@@ -834,10 +819,6 @@
                                 <exclude reference="PrJ-Uj-VJs"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="2FL-GQ-kdg"/>
-                                <exclude reference="9hL-9J-veu"/>
-                                <exclude reference="PDE-eB-mzn"/>
-                                <exclude reference="SPY-zG-KgC"/>
                                 <exclude reference="3ka-Rv-gX7"/>
                                 <exclude reference="9Ut-jH-AMm"/>
                                 <exclude reference="N4s-sp-81o"/>
@@ -846,6 +827,10 @@
                                 <exclude reference="q7V-gQ-WRL"/>
                                 <exclude reference="wMM-bt-lWm"/>
                                 <exclude reference="wQ6-H4-zcy"/>
+                                <exclude reference="2FL-GQ-kdg"/>
+                                <exclude reference="9hL-9J-veu"/>
+                                <exclude reference="PDE-eB-mzn"/>
+                                <exclude reference="SPY-zG-KgC"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -854,10 +839,6 @@
                                 <include reference="PrJ-Uj-VJs"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="2FL-GQ-kdg"/>
-                                <exclude reference="9hL-9J-veu"/>
-                                <include reference="PDE-eB-mzn"/>
-                                <include reference="SPY-zG-KgC"/>
                                 <include reference="3ka-Rv-gX7"/>
                                 <include reference="9Ut-jH-AMm"/>
                                 <exclude reference="N4s-sp-81o"/>
@@ -866,6 +847,10 @@
                                 <exclude reference="q7V-gQ-WRL"/>
                                 <exclude reference="wMM-bt-lWm"/>
                                 <include reference="wQ6-H4-zcy"/>
+                                <exclude reference="2FL-GQ-kdg"/>
+                                <exclude reference="9hL-9J-veu"/>
+                                <include reference="PDE-eB-mzn"/>
+                                <include reference="SPY-zG-KgC"/>
                             </mask>
                         </variation>
                     </view>
@@ -879,7 +864,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="a9K-bP-15L" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="SbC-hj-WGR" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2410.5" y="944"/>
+            <point key="canvasLocation" x="2424" y="735"/>
         </scene>
         <!--Reset Password View Controller-->
         <scene sceneID="9wn-Q8-cJr">

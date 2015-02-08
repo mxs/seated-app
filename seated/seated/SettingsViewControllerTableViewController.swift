@@ -47,15 +47,15 @@ class SettingsViewControllerTableViewController: UITableViewController {
     }
     
     @IBAction func cancelSubscription(sender: AnyObject) {
-        PFCloud.callFunctionInBackground("cancelSubscription",
-            withParameters: ["stripeCustomerId": SeatedUser.currentUser().stripeCustomerId, "subscriptionId":SeatedUser.currentUser().subscription.subscriptionId]) { (result, error) -> Void in
-                if error != nil {
-                    //TODO: display error
-                }
-                else {
-                    PFUser.logOut()
-                }
-        }
+//        PFCloud.callFunctionInBackground("cancelSubscription",
+//            withParameters: ["stripeCustomerId": SeatedUser.currentUser().stripeCustomerId, "subscriptionId":SeatedUser.currentUser().subscription.subscriptionId]) { (result, error) -> Void in
+//                if error != nil {
+//                    //TODO: display error
+//                }
+//                else {
+//                    PFUser.logOut()
+//                }
+//        }
     }
     
     func updatePaymentRequired() -> Void {

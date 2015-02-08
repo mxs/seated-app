@@ -30,13 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             //always update user from Parse
             user.fetchInBackgroundWithBlock({ (result, error) -> Void in
-                println("from fetch: \(user)")
                 if error != nil {
                     //TODO:Alert about fetch latest user info
                 }
             })
-            
-            SubscriptionHelper.sharedInstance.fetchStripeSubscription()
             
             let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
             var rootNavigationVC:UINavigationController

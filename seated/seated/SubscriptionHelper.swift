@@ -16,6 +16,7 @@ class SubscriptionHelper: NSObject {
     let canceled = "canceled"
     let noValidCardAlertCountKey = "noValidCardAlertCount"
     let warnBeforeChargeAlertCountKey = "warnBeforeChargeAlertCount"
+    let cancelledTrialWarning = "cancelledTrialWarning"
     
     class var sharedInstance: SubscriptionHelper {
         struct Static {
@@ -58,11 +59,16 @@ class SubscriptionHelper: NSObject {
         let subscription = user.subscription
         if subscription.status == self.trial {
             if user.subscription.daysUntilTrialEnd <= 3 {
-                if user.cardId == nil {
-                    self.noValidCard(user.subscription, presentingViewController: presentingViewController)
+                if subscription.cancelAtPeriodEnd {
+                    self.cancelledTrialWarning(subscription, presentingViewController:presentingViewController)
                 }
                 else {
-                    self.haveValidCard(user.subscription, presentingViewController: presentingViewController)
+                    if user.cardId == nil {
+                        self.noValidCard(user.subscription, presentingViewController: presentingViewController)
+                    }
+                    else {
+                        self.haveValidCard(user.subscription, presentingViewController: presentingViewController)
+                    }
                 }
             }
         }
@@ -76,12 +82,10 @@ class SubscriptionHelper: NSObject {
         var alertCount = defaults.integerForKey(self.warnBeforeChargeAlertCountKey)
 
         if alertCount < 1 {
-            let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-            let window = UIApplication.sharedApplication().delegate?.window!
             let dateFormat = NSDateFormatter()
             dateFormat.dateFormat = "dd MMM YYYY"
             let chargeDate = dateFormat.stringFromDate(subscription.trialEnd)
-            let alertController = UIAlertController(title: "Trial ends in \(subscription.daysUntilTrialEnd) days", message: "First charge to occur on \(chargeDate)", preferredStyle: .Alert)
+            let alertController = UIAlertController(title: "Trial ends in \(subscription.daysUntilTrialEnd) days", message: "First charge to occur on \(chargeDate).", preferredStyle: .Alert)
             
             let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             
@@ -102,7 +106,7 @@ class SubscriptionHelper: NSObject {
             let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
             let window = UIApplication.sharedApplication().delegate?.window!
             
-            let alertController = UIAlertController(title: "Trial ends in \(subscription.daysUntilTrialEnd) days", message: "Would you like to add payment method?", preferredStyle: .Alert)
+            let alertController = UIAlertController(title: "Trial ends in \(subscription.daysUntilTrialEnd) days", message: "Would you like to add a payment method? Service will no longer be available otherwise at the end of the trial.", preferredStyle: .Alert)
             let noAction = UIAlertAction(title: "No", style: .Cancel, handler: nil)
             
             let yesAction = UIAlertAction(title: "Yes", style: .Default) { (action) -> Void in
@@ -118,6 +122,22 @@ class SubscriptionHelper: NSObject {
             
             presentingViewController.presentViewController(alertController, animated: true, completion: nil)
 
+        }
+    }
+    
+    //only shown once
+    func cancelledTrialWarning(subscription:Subscription, presentingViewController:UIViewController) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        var alertCount = defaults.integerForKey(self.cancelledTrialWarning)
+        if alertCount < 1 {
+            let alertController = UIAlertController(title: "Trial ends in \(subscription.daysUntilTrialEnd) days", message: "Your service will no longer be available at the end of the trial.", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            
+            alertController.addAction(okAction)
+            
+            defaults.setInteger(++alertCount, forKey: self.cancelledTrialWarning)
+            
+            presentingViewController.presentViewController(alertController, animated: true, completion: nil)
         }
     }
 

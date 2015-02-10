@@ -23,16 +23,18 @@ class SettingsViewControllerTableViewController: UITableViewController {
         super.viewDidLoad()
         self.title = "Settings"
         
-        let subscription = SeatedUser.currentUser().subscription
-        let dateFormat = NSDateFormatter()
-        dateFormat.dateFormat = "dd MMM YYYY"
-        self.nextBillingDate = dateFormat.stringFromDate(subscription.currentPeriodEnd)
-        
-        self.updateSubscriptionStatusLabels()
-        self.fullNameLabel.text = SeatedUser.currentUser().displayName
-        self.subscriptionDescriptionLabel.text = "$5 monthly subscription (\(subscription.status))"
-        
-        self.tableView.tableHeaderView?.frame = CGRectMake(0, 0, self.tableView.frame.width, 125.0)
+        if let subscription = SeatedUser.currentUser().subscription {
+            let dateFormat = NSDateFormatter()
+            dateFormat.dateFormat = "dd MMM YYYY"
+            self.nextBillingDate = dateFormat.stringFromDate(subscription.currentPeriodEnd)
+            
+            self.updateSubscriptionStatusLabels()
+            self.fullNameLabel.text = SeatedUser.currentUser().displayName
+            self.subscriptionDescriptionLabel.text = "$5 monthly subscription (\(subscription.status))"
+            
+            self.tableView.tableHeaderView?.frame = CGRectMake(0, 0, self.tableView.frame.width, 125.0)
+            
+        }
     }
     
     @IBAction func logout(sender: AnyObject) {
@@ -49,14 +51,15 @@ class SettingsViewControllerTableViewController: UITableViewController {
     }
     
     @IBAction func updateSubscription(sender: AnyObject) {
-        let subscription = SeatedUser.currentUser().subscription
-        let params = ["stripeCustomerId": SeatedUser.currentUser().stripeCustomerId, "subscriptionId":SeatedUser.currentUser().subscription.subscriptionId, "objectId":subscription.objectId]
-        
-        if self.isTrialCancelled() {
-            self.reactivateTrialSubscription(params, subscription:subscription)
-        }
-        else {
-            self.cancelSubscription(params, subscription: subscription)
+        if let subscription = SeatedUser.currentUser().subscription {
+            let params = ["stripeCustomerId": SeatedUser.currentUser().stripeCustomerId, "subscriptionId":subscription.subscriptionId, "objectId":subscription.objectId]
+            
+            if self.isTrialCancelled() {
+                self.reactivateTrialSubscription(params, subscription:subscription)
+            }
+            else {
+                self.cancelSubscription(params, subscription: subscription)
+            }            
         }
     }
     
@@ -140,8 +143,10 @@ class SettingsViewControllerTableViewController: UITableViewController {
     }
     
     func isTrialCancelled() -> Bool {
-        let subscription = SeatedUser.currentUser().subscription
-        return subscription.cancelAtPeriodEnd && subscription.status == "trialing"
+        if let subscription = SeatedUser.currentUser().subscription {
+            return subscription.cancelAtPeriodEnd && subscription.status == "trialing"
+        }
+        return true
     }
     
     //hides and unhides the payment details cell

@@ -83,9 +83,9 @@ class SeatedUser: PFUser, PFSubclassing {
         }
     }
     
-    var subscription:Subscription {
+    var subscription:Subscription? {
         get {
-            return self["subscription"] as Subscription
+            return self["subscription"] as? Subscription
         }
         set {
             self["subscription"] = newValue

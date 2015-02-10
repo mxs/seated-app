@@ -35,44 +35,50 @@ class SubscriptionHelper: NSObject {
         let user = SeatedUser.currentUser()
         var query = SeatedUser.query()
         
-        // local query just to populate subscription property of user as SeatedUser.current() does not do that
-        query.fromLocalDatastore()
-        query.includeKey("subscription")
-        query.getObjectInBackgroundWithId(user.objectId, block: { (resultUser, error) -> Void in
-            
-            let params = ["stripeCustomerId":user.stripeCustomerId, "subscriptionId":user.subscription.subscriptionId, "objectId":user.subscription.objectId]
-            // This cloud function pull in data from Stripe also updates the subscription in Parse so we don't need to save to Parse again
-            PFCloud.callFunctionInBackground("retrieveSubscription", withParameters:params, block: { (subscriptionData, error) -> Void in
-                if error == nil {
-                    user.subscription.update(subscriptionData as NSDictionary)
-                    self.checkTrialValidity(user, presentingViewController: presentingViewController)
-                }
-                else {
-                    
-                }
+        if let subscription = user.subscription {
+            // local query just to populate subscription property of user as SeatedUser.current() does not do that
+            query.fromLocalDatastore()
+            query.includeKey("subscription")
+            query.getObjectInBackgroundWithId(user.objectId, block: { (resultUser, error) -> Void in
+                
+                let params = ["stripeCustomerId":user.stripeCustomerId, "subscriptionId":subscription.subscriptionId, "objectId":subscription.objectId]
+                // This cloud function pull in data from Stripe also updates the subscription in Parse so we don't need to save to Parse again
+                PFCloud.callFunctionInBackground("retrieveSubscription", withParameters:params, block: { (subscriptionData, error) -> Void in
+                    if error == nil {
+                        subscription.update(subscriptionData as NSDictionary)
+                        self.checkTrialValidity(user, presentingViewController: presentingViewController)
+                    }
+                    else {
+                        
+                    }
+                })
+                
             })
-            
-        })
+        }
+        else {
+            //TODO: Cancelled user
+        }
+        
     }
     
     func checkTrialValidity(user:SeatedUser, presentingViewController:UIViewController) {
-        let subscription = user.subscription
-        if subscription.status == self.trial {
-            if user.subscription.daysUntilTrialEnd <= 3 {
-                if subscription.cancelAtPeriodEnd {
-                    self.cancelledTrialWarning(subscription, presentingViewController:presentingViewController)
-                }
-                else {
-                    if user.cardId == nil {
-                        self.noValidCard(user.subscription, presentingViewController: presentingViewController)
+        if let subscription = user.subscription {
+            if subscription.status == self.trial {
+                if subscription.daysUntilTrialEnd <= 3 {
+                    if subscription.cancelAtPeriodEnd {
+                        self.cancelledTrialWarning(subscription, presentingViewController:presentingViewController)
                     }
                     else {
-                        self.haveValidCard(user.subscription, presentingViewController: presentingViewController)
+                        if user.cardId == nil {
+                            self.noValidCard(subscription, presentingViewController: presentingViewController)
+                        }
+                        else {
+                            self.haveValidCard(subscription, presentingViewController: presentingViewController)
+                        }
                     }
                 }
             }
         }
-        
     }
     
     // Only show alert once

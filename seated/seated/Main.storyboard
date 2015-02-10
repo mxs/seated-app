@@ -636,7 +636,7 @@
                                                         <rect key="frame" x="15" y="7" width="139" height="30"/>
                                                     </variation>
                                                     <connections>
-                                                        <action selector="cancelSubscription:" destination="Rqa-4I-Nje" eventType="touchUpInside" id="VIE-nh-9ih"/>
+                                                        <action selector="updateSubscription:" destination="Rqa-4I-Nje" eventType="touchUpInside" id="if2-Bv-JfV"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -724,6 +724,7 @@
                         <outlet property="fullNameLabel" destination="9g0-cw-hHr" id="ulC-bi-Nw2"/>
                         <outlet property="nextBillingDateLabel" destination="vn1-sW-xaE" id="mcU-6U-xeZ"/>
                         <outlet property="paymentDetailsLabel" destination="GkZ-Yh-2bx" id="9UQ-Dn-27O"/>
+                        <outlet property="subscriptionButton" destination="2L3-U9-Vqy" id="E9K-cs-zFb"/>
                         <outlet property="subscriptionDescriptionLabel" destination="R18-Fv-Mfu" id="TjB-Yl-waI"/>
                         <segue destination="B1q-h8-pd0" kind="showDetail" identifier="logoutSegue" id="NBs-IQ-y1U"/>
                     </connections>

@@ -26,7 +26,15 @@ class Subscription: PFObject, PFSubclassing {
         self.currentPeriodEnd = NSDate(timeIntervalSince1970: data["current_period_end"] as Double)
         self.startDate = NSDate(timeIntervalSince1970: data["start"] as Double)
         self.trialEnd = NSDate(timeIntervalSince1970: data["trial_end"] as Double)
-        self.daysUntilTrialEnd = data["days_until_trial_end"] as Int
+        if data["days_until_trial_end"] == nil {
+            let now = NSDate().timeIntervalSince1970
+            let days = Int(floor(((data["trial_end"] as Double) - now) / 60 / 60 / 24))
+            println(days)
+            self.daysUntilTrialEnd = days
+        }
+        else {
+            self.daysUntilTrialEnd = data["days_until_trial_end"] as Int
+        }
     }
     
     var subscriptionId:String {

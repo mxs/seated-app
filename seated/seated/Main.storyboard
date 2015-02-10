@@ -726,7 +726,6 @@
                         <outlet property="paymentDetailsLabel" destination="GkZ-Yh-2bx" id="9UQ-Dn-27O"/>
                         <outlet property="subscriptionButton" destination="2L3-U9-Vqy" id="E9K-cs-zFb"/>
                         <outlet property="subscriptionDescriptionLabel" destination="R18-Fv-Mfu" id="TjB-Yl-waI"/>
-                        <segue destination="B1q-h8-pd0" kind="showDetail" identifier="logoutSegue" id="NBs-IQ-y1U"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4X5-mP-irV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -736,7 +735,7 @@
         <!--Payment View Controller-->
         <scene sceneID="nyW-Jl-diV">
             <objects>
-                <viewController id="BoA-Gn-MY1" customClass="PaymentViewController" customModule="seated" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="paymentViewController" id="BoA-Gn-MY1" customClass="PaymentViewController" customModule="seated" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="DE7-gA-sOm"/>
                         <viewControllerLayoutGuide type="bottom" id="jmp-LT-Rv4"/>
@@ -790,6 +789,27 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your trial period has ended, by re-subscribing your card will be debited the monthly fee of $5 immediately." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eC8-1h-KMJ">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="nm3-Ws-2hX">
+                                        <variation key="widthClass=compact" constant="70"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="nm3-Ws-2hX"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="nm3-Ws-2hX"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -797,6 +817,8 @@
                             <constraint firstItem="DbW-BP-55v" firstAttribute="top" secondItem="PrJ-Uj-VJs" secondAttribute="bottom" constant="50" id="3ka-Rv-gX7">
                                 <variation key="widthClass=compact" constant="30"/>
                             </constraint>
+                            <constraint firstAttribute="trailingMargin" secondItem="eC8-1h-KMJ" secondAttribute="trailing" id="7GQ-iE-rha"/>
+                            <constraint firstItem="eC8-1h-KMJ" firstAttribute="leading" secondItem="KE1-Md-Kad" secondAttribute="leadingMargin" id="8tQ-7d-nCz"/>
                             <constraint firstItem="DbW-BP-55v" firstAttribute="trailing" secondItem="PrJ-Uj-VJs" secondAttribute="trailing" constant="-1" id="9Ut-jH-AMm"/>
                             <constraint firstAttribute="trailingMargin" secondItem="PrJ-Uj-VJs" secondAttribute="trailing" id="9hL-9J-veu"/>
                             <constraint firstItem="DbW-BP-55v" firstAttribute="leading" secondItem="KE1-Md-Kad" secondAttribute="leadingMargin" constant="20" id="N4s-sp-81o">
@@ -813,13 +835,19 @@
                             </constraint>
                             <constraint firstItem="DbW-BP-55v" firstAttribute="top" secondItem="DE7-gA-sOm" secondAttribute="bottom" constant="100" id="wMM-bt-lWm"/>
                             <constraint firstAttribute="centerX" secondItem="DbW-BP-55v" secondAttribute="centerX" id="wQ6-H4-zcy"/>
+                            <constraint firstItem="eC8-1h-KMJ" firstAttribute="top" secondItem="DbW-BP-55v" secondAttribute="bottom" constant="8" id="yCE-yr-s2e"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="DbW-BP-55v"/>
                                 <exclude reference="PrJ-Uj-VJs"/>
+                                <exclude reference="eC8-1h-KMJ"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="2FL-GQ-kdg"/>
+                                <exclude reference="9hL-9J-veu"/>
+                                <exclude reference="PDE-eB-mzn"/>
+                                <exclude reference="SPY-zG-KgC"/>
                                 <exclude reference="3ka-Rv-gX7"/>
                                 <exclude reference="9Ut-jH-AMm"/>
                                 <exclude reference="N4s-sp-81o"/>
@@ -828,18 +856,22 @@
                                 <exclude reference="q7V-gQ-WRL"/>
                                 <exclude reference="wMM-bt-lWm"/>
                                 <exclude reference="wQ6-H4-zcy"/>
-                                <exclude reference="2FL-GQ-kdg"/>
-                                <exclude reference="9hL-9J-veu"/>
-                                <exclude reference="PDE-eB-mzn"/>
-                                <exclude reference="SPY-zG-KgC"/>
+                                <exclude reference="7GQ-iE-rha"/>
+                                <exclude reference="8tQ-7d-nCz"/>
+                                <exclude reference="yCE-yr-s2e"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="DbW-BP-55v"/>
                                 <include reference="PrJ-Uj-VJs"/>
+                                <include reference="eC8-1h-KMJ"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="2FL-GQ-kdg"/>
+                                <exclude reference="9hL-9J-veu"/>
+                                <include reference="PDE-eB-mzn"/>
+                                <include reference="SPY-zG-KgC"/>
                                 <include reference="3ka-Rv-gX7"/>
                                 <include reference="9Ut-jH-AMm"/>
                                 <exclude reference="N4s-sp-81o"/>
@@ -848,10 +880,9 @@
                                 <exclude reference="q7V-gQ-WRL"/>
                                 <exclude reference="wMM-bt-lWm"/>
                                 <include reference="wQ6-H4-zcy"/>
-                                <exclude reference="2FL-GQ-kdg"/>
-                                <exclude reference="9hL-9J-veu"/>
-                                <include reference="PDE-eB-mzn"/>
-                                <include reference="SPY-zG-KgC"/>
+                                <include reference="7GQ-iE-rha"/>
+                                <include reference="8tQ-7d-nCz"/>
+                                <include reference="yCE-yr-s2e"/>
                             </mask>
                         </variation>
                     </view>
@@ -859,6 +890,7 @@
                     <connections>
                         <outlet property="finishButton" destination="DbW-BP-55v" id="zOS-ha-140"/>
                         <outlet property="paymentViewContainer" destination="PrJ-Uj-VJs" id="M3s-hm-c1q"/>
+                        <outlet property="renewLabel" destination="eC8-1h-KMJ" id="dx4-Az-3Oj"/>
                         <segue destination="SbC-hj-WGR" kind="unwind" identifier="unwindToSettingsSegue" unwindAction="prepareForSegueUnwind:" id="Cdw-Z5-Hjr"/>
                     </connections>
                 </viewController>

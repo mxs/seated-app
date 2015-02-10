@@ -13,7 +13,9 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
 
     @IBOutlet weak var finishButton: UIButton!
     @IBOutlet weak var paymentViewContainer: UIView!
+    @IBOutlet weak var renewLabel: UILabel!
     var paymentView:PTKView!
+    var renewSubscription:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,12 +26,20 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
         self.paymentView = PTKView(frame: CGRectMake(0, 0, 290, 46))
         self.paymentView.delegate = self
         self.paymentViewContainer.addSubview(self.paymentView)
-        
+
         self.finishButton.setTitleColor(UIColor.textColour(), forState: UIControlState.Normal)
         self.finishButton.setBackgroundImage(UIImage.imageWithColor(UIColor.primaryColour()), forState: UIControlState.Normal)
         self.finishButton.layer.cornerRadius = 5.0
         self.finishButton.layer.masksToBounds = true
         self.finishButton.enabled = false
+       
+        self.renewLabel.hidden = !self.renewSubscription
+        if !self.renewSubscription {
+            self.finishButton.setTitle("Update", forState: UIControlState.Normal)
+        }
+        else {
+            self.finishButton.setTitle("Re-subscribe", forState: UIControlState.Normal)
+        }
     }
 
     // MARK: - PTKViewDelegate
@@ -40,6 +50,7 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
     
     // MARK: - Actions
     @IBAction func finishPayment(sender: AnyObject) {
+        
         if self.paymentView.card != nil {
             var card = STPCard()
             
@@ -63,7 +74,12 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
                     //TODO: handle create Strip token with card error
                 }
                 else {
-                    self.updateCardForCustomerWithToken(token)
+                    if self.renewSubscription {
+                        self.renewSubscription(token)
+                    }
+                    else {
+                        self.updateCardForCustomerWithToken(token)
+                    }
                 }
             })
         }
@@ -90,6 +106,25 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
             }
             else {
                 //TODO: handle create Stripe customer and subscription error
+            }
+        }
+    }
+    
+    func renewSubscription(token:STPToken) {
+        let user = SeatedUser.currentUser()
+        var params = ["token" : token.tokenId, "customer_id": user.stripeCustomerId]
+        PFCloud.callFunctionInBackground("createSubscription", withParameters: params) { (subscriptionData, error) -> Void in
+            if error == nil {
+                var subscription = Subscription()
+                subscription.update(subscriptionData as NSDictionary)
+                user.subscription = subscription
+                user.saveInBackgroundWithBlock({ (success, error) -> Void in
+                    if error != nil {
+                        user.saveEventually()
+                    }
+                })
+                SVProgressHUD.showSuccessWithStatus("Subscription Renewed")
+                self.dismissViewControllerAnimated(true, completion: nil)
             }
         }
     }

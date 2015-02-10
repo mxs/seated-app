@@ -43,7 +43,10 @@ class SettingsViewControllerTableViewController: UITableViewController {
         let yesAction = UIAlertAction(title: "Log out", style: .Default) { (action) -> Void in
             PFUser.logOut()
             Firebase(url: "https://seatedapp.firebaseio.com/").unauth()
-            self.performSegueWithIdentifier("logoutSegue", sender: self)
+            let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+            let rootVC = storyBoard.instantiateInitialViewController() as UIViewController
+            self.presentViewController(rootVC, animated: true, completion: nil)
+
         }
         alertController.addAction(cancelAction)
         alertController.addAction(yesAction)

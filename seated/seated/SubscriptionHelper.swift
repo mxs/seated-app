@@ -49,14 +49,14 @@ class SubscriptionHelper: NSObject {
                         self.checkTrialValidity(user, presentingViewController: presentingViewController)
                     }
                     else {
-                        
+                        //TODO: show error
                     }
                 })
                 
             })
         }
         else {
-            //TODO: Cancelled user
+            self.cancelledAndTrialExpired(presentingViewController)
         }
         
     }
@@ -90,7 +90,7 @@ class SubscriptionHelper: NSObject {
         if alertCount < 1 {
             let dateFormat = NSDateFormatter()
             dateFormat.dateFormat = "dd MMM YYYY"
-            let chargeDate = dateFormat.stringFromDate(subscription.trialEnd)
+            let chargeDate = dateFormat.stringFromDate(subscription.trialEnd!)
             let alertController = UIAlertController(title: "Trial ends in \(subscription.daysUntilTrialEnd) days", message: "First charge to occur on \(chargeDate).", preferredStyle: .Alert)
             
             let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
@@ -145,6 +145,27 @@ class SubscriptionHelper: NSObject {
             
             presentingViewController.presentViewController(alertController, animated: true, completion: nil)
         }
+    }
+    
+    func cancelledAndTrialExpired(presentingViewController:UIViewController) {
+        let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let alertController = UIAlertController(title: "Subscription Cancelled", message: "Would you like to re-subscribe to Seated?", preferredStyle: .Alert)
+        let noAction = UIAlertAction(title: "No", style: .Cancel) { (action) in
+            PFUser.logOut()
+            let rootVC = storyBoard.instantiateInitialViewController() as UIViewController
+            presentingViewController.presentViewController(rootVC, animated: true, completion: nil)
+        }
+        
+        let yesAction = UIAlertAction(title: "Yes", style: .Default) { (action) -> Void in
+            let paymentVC = storyBoard.instantiateViewControllerWithIdentifier("paymentViewController") as PaymentViewController
+            paymentVC.renewSubscription = true
+            presentingViewController.presentViewController(paymentVC, animated: true, completion: nil)
+        }
+        
+        alertController.addAction(noAction)
+        alertController.addAction(yesAction)
+        
+        presentingViewController.presentViewController(alertController, animated: true, completion: nil)
     }
 
 }

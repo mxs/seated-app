@@ -25,8 +25,15 @@ class Subscription: PFObject, PFSubclassing {
         self.currentPeriodStart = NSDate(timeIntervalSince1970: data["current_period_start"] as Double)
         self.currentPeriodEnd = NSDate(timeIntervalSince1970: data["current_period_end"] as Double)
         self.startDate = NSDate(timeIntervalSince1970: data["start"] as Double)
-        self.trialEnd = NSDate(timeIntervalSince1970: data["trial_end"] as Double)
-        if data["days_until_trial_end"] == nil {
+
+        if data["trial_end"]!.isKindOfClass(NSNull) {
+            // only happens from a re-subscribe as there is no trial if re-subscribing after cancelled
+        }
+        else {
+            self.trialEnd = NSDate(timeIntervalSince1970: data["trial_end"] as Double)
+        }
+
+        if data["days_until_trial_end"] == nil { //only happens on create customer
             let now = NSDate().timeIntervalSince1970
             let days = Int(floor(((data["trial_end"] as Double) - now) / 60 / 60 / 24))
             println(days)
@@ -74,9 +81,9 @@ class Subscription: PFObject, PFSubclassing {
         }
     }
     
-    var trialEnd:NSDate {
+    var trialEnd:NSDate?{
         get {
-            return self["trial_end"] as NSDate
+            return self["trial_end"] as? NSDate
         }
         set {
             self["trial_end"] = newValue

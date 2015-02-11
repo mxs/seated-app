@@ -1,33 +1,33 @@
 PODS:
   - Bolts (1.1.3)
-  - Firebase (2.1.0)
-  - JSQMessagesViewController (6.1.1):
-    - JSQSystemSoundPlayer (~> 2.0.0)
-  - JSQSystemSoundPlayer (2.0.0)
-  - Parse (1.6.1):
-    - Bolts (~> 1.1.3)
+  - Firebase (2.1.2)
+  - JSQMessagesViewController (6.1.3):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
+  - Parse (1.6.2):
+    - Bolts (~> 1.1)
   - PaymentKit (1.1.1)
-  - Stripe (3.0.0):
-    - Stripe/Core (= 3.0.0)
-  - Stripe/Core (3.0.0)
+  - Stripe (3.1.0):
+    - Stripe/Core (= 3.1.0)
+  - Stripe/Core (3.1.0)
   - SVProgressHUD (1.1.2)
 
 DEPENDENCIES:
   - Firebase (>= 2.1.0)
   - JSQMessagesViewController
-  - Parse
+  - Parse (~> 1.6)
   - PaymentKit
   - Stripe
   - SVProgressHUD
 
 SPEC CHECKSUMS:
   Bolts: 3db0a875235e0c9042b013af13af0f00f79b102c
-  Firebase: 8d30a2f85b7e5c0eb731f86e8ae15f4c730fe835
-  JSQMessagesViewController: 84a5823a1f6a4f29ee6d4db0ea4b9d63876be4ee
-  JSQSystemSoundPlayer: c98443b1cbb3b45db09d0d3d6c2355cf78294981
-  Parse: b0ec7666167e212edb6fc94f60ba170248bd1869
+  Firebase: 7052c7b7f37d6ba0d3bb1c7c2849864aa5e9d02e
+  JSQMessagesViewController: e93a288a9662d4519c95a28a8c0eec10beae1bfc
+  JSQSystemSoundPlayer: 55528c699a283aae2220d3ae7b8b527d2ecef4b4
+  Parse: 60d65108fe39da77ec16c9e51d74b4d296b21424
   PaymentKit: f77b4d5cee45947949429c3d587e8eb160a3c9e2
-  Stripe: 7c3b67e5f57cb76ce5dd70b815a967ea20b14c33
+  Stripe: aaa174b50fac40a16958cbc892457a241d0b4b08
   SVProgressHUD: da7a49e789af645d9279ffbca62318945a832438
 
 COCOAPODS: 0.35.0

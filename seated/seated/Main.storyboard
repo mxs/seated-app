@@ -178,7 +178,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iKE-3S-6tQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="108" y="-104"/>
+            <point key="canvasLocation" x="-192" y="-112"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="7Av-7u-7NO">
@@ -215,7 +215,7 @@
                                     </mask>
                                 </variation>
                                 <connections>
-                                    <action selector="loginIn:" destination="KT4-bl-0rq" eventType="touchUpInside" id="j0C-3o-3Gg"/>
+                                    <action selector="action:" destination="KT4-bl-0rq" eventType="touchUpInside" id="NeO-TS-W8R"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wDX-a5-UVy">
@@ -248,7 +248,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="HNg-Dj-UL5" kind="presentation" id="j2B-bn-04J"/>
+                                    <action selector="toggleMode" destination="KT4-bl-0rq" eventType="touchUpInside" id="R7Y-7Z-HKl"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jUp-hF-dVF">
@@ -354,7 +354,9 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="emailTextField" destination="hb6-Ke-0rC" id="LW4-rc-fRb"/>
+                        <outlet property="forgotPasswordButton" destination="Wtb-iR-ESu" id="dmM-4u-9wF"/>
                         <outlet property="loginButton" destination="hmA-4l-I2d" id="UhC-h4-Jjf"/>
+                        <outlet property="newUserButton" destination="wDX-a5-UVy" id="f5J-KQ-Ome"/>
                         <outlet property="passwordTextField" destination="jeA-dQ-Kdp" id="KAc-SZ-Cda"/>
                         <segue destination="0Nr-Qa-J3X" kind="show" identifier="customerLoginSuccessSegue" id="hPp-1l-ybO"/>
                         <segue destination="X9X-Z0-PUC" kind="show" identifier="adminLoginSuccessSegue" id="a4c-sr-EC5"/>
@@ -363,7 +365,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uJ1-TB-4O2" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="PkS-xR-pLc" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="736.5" y="-104"/>
+            <point key="canvasLocation" x="499.5" y="-112"/>
         </scene>
         <!--Conversation View Controller-->
         <scene sceneID="X2t-Yg-Wdn">
@@ -899,44 +901,6 @@
             </objects>
             <point key="canvasLocation" x="2424" y="735"/>
         </scene>
-        <!--Reset Password View Controller-->
-        <scene sceneID="9wn-Q8-cJr">
-            <objects>
-                <viewController id="HNg-Dj-UL5" customClass="ResetPasswordViewController" customModule="seated" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="8CJ-gZ-3tI"/>
-                        <viewControllerLayoutGuide type="bottom" id="yZU-sG-EIN"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="vga-mT-AJX">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="57c-GY-4xb">
-                                <rect key="frame" x="104" y="248" width="112" height="30"/>
-                                <state key="normal" title="Reset Password">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="resetPassword:" destination="HNg-Dj-UL5" eventType="touchUpInside" id="qpL-3h-vxR"/>
-                                </connections>
-                            </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gkW-ab-tPQ">
-                                <rect key="frame" x="27" y="106" width="277" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <outlet property="emailTextField" destination="gkW-ab-tPQ" id="2ew-Z2-LOd"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6Ms-rF-BvW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="662" y="-746"/>
-        </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="eib-kD-My6">
             <objects>
@@ -1185,7 +1149,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cXY-Gg-ng2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1732" y="-53"/>
+            <point key="canvasLocation" x="1830" y="-112"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Kpb-Wi-c1f">
@@ -1203,7 +1167,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X7Y-KA-RTm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1200" y="-52"/>
+            <point key="canvasLocation" x="1260" y="-112"/>
         </scene>
     </scenes>
     <resources>
@@ -1212,8 +1176,8 @@
         <image name="transparent-seated-logo.png" width="86" height="80"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lhI-Ys-E09"/>
+        <segue reference="YXN-d6-azq"/>
         <segue reference="hPp-1l-ybO"/>
-        <segue reference="fgN-bq-rfi"/>
+        <segue reference="VqZ-xE-plc"/>
     </inferredMetricsTieBreakers>
 </document>

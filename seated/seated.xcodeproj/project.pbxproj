@@ -25,7 +25,6 @@
 		A691A9961A7F6CEB0037CCF1 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A691A9951A7F6CEB0037CCF1 /* UIColorExtension.swift */; };
 		A691A9981A7F9A700037CCF1 /* intro-background.png in Resources */ = {isa = PBXBuildFile; fileRef = A691A9971A7F9A700037CCF1 /* intro-background.png */; };
 		A6A240071A55262400E2327F /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A240061A55262400E2327F /* PaymentViewController.swift */; };
-		A6A240091A56A52700E2327F /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A240081A56A52700E2327F /* ResetPasswordViewController.swift */; };
 		A6A2400B1A58004E00E2327F /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2400A1A58004E00E2327F /* ConversationViewController.swift */; };
 		A6CFF6031A53F4B900BBD8D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6CFF6021A53F4B900BBD8D3 /* Main.storyboard */; };
 		A6CFF6051A53FB2E00BBD8D3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CFF6041A53FB2E00BBD8D3 /* RootViewController.swift */; };
@@ -75,7 +74,6 @@
 		A691A9951A7F6CEB0037CCF1 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		A691A9971A7F9A700037CCF1 /* intro-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-background.png"; sourceTree = "<group>"; };
 		A6A240061A55262400E2327F /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
-		A6A240081A56A52700E2327F /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		A6A2400A1A58004E00E2327F /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		A6CFF6021A53F4B900BBD8D3 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A6CFF6041A53FB2E00BBD8D3 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -188,7 +186,6 @@
 				A6768CAA1A5123C30089DC80 /* seated-Bridging-Header.h */,
 				A6CFF6041A53FB2E00BBD8D3 /* RootViewController.swift */,
 				A6A240061A55262400E2327F /* PaymentViewController.swift */,
-				A6A240081A56A52700E2327F /* ResetPasswordViewController.swift */,
 				A6A2400A1A58004E00E2327F /* ConversationViewController.swift */,
 				A6657E5B1A5FB6E700B64EDA /* SettingsViewControllerTableViewController.swift */,
 				A613E6081A64E4E90089F62D /* SubscriptionHelper.swift */,
@@ -411,7 +408,6 @@
 				A6F161931A821C3A0055359B /* UIImageExtension.swift in Sources */,
 				A6A2400B1A58004E00E2327F /* ConversationViewController.swift in Sources */,
 				A6657E5C1A5FB6E700B64EDA /* SettingsViewControllerTableViewController.swift in Sources */,
-				A6A240091A56A52700E2327F /* ResetPasswordViewController.swift in Sources */,
 				A660769E1A4913AE0039B61D /* AppDelegate.swift in Sources */,
 				A6657E551A5CE7C800B64EDA /* SeatedUser.swift in Sources */,
 				A6F161971A8250A50055359B /* BlurBackgroundProtocol.swift in Sources */,

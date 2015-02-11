@@ -14,8 +14,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate, BlurBackground
     @IBOutlet weak var emailTextField: SeatedTextField!
     @IBOutlet weak var passwordTextField: SeatedTextField!
     @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var newUserButton: UIButton!
+    @IBOutlet weak var forgotPasswordButton: UIButton!
     var backgroundImageView: UIImageView!
     var backgroundImage:UIImage?
+    var forgotPasswordMode:Bool = false
     
     //MARK: - BlurBackgroundProtocol
     var blurredBackgroundImage:UIImage? {
@@ -50,13 +53,40 @@ class LoginViewController: UIViewController, UITextFieldDelegate, BlurBackground
         self.emailTextField.resignFirstResponder()
     }
 
-    @IBAction func loginIn(sender: AnyObject) {
+    @IBAction func action(sender: AnyObject) {
         
+        if self.forgotPasswordMode {
+            self.resetPassword()
+        }
+        else {
+            self.login()
+        }
+    }
+    
+    @IBAction func toggleMode() {
+        self.forgotPasswordMode = !self.forgotPasswordMode
+        self.passwordTextField.hidden = self.forgotPasswordMode
+        self.newUserButton.hidden = self.forgotPasswordMode
+        
+        if self.forgotPasswordMode {
+            self.loginButton.setTitle("Reset Password", forState: UIControlState.Normal)
+            self.forgotPasswordButton.setTitle("Remembered Password?", forState: UIControlState.Normal)
+        }
+        else {
+            self.loginButton.setTitle("Login", forState: UIControlState.Normal)
+            self.forgotPasswordButton.setTitle("Forgot Password?", forState: UIControlState.Normal)
+        }
+    }
+
+    func login() {
         SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Black)
-        
         PFUser.logInWithUsernameInBackground(self.emailTextField.text, password: self.passwordTextField.text) { (user, error) -> Void in
             if error == nil {
                 let loggedInUser = user as SeatedUser
+                
+                loggedInUser.pinInBackgroundWithBlock({ (success, error) -> Void in
+                    
+                })
                 
                 let currentInstallation = PFInstallation.currentInstallation()
                 if currentInstallation.channels == nil {
@@ -73,7 +103,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, BlurBackground
                 else {
                     self.performSegueWithIdentifier("customerLoginSuccessSegue", sender: self)
                 }
-
+                
             }
             else {
                 //TODO: handle login fail error
@@ -81,9 +111,22 @@ class LoginViewController: UIViewController, UITextFieldDelegate, BlurBackground
         }
     }
     
+    func resetPassword() {
+        if PFUser.requestPasswordResetForEmail(self.emailTextField.text) {
+            let alertController = UIAlertController(title: "Password Reset", message: "Instructions sent to email.", preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "OK", style: .Cancel) { (action) in
+                self.toggleMode()
+            }
+            alertController.addAction(okAction)
+            self.presentViewController(alertController, animated: true, completion: nil)
+        }
+        
+    }
+
+    
     //MARK: UITextFieldDelegate
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        self.loginIn(self)
+        self.login()
         return false
     }
     
@@ -95,5 +138,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate, BlurBackground
             }
         }
     }
+    
 }
 

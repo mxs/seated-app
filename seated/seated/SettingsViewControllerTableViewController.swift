@@ -28,9 +28,8 @@ class SettingsViewControllerTableViewController: UITableViewController {
             dateFormat.dateFormat = "dd MMM YYYY"
             self.nextBillingDate = dateFormat.stringFromDate(subscription.currentPeriodEnd)
             
-            self.updateSubscriptionStatusLabels()
+            self.updateSubscriptionStatusLabels(subscription)
             self.fullNameLabel.text = SeatedUser.currentUser().displayName
-            self.subscriptionDescriptionLabel.text = "$5 monthly subscription (\(subscription.status))"
             
             self.tableView.tableHeaderView?.frame = CGRectMake(0, 0, self.tableView.frame.width, 125.0)
             
@@ -97,7 +96,7 @@ class SettingsViewControllerTableViewController: UITableViewController {
                 if error == nil {
                     SVProgressHUD.showSuccessWithStatus("Subscription Cancelled")
                     subscription.cancelAtPeriodEnd = true
-                    self.updateSubscriptionStatusLabels()
+                    self.updateSubscriptionStatusLabels(subscription)
                 }
                 else {
                     SVProgressHUD.showErrorWithStatus("Cancellation Failed")
@@ -119,7 +118,7 @@ class SettingsViewControllerTableViewController: UITableViewController {
                 if error == nil {
                     SVProgressHUD.showSuccessWithStatus("Trial Subscription Reactivated")
                     subscription.cancelAtPeriodEnd = false
-                    self.updateSubscriptionStatusLabels()
+                    self.updateSubscriptionStatusLabels(subscription)
                 }
                 else {
                     SVProgressHUD.showErrorWithStatus("Reactivation Failed")
@@ -131,32 +130,53 @@ class SettingsViewControllerTableViewController: UITableViewController {
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
-    func updateSubscriptionStatusLabels() {
+    func updateSubscriptionStatusLabels(subscription:Subscription) {
         if self.isTrialCancelled() {
             self.nextBillingDateLabel.text = "Trial service ends on \(self.nextBillingDate)"
             self.subscriptionButton.setTitle("Reactivate Subscription", forState: UIControlState.Normal)
             self.cardDetailsLabel.text = "No pending charges"
             self.cardDetailsLabel.textColor = UIColor.blackColor()
+            self.subscriptionDescriptionLabel.text = "$5 monthly subscription (\(subscription.status))"
+        }
+        else if self.isServiceCancelled() {
+            self.nextBillingDateLabel.text = "Service ends on \(self.nextBillingDate)"
+            self.cardDetailsLabel.text = "No pending charges"
+            self.cardDetailsLabel.textColor = UIColor.blackColor()
+            self.subscriptionDescriptionLabel.text = "$5 monthly subscription (cancelled)"
         }
         else {
             self.nextBillingDateLabel.text = "Next charge on \(self.nextBillingDate)"
             self.subscriptionButton.setTitle("Cancel Subscription", forState: UIControlState.Normal)
+            self.subscriptionDescriptionLabel.text = "$5 monthly subscription (\(subscription.status))"
             self.updatePaymentRequired()
         }
-        self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: UITableViewRowAnimation.Automatic)
+        var indexSet = NSMutableIndexSet(index: 0)
+        indexSet.addIndex(2)
+        self.tableView.reloadSections(indexSet, withRowAnimation: UITableViewRowAnimation.Automatic)
+
     }
     
     func isTrialCancelled() -> Bool {
         if let subscription = SeatedUser.currentUser().subscription {
             return subscription.cancelAtPeriodEnd && subscription.status == "trialing"
         }
-        return true
+        return false
+    }
+    
+    func isServiceCancelled() -> Bool {
+        if let subscription = SeatedUser.currentUser().subscription {
+            return subscription.cancelAtPeriodEnd && subscription.status == "active"
+        }
+        return false
     }
     
     //hides and unhides the payment details cell
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 && self.isTrialCancelled() {
+        if section == 0 && (self.isTrialCancelled() || self.isServiceCancelled()) {
             return 0
+        }
+        else if section == 2 && self.isServiceCancelled() {
+            return 1
         }
         else {
             return super.tableView(tableView, numberOfRowsInSection: section)

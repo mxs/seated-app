@@ -620,6 +620,50 @@
                             </tableViewSection>
                             <tableViewSection id="VOj-63-blu">
                                 <cells>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="VT5-yV-nxQ">
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VT5-yV-nxQ" id="1ys-TZ-6FD">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jol-wV-E9u">
+                                                    <rect key="frame" x="0.0" y="7" width="320" height="30"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <state key="normal" title="Logout">
+                                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </state>
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="15" y="7" width="49" height="30"/>
+                                                    </variation>
+                                                    <connections>
+                                                        <action selector="logout:" destination="Rqa-4I-Nje" eventType="touchUpInside" id="YNK-Uf-eJp"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="centerX" secondItem="jol-wV-E9u" secondAttribute="centerX" id="19z-ej-aJi"/>
+                                                <constraint firstItem="jol-wV-E9u" firstAttribute="leading" secondItem="1ys-TZ-6FD" secondAttribute="leadingMargin" constant="7" id="CgI-5B-qAZ"/>
+                                                <constraint firstAttribute="centerY" secondItem="jol-wV-E9u" secondAttribute="centerY" id="iCq-Yg-UYw"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="jol-wV-E9u" secondAttribute="trailing" constant="7" id="vMU-Mz-O7h"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="constraints">
+                                                    <exclude reference="19z-ej-aJi"/>
+                                                    <exclude reference="CgI-5B-qAZ"/>
+                                                    <exclude reference="iCq-Yg-UYw"/>
+                                                    <exclude reference="vMU-Mz-O7h"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="widthClass=compact">
+                                                <mask key="constraints">
+                                                    <exclude reference="19z-ej-aJi"/>
+                                                    <include reference="CgI-5B-qAZ"/>
+                                                    <include reference="iCq-Yg-UYw"/>
+                                                    <include reference="vMU-Mz-O7h"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Ivc-WT-MJ6">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ivc-WT-MJ6" id="aNP-sr-Uje">
@@ -662,50 +706,6 @@
                                                     <exclude reference="FM7-xd-VVU"/>
                                                     <include reference="cu8-e6-f2a"/>
                                                     <include reference="heL-VJ-Gpk"/>
-                                                </mask>
-                                            </variation>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="VT5-yV-nxQ">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VT5-yV-nxQ" id="1ys-TZ-6FD">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jol-wV-E9u">
-                                                    <rect key="frame" x="0.0" y="7" width="320" height="30"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <state key="normal" title="Logout">
-                                                        <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </state>
-                                                    <variation key="widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="15" y="7" width="49" height="30"/>
-                                                    </variation>
-                                                    <connections>
-                                                        <action selector="logout:" destination="Rqa-4I-Nje" eventType="touchUpInside" id="YNK-Uf-eJp"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="centerX" secondItem="jol-wV-E9u" secondAttribute="centerX" id="19z-ej-aJi"/>
-                                                <constraint firstItem="jol-wV-E9u" firstAttribute="leading" secondItem="1ys-TZ-6FD" secondAttribute="leadingMargin" constant="7" id="CgI-5B-qAZ"/>
-                                                <constraint firstAttribute="centerY" secondItem="jol-wV-E9u" secondAttribute="centerY" id="iCq-Yg-UYw"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="jol-wV-E9u" secondAttribute="trailing" constant="7" id="vMU-Mz-O7h"/>
-                                            </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="19z-ej-aJi"/>
-                                                    <exclude reference="CgI-5B-qAZ"/>
-                                                    <exclude reference="iCq-Yg-UYw"/>
-                                                    <exclude reference="vMU-Mz-O7h"/>
-                                                </mask>
-                                            </variation>
-                                            <variation key="widthClass=compact">
-                                                <mask key="constraints">
-                                                    <exclude reference="19z-ej-aJi"/>
-                                                    <include reference="CgI-5B-qAZ"/>
-                                                    <include reference="iCq-Yg-UYw"/>
-                                                    <include reference="vMU-Mz-O7h"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>

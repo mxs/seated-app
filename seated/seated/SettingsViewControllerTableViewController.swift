@@ -183,4 +183,19 @@ class SettingsViewControllerTableViewController: UITableViewController {
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+
+        if segue.destinationViewController is TermPolicyViewController {
+            var urlString:String?
+            if segue.identifier == "termsSegue" {
+                urlString = "http://getseated.com.au/terms"
+            }
+            else if segue.identifier == "privacySegue" {
+                urlString = "http://getseated.com.au/privacy"
+            }
+            (segue.destinationViewController as TermPolicyViewController).urlString = urlString
+        }
+
+    }
+    
 }

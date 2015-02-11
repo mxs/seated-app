@@ -26,6 +26,7 @@
 		A691A9981A7F9A700037CCF1 /* intro-background.png in Resources */ = {isa = PBXBuildFile; fileRef = A691A9971A7F9A700037CCF1 /* intro-background.png */; };
 		A6A240071A55262400E2327F /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A240061A55262400E2327F /* PaymentViewController.swift */; };
 		A6A2400B1A58004E00E2327F /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2400A1A58004E00E2327F /* ConversationViewController.swift */; };
+		A6CB38881A8B7475004818EC /* TermPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CB38871A8B7475004818EC /* TermPolicyViewController.swift */; };
 		A6CFF6031A53F4B900BBD8D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6CFF6021A53F4B900BBD8D3 /* Main.storyboard */; };
 		A6CFF6051A53FB2E00BBD8D3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CFF6041A53FB2E00BBD8D3 /* RootViewController.swift */; };
 		A6CFF60E1A54CCED00BBD8D3 /* IntroContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CFF60C1A54CCED00BBD8D3 /* IntroContentViewController.swift */; };
@@ -75,6 +76,7 @@
 		A691A9971A7F9A700037CCF1 /* intro-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-background.png"; sourceTree = "<group>"; };
 		A6A240061A55262400E2327F /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		A6A2400A1A58004E00E2327F /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
+		A6CB38871A8B7475004818EC /* TermPolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermPolicyViewController.swift; sourceTree = "<group>"; };
 		A6CFF6021A53F4B900BBD8D3 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A6CFF6041A53FB2E00BBD8D3 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		A6CFF60C1A54CCED00BBD8D3 /* IntroContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroContentViewController.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				A613E6081A64E4E90089F62D /* SubscriptionHelper.swift */,
 				A6F1618F1A80A81F0055359B /* SeatedTextField.swift */,
 				A6F161961A8250A50055359B /* BlurBackgroundProtocol.swift */,
+				A6CB38871A8B7475004818EC /* TermPolicyViewController.swift */,
 			);
 			path = seated;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				A6657E551A5CE7C800B64EDA /* SeatedUser.swift in Sources */,
 				A6F161971A8250A50055359B /* BlurBackgroundProtocol.swift in Sources */,
 				A613E6091A64E4E90089F62D /* SubscriptionHelper.swift in Sources */,
+				A6CB38881A8B7475004818EC /* TermPolicyViewController.swift in Sources */,
 				A66076C21A4EB5CD0039B61D /* SignUpViewController.swift in Sources */,
 				A62BCAF21A838FE3008AD5DE /* Subscription.swift in Sources */,
 				A652E6331A68BE28003F503F /* ConversationListViewController.swift in Sources */,

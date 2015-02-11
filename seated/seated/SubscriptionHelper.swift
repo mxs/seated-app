@@ -32,32 +32,51 @@ class SubscriptionHelper: NSObject {
     }
     
     func fetchStripeSubscription(presentingViewController:UIViewController) {
-        let user = SeatedUser.currentUser()
         var query = SeatedUser.query()
-        
-        if let subscription = user.subscription {
-            // local query just to populate subscription property of user as SeatedUser.current() does not do that
-            query.fromLocalDatastore()
-            query.includeKey("subscription")
-            query.getObjectInBackgroundWithId(user.objectId, block: { (resultUser, error) -> Void in
-                
-                let params = ["stripeCustomerId":user.stripeCustomerId, "subscriptionId":subscription.subscriptionId, "objectId":subscription.objectId]
-                // This cloud function pull in data from Stripe also updates the subscription in Parse so we don't need to save to Parse again
-                PFCloud.callFunctionInBackground("retrieveSubscription", withParameters:params, block: { (subscriptionData, error) -> Void in
-                    if error == nil {
-                        subscription.update(subscriptionData as NSDictionary)
-                        self.checkTrialValidity(user, presentingViewController: presentingViewController)
-                    }
-                    else {
-                        //TODO: show error
-                    }
-                })
-                
-            })
-        }
-        else {
-            self.cancelledAndTrialExpired(presentingViewController)
-        }
+
+        // local query just to populate subscription property of user as SeatedUser.current() does not do that
+        query.fromLocalDatastore()
+        query.includeKey("subscription")
+        query.getObjectInBackgroundWithId(SeatedUser.currentUser().objectId, block: { (fetchedUser, error) -> Void in
+            if error != nil {
+                println(error)
+            }
+            else {
+                let user = fetchedUser as SeatedUser
+                if let subscription = user.subscription {
+                    let params = ["stripeCustomerId":user.stripeCustomerId, "subscriptionId":subscription.subscriptionId, "objectId":subscription.objectId]
+                    // This cloud function pull in data from Stripe also updates the subscription in Parse so we don't need to save to Parse again
+                    PFCloud.callFunctionInBackground("retrieveSubscription", withParameters:params, block: { (subscriptionData, error) -> Void in
+                        if error == nil {
+                            subscription.update(subscriptionData as NSDictionary)
+                            subscription.saveEventually(nil)
+                            self.checkTrialValidity(user, presentingViewController: presentingViewController)
+                        }
+                        else {
+                            if let errorCode = error.userInfo?["error"] as? String {
+                                // subscription no longer exists meaning it has been cancelled permanently by webhook
+                                if errorCode == "404" {
+                                    subscription.unpinInBackgroundWithBlock() {(sucess, error) in
+                                        subscription.deleteInBackgroundWithBlock() {(success, error) in
+                                            if error != nil {
+                                                println(error)
+                                            }
+                                            user.removeObjectForKey("subscription")
+                                            user.saveEventually(nil)
+                                        }
+                                        self.cancelledAndTrialExpired(presentingViewController)
+                                    }
+                                }
+                            }
+                        }
+                    })
+                }
+                else {
+                    self.cancelledAndTrialExpired(presentingViewController)
+                }
+            }
+            
+        })
         
     }
     
@@ -151,6 +170,7 @@ class SubscriptionHelper: NSObject {
         let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let alertController = UIAlertController(title: "Subscription Cancelled", message: "Would you like to re-subscribe to Seated?", preferredStyle: .Alert)
         let noAction = UIAlertAction(title: "No", style: .Cancel) { (action) in
+            SeatedUser.currentUser().unpin()
             PFUser.logOut()
             let rootVC = storyBoard.instantiateInitialViewController() as UIViewController
             presentingViewController.presentViewController(rootVC, animated: true, completion: nil)

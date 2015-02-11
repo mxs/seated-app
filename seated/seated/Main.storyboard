@@ -25,7 +25,7 @@
                         <viewControllerLayoutGuide type="bottom" id="PsR-t8-eap"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ctI-NW-Lhc">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro-background.png" translatesAutoresizingMaskIntoConstraints="NO" id="9Zx-0b-IHT">
@@ -844,10 +844,9 @@
                                 <exclude reference="eC8-1h-KMJ"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="2FL-GQ-kdg"/>
-                                <exclude reference="9hL-9J-veu"/>
-                                <exclude reference="PDE-eB-mzn"/>
-                                <exclude reference="SPY-zG-KgC"/>
+                                <exclude reference="7GQ-iE-rha"/>
+                                <exclude reference="8tQ-7d-nCz"/>
+                                <exclude reference="yCE-yr-s2e"/>
                                 <exclude reference="3ka-Rv-gX7"/>
                                 <exclude reference="9Ut-jH-AMm"/>
                                 <exclude reference="N4s-sp-81o"/>
@@ -856,9 +855,10 @@
                                 <exclude reference="q7V-gQ-WRL"/>
                                 <exclude reference="wMM-bt-lWm"/>
                                 <exclude reference="wQ6-H4-zcy"/>
-                                <exclude reference="7GQ-iE-rha"/>
-                                <exclude reference="8tQ-7d-nCz"/>
-                                <exclude reference="yCE-yr-s2e"/>
+                                <exclude reference="2FL-GQ-kdg"/>
+                                <exclude reference="9hL-9J-veu"/>
+                                <exclude reference="PDE-eB-mzn"/>
+                                <exclude reference="SPY-zG-KgC"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -868,10 +868,9 @@
                                 <include reference="eC8-1h-KMJ"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="2FL-GQ-kdg"/>
-                                <exclude reference="9hL-9J-veu"/>
-                                <include reference="PDE-eB-mzn"/>
-                                <include reference="SPY-zG-KgC"/>
+                                <include reference="7GQ-iE-rha"/>
+                                <include reference="8tQ-7d-nCz"/>
+                                <include reference="yCE-yr-s2e"/>
                                 <include reference="3ka-Rv-gX7"/>
                                 <include reference="9Ut-jH-AMm"/>
                                 <exclude reference="N4s-sp-81o"/>
@@ -880,9 +879,10 @@
                                 <exclude reference="q7V-gQ-WRL"/>
                                 <exclude reference="wMM-bt-lWm"/>
                                 <include reference="wQ6-H4-zcy"/>
-                                <include reference="7GQ-iE-rha"/>
-                                <include reference="8tQ-7d-nCz"/>
-                                <include reference="yCE-yr-s2e"/>
+                                <exclude reference="2FL-GQ-kdg"/>
+                                <exclude reference="9hL-9J-veu"/>
+                                <include reference="PDE-eB-mzn"/>
+                                <include reference="SPY-zG-KgC"/>
                             </mask>
                         </variation>
                     </view>

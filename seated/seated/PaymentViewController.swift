@@ -93,12 +93,11 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
 
         PFCloud.callFunctionInBackground("updateCustomerCard", withParameters: params) { (result, error) -> Void in
             if error == nil {
-                println(result)
                 SeatedUser.currentUser().cardId = result["card_id"] as? String
                 SeatedUser.currentUser().cardLabel = result["card_label"] as? String
                 SeatedUser.currentUser().saveInBackgroundWithBlock({ (success, error) -> Void in
                     if !success {
-                        SeatedUser.currentUser().saveEventually()
+                        SeatedUser.currentUser().saveEventually(nil)
                     }
                 })
                 SVProgressHUD.showSuccessWithStatus("Updated!")
@@ -117,12 +116,15 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
             if error == nil {
                 var subscription = Subscription()
                 subscription.update(subscriptionData as NSDictionary)
-                user.subscription = subscription
-                user.saveInBackgroundWithBlock({ (success, error) -> Void in
-                    if error != nil {
-                        user.saveEventually()
-                    }
+                subscription.pinInBackgroundWithBlock({ (success, error) -> Void in
+                    //success
                 })
+                subscription.saveEventually(nil)
+                user.subscription = subscription
+                user.cardId = subscriptionData["card_id"] as? String
+                user.cardLabel = subscriptionData["card_label"] as? String
+                user.saveEventually(nil)
+
                 SVProgressHUD.showSuccessWithStatus("Subscription Renewed")
                 self.dismissViewControllerAnimated(true, completion: nil)
             }

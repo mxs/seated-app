@@ -43,7 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             else {
                 rootNavigationVC = storyBoard.instantiateViewControllerWithIdentifier("conversationNavigationController") as UINavigationController
             }
-            
             self.window?.rootViewController = rootNavigationVC
         }
         
@@ -82,7 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(application: UIApplication) {
         var currentInstallation = PFInstallation.currentInstallation()
         currentInstallation.badge = 0
-        currentInstallation.saveEventually()
+        currentInstallation.saveEventually(nil)
     }
 
     func applicationWillTerminate(application: UIApplication) {

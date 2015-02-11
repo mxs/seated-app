@@ -36,7 +36,6 @@ class Subscription: PFObject, PFSubclassing {
         if data["days_until_trial_end"] == nil { //only happens on create customer
             let now = NSDate().timeIntervalSince1970
             let days = Int(floor(((data["trial_end"] as Double) - now) / 60 / 60 / 24))
-            println(days)
             self.daysUntilTrialEnd = days
         }
         else {
@@ -64,7 +63,6 @@ class Subscription: PFObject, PFSubclassing {
     
     var currentPeriodEnd:NSDate {
         get {
-            let c = self["current_period_end"] as NSDate
             return self["current_period_end"] as NSDate
         }
         set {

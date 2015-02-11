@@ -61,6 +61,11 @@ class ConversationViewController: JSQMessagesViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.jsq_defaultTypingIndicatorImage(), style: UIBarButtonItemStyle.Bordered, target: self, action: "showSettings")
 
         self.setupFirebase()
+        
+        if !SeatedUser.currentUser().isAdmin {
+            SubscriptionHelper.sharedInstance.fetchStripeSubscription(self)
+        }
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -72,9 +77,6 @@ class ConversationViewController: JSQMessagesViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if !SeatedUser.currentUser().isAdmin {
-            SubscriptionHelper.sharedInstance.fetchStripeSubscription(self)
-        }
         clearUnreadCount()
     }
     

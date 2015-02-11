@@ -159,12 +159,13 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol {
     
     func setUpPushNotification(stripeCustomerId:String) {
         let currentInstallation = PFInstallation.currentInstallation()
-        currentInstallation.channels.append(stripeCustomerId)
-        currentInstallation.saveInBackgroundWithBlock { (success, error) -> Void in
-            if error != nil {
-                //TODO: Handle error
-            }
+        if currentInstallation.channels != nil {
+            currentInstallation.channels.append(stripeCustomerId)
         }
+        else {
+            currentInstallation.channels = ["global"]
+        }
+        currentInstallation.saveEventually(nil)
     }
     
     func performSuccessSegue() {

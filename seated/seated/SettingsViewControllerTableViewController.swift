@@ -41,6 +41,7 @@ class SettingsViewControllerTableViewController: UITableViewController {
         let alertController = UIAlertController(title: "Are you sure?", message: "", preferredStyle: .Alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler:nil)
         let yesAction = UIAlertAction(title: "Log out", style: .Default) { (action) -> Void in
+            SeatedUser.currentUser().unpin()
             PFUser.logOut()
             Firebase(url: "https://seatedapp.firebaseio.com/").unauth()
             let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())

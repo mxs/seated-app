@@ -63,11 +63,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, BlurBackground
                     currentInstallation.channels = ["global"]
                 }
                 currentInstallation.channels.append(loggedInUser.stripeCustomerId)
-                currentInstallation.saveInBackgroundWithBlock({ (success, error) -> Void in
-                    if error != nil {
-                        currentInstallation.saveEventually()
-                    }
-                })
+                currentInstallation.saveEventually(nil)
                 
                 SVProgressHUD.dismiss()
                 

@@ -116,6 +116,7 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
             if error == nil {
                 var subscription = Subscription()
                 subscription.update(subscriptionData as NSDictionary)
+                //have to repin as its a new object
                 subscription.pinInBackgroundWithBlock({ (success, error) -> Void in
                     //success
                 })

@@ -25,15 +25,20 @@ class SettingsViewControllerTableViewController: UITableViewController {
         
         if let subscription = SeatedUser.currentUser().subscription {
             let dateFormat = NSDateFormatter()
-            dateFormat.dateFormat = "dd MMM YYYY"
+            dateFormat.dateFormat = "d MMMM YYYY"
             self.nextBillingDate = dateFormat.stringFromDate(subscription.currentPeriodEnd)
-            
             self.updateSubscriptionStatusLabels(subscription)
-            self.fullNameLabel.text = SeatedUser.currentUser().displayName
-            
             self.tableView.tableHeaderView?.frame = CGRectMake(0, 0, self.tableView.frame.width, 125.0)
-            
         }
+        else if SeatedUser.currentUser().isAdmin {
+            self.tableView.tableHeaderView?.frame = CGRectMake(0, 0, self.tableView.frame.width, 40.0)
+        }
+        
+        self.fullNameLabel.text = SeatedUser.currentUser().displayName
+        self.subscriptionDescriptionLabel.hidden = SeatedUser.currentUser().isAdmin
+        self.cardDetailsLabel.hidden = SeatedUser.currentUser().isAdmin
+        self.nextBillingDateLabel.hidden = SeatedUser.currentUser().isAdmin
+        
     }
     
     @IBAction func logout(sender: AnyObject) {
@@ -172,10 +177,10 @@ class SettingsViewControllerTableViewController: UITableViewController {
     
     //hides and unhides the payment details cell
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 && (self.isTrialCancelled() || self.isServiceCancelled()) {
+        if section == 0 && (self.isTrialCancelled() || self.isServiceCancelled() || SeatedUser.currentUser().isAdmin) {
             return 0
         }
-        else if section == 2 && self.isServiceCancelled() {
+        else if section == 2 && (self.isServiceCancelled() || SeatedUser.currentUser().isAdmin) {
             return 1
         }
         else {

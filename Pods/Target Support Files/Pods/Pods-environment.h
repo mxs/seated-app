@@ -12,6 +12,12 @@
 #define COCOAPODS_VERSION_MINOR_Bolts 1
 #define COCOAPODS_VERSION_PATCH_Bolts 3
 
+// DateTools
+#define COCOAPODS_POD_AVAILABLE_DateTools
+#define COCOAPODS_VERSION_MAJOR_DateTools 1
+#define COCOAPODS_VERSION_MINOR_DateTools 5
+#define COCOAPODS_VERSION_PATCH_DateTools 0
+
 // Firebase
 #define COCOAPODS_POD_AVAILABLE_Firebase
 #define COCOAPODS_VERSION_MAJOR_Firebase 2

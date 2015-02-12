@@ -71,7 +71,7 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
             
             STPAPIClient.sharedClient().createTokenWithCard(card, completion: { (token, error) -> Void in
                 if error != nil {
-                    //TODO: handle create Strip token with card error
+                    SVProgressHUD.showErrorWithStatus("Update Card Failed")
                 }
                 else {
                     if self.renewSubscription {

@@ -11,7 +11,6 @@ import UIKit
 class Conversation: NSObject, Equatable {
     let id:String!
     let title:String!
-    let dateFormatter:NSDateFormatter!
     var lastMessage:String!
     var lastMessageTime:Int!
     var participants:NSDictionary!
@@ -22,19 +21,20 @@ class Conversation: NSObject, Equatable {
         self.lastMessage = lastMessage
         self.lastMessageTime = lastMesasgeTime
         self.participants = participants
-        
-        let timeZone = NSTimeZone.localTimeZone()
-        self.dateFormatter = NSDateFormatter()
-        self.dateFormatter.dateStyle = NSDateFormatterStyle.MediumStyle
-        self.dateFormatter.timeStyle = NSDateFormatterStyle.MediumStyle
-        self.dateFormatter.timeZone = timeZone
-        self.dateFormatter.locale = NSLocale.currentLocale()
-
     }
     
     var lastMessageTimePretty:String {
-        let date = NSDate(timeIntervalSince1970: Double(self.lastMessageTime)/1000)
-        return self.dateFormatter.stringFromDate(date)
+        var date = NSDate(timeIntervalSince1970: Double(self.lastMessageTime)/1000)
+        let daysAgo = date.daysAgo()
+        if daysAgo > 7 {
+            return date.formattedDateWithFormat("d MMMM")
+        }
+        else if daysAgo < 1 {
+            return date.formattedDateWithFormat("hh:mm aaa")
+        }
+        else {
+            return date.formattedDateWithFormat("EEE")
+        }
     }
     
     func unreadCountForParticipant(participant:String) -> Int {
@@ -42,8 +42,6 @@ class Conversation: NSObject, Equatable {
             return  unreadCount["unread-count"] as Int
         }
         return 0
-        
-
     }
 }
 

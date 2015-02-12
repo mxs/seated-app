@@ -17,7 +17,8 @@ class ConversationTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        self.unreadCountLabel.layer.cornerRadius = 10.0
+        self.unreadCountLabel.layer.masksToBounds = true
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

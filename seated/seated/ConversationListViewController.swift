@@ -18,6 +18,13 @@ class ConversationListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = "Customers"
+        
+        var navBar = self.navigationController?.navigationBar
+        navBar?.barTintColor = UIColor.primaryColour()
+        navBar?.tintColor = UIColor.textColour()
+        navBar?.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.textColour()]
+
         Firebase.setOption("persistence", to: true)
         
         self.conversationsRef = Firebase(url: "https://seatedapp.firebaseio.com/users/\(SeatedUser.currentUser().stripeCustomerId)/conversations")
@@ -97,7 +104,9 @@ class ConversationListViewController: UITableViewController {
         cell.lastMessageLabel.text = conversation.lastMessage
         cell.titleLabel.text = conversation.title
         cell.timeStampLabel.text = conversation.lastMessageTimePretty
-        cell.unreadCountLabel.text = String(conversation.unreadCountForParticipant(SeatedUser.currentUser().stripeCustomerId))
+        let unreadCount = conversation.unreadCountForParticipant(SeatedUser.currentUser().stripeCustomerId)
+        cell.unreadCountLabel.text = String(unreadCount)
+        cell.unreadCountLabel.hidden = unreadCount == 0
         
         return cell
     }

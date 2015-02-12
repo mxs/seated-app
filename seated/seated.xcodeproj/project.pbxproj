@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8EED7B460EA708EA1A8923B8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2870EDA7E24441B6BE243479 /* libPods.a */; };
-		A613E6091A64E4E90089F62D /* UnsubscribedHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A613E6081A64E4E90089F62D /* UnsubscribedHelper.swift */; };
+		A613E6091A64E4E90089F62D /* SubscriptionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A613E6081A64E4E90089F62D /* SubscriptionHelper.swift */; };
+		A62BCAF21A838FE3008AD5DE /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62BCAF11A838FE3008AD5DE /* Subscription.swift */; };
 		A652E6331A68BE28003F503F /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A652E6321A68BE28003F503F /* ConversationListViewController.swift */; };
 		A652E6351A6C7C65003F503F /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A652E6341A6C7C65003F503F /* Conversation.swift */; };
 		A652E6371A6CD6F4003F503F /* ConversationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A652E6361A6CD6F4003F503F /* ConversationTableViewCell.swift */; };
@@ -21,13 +22,22 @@
 		A6657E551A5CE7C800B64EDA /* SeatedUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6657E541A5CE7C800B64EDA /* SeatedUser.swift */; };
 		A6657E5A1A5E574E00B64EDA /* incoming-avatar@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6657E591A5E574E00B64EDA /* incoming-avatar@2x.png */; };
 		A6657E5C1A5FB6E700B64EDA /* SettingsViewControllerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6657E5B1A5FB6E700B64EDA /* SettingsViewControllerTableViewController.swift */; };
+		A691A9961A7F6CEB0037CCF1 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A691A9951A7F6CEB0037CCF1 /* UIColorExtension.swift */; };
+		A691A9981A7F9A700037CCF1 /* intro-background.png in Resources */ = {isa = PBXBuildFile; fileRef = A691A9971A7F9A700037CCF1 /* intro-background.png */; };
 		A6A240071A55262400E2327F /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A240061A55262400E2327F /* PaymentViewController.swift */; };
-		A6A240091A56A52700E2327F /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A240081A56A52700E2327F /* ResetPasswordViewController.swift */; };
 		A6A2400B1A58004E00E2327F /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2400A1A58004E00E2327F /* ConversationViewController.swift */; };
+		A6CB38881A8B7475004818EC /* TermPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CB38871A8B7475004818EC /* TermPolicyViewController.swift */; };
 		A6CFF6031A53F4B900BBD8D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6CFF6021A53F4B900BBD8D3 /* Main.storyboard */; };
 		A6CFF6051A53FB2E00BBD8D3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CFF6041A53FB2E00BBD8D3 /* RootViewController.swift */; };
 		A6CFF60E1A54CCED00BBD8D3 /* IntroContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CFF60C1A54CCED00BBD8D3 /* IntroContentViewController.swift */; };
 		A6CFF60F1A54CCED00BBD8D3 /* IntroContentViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CFF60D1A54CCED00BBD8D3 /* IntroContentViewController.xib */; };
+		A6F161881A8047390055359B /* transparent-seated-logo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6F161871A8047390055359B /* transparent-seated-logo@2x.png */; };
+		A6F1618A1A8099320055359B /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6F161891A8099320055359B /* Accelerate.framework */; };
+		A6F1618E1A809B950055359B /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = A6F1618C1A809B950055359B /* UIImage+ImageEffects.m */; };
+		A6F161901A80A81F0055359B /* SeatedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F1618F1A80A81F0055359B /* SeatedTextField.swift */; };
+		A6F161931A821C3A0055359B /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F161921A821C3A0055359B /* UIImageExtension.swift */; };
+		A6F161951A8235880055359B /* ios7-close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6F161941A8235880055359B /* ios7-close@2x.png */; };
+		A6F161971A8250A50055359B /* BlurBackgroundProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6F161961A8250A50055359B /* BlurBackgroundProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +53,8 @@
 /* Begin PBXFileReference section */
 		237050A84A16FE74DB9A5323 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		2870EDA7E24441B6BE243479 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		A613E6081A64E4E90089F62D /* UnsubscribedHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnsubscribedHelper.swift; sourceTree = "<group>"; };
+		A613E6081A64E4E90089F62D /* SubscriptionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionHelper.swift; sourceTree = "<group>"; };
+		A62BCAF11A838FE3008AD5DE /* Subscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
 		A652E6321A68BE28003F503F /* ConversationListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
 		A652E6341A6C7C65003F503F /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		A652E6361A6CD6F4003F503F /* ConversationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationTableViewCell.swift; sourceTree = "<group>"; };
@@ -61,13 +72,23 @@
 		A6657E591A5E574E00B64EDA /* incoming-avatar@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "incoming-avatar@2x.png"; sourceTree = "<group>"; };
 		A6657E5B1A5FB6E700B64EDA /* SettingsViewControllerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewControllerTableViewController.swift; sourceTree = "<group>"; };
 		A6768CAA1A5123C30089DC80 /* seated-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "seated-Bridging-Header.h"; sourceTree = "<group>"; };
+		A691A9951A7F6CEB0037CCF1 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		A691A9971A7F9A700037CCF1 /* intro-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-background.png"; sourceTree = "<group>"; };
 		A6A240061A55262400E2327F /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
-		A6A240081A56A52700E2327F /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		A6A2400A1A58004E00E2327F /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
+		A6CB38871A8B7475004818EC /* TermPolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermPolicyViewController.swift; sourceTree = "<group>"; };
 		A6CFF6021A53F4B900BBD8D3 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A6CFF6041A53FB2E00BBD8D3 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		A6CFF60C1A54CCED00BBD8D3 /* IntroContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroContentViewController.swift; sourceTree = "<group>"; };
 		A6CFF60D1A54CCED00BBD8D3 /* IntroContentViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IntroContentViewController.xib; sourceTree = "<group>"; };
+		A6F161871A8047390055359B /* transparent-seated-logo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "transparent-seated-logo@2x.png"; sourceTree = "<group>"; };
+		A6F161891A8099320055359B /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		A6F1618C1A809B950055359B /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		A6F1618D1A809B950055359B /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		A6F1618F1A80A81F0055359B /* SeatedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeatedTextField.swift; sourceTree = "<group>"; };
+		A6F161921A821C3A0055359B /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		A6F161941A8235880055359B /* ios7-close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ios7-close@2x.png"; sourceTree = "<group>"; };
+		A6F161961A8250A50055359B /* BlurBackgroundProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlurBackgroundProtocol.swift; sourceTree = "<group>"; };
 		AF58CAAD5538563E7608E5C3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -76,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6F1618A1A8099320055359B /* Accelerate.framework in Frameworks */,
 				8EED7B460EA708EA1A8923B8 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -102,9 +124,19 @@
 		9E7392767A1A8E7393AF7002 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A6F161891A8099320055359B /* Accelerate.framework */,
 				2870EDA7E24441B6BE243479 /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A62BCAF01A838FBF008AD5DE /* Parse Models */ = {
+			isa = PBXGroup;
+			children = (
+				A6657E541A5CE7C800B64EDA /* SeatedUser.swift */,
+				A62BCAF11A838FE3008AD5DE /* Subscription.swift */,
+			);
+			name = "Parse Models";
 			sourceTree = "<group>";
 		};
 		A652E6311A68BE06003F503F /* Admin */ = {
@@ -140,8 +172,11 @@
 		A660769A1A4913AE0039B61D /* seated */ = {
 			isa = PBXGroup;
 			children = (
+				A62BCAF01A838FBF008AD5DE /* Parse Models */,
+				A6F161911A821C230055359B /* Extensions */,
+				A6F1618B1A809B7C0055359B /* Categories */,
 				A652E6311A68BE06003F503F /* Admin */,
-				A6657E561A5E503700B64EDA /* assets */,
+				A6657E561A5E503700B64EDA /* Assets */,
 				A66076C31A4EBBEC0039B61D /* Intro Flow */,
 				A660769D1A4913AE0039B61D /* AppDelegate.swift */,
 				A660769F1A4913AE0039B61D /* LoginViewController.swift */,
@@ -153,11 +188,12 @@
 				A6768CAA1A5123C30089DC80 /* seated-Bridging-Header.h */,
 				A6CFF6041A53FB2E00BBD8D3 /* RootViewController.swift */,
 				A6A240061A55262400E2327F /* PaymentViewController.swift */,
-				A6A240081A56A52700E2327F /* ResetPasswordViewController.swift */,
 				A6A2400A1A58004E00E2327F /* ConversationViewController.swift */,
-				A6657E541A5CE7C800B64EDA /* SeatedUser.swift */,
 				A6657E5B1A5FB6E700B64EDA /* SettingsViewControllerTableViewController.swift */,
-				A613E6081A64E4E90089F62D /* UnsubscribedHelper.swift */,
+				A613E6081A64E4E90089F62D /* SubscriptionHelper.swift */,
+				A6F1618F1A80A81F0055359B /* SeatedTextField.swift */,
+				A6F161961A8250A50055359B /* BlurBackgroundProtocol.swift */,
+				A6CB38871A8B7475004818EC /* TermPolicyViewController.swift */,
 			);
 			path = seated;
 			sourceTree = "<group>";
@@ -196,13 +232,34 @@
 			name = "Intro Flow";
 			sourceTree = "<group>";
 		};
-		A6657E561A5E503700B64EDA /* assets */ = {
+		A6657E561A5E503700B64EDA /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				A6F161941A8235880055359B /* ios7-close@2x.png */,
+				A6F161871A8047390055359B /* transparent-seated-logo@2x.png */,
+				A691A9971A7F9A700037CCF1 /* intro-background.png */,
 				A6657E591A5E574E00B64EDA /* incoming-avatar@2x.png */,
 			);
-			name = assets;
+			name = Assets;
 			path = ../../assets;
+			sourceTree = "<group>";
+		};
+		A6F1618B1A809B7C0055359B /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				A6F1618C1A809B950055359B /* UIImage+ImageEffects.m */,
+				A6F1618D1A809B950055359B /* UIImage+ImageEffects.h */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		A6F161911A821C230055359B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A691A9951A7F6CEB0037CCF1 /* UIColorExtension.swift */,
+				A6F161921A821C3A0055359B /* UIImageExtension.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,9 +347,12 @@
 			files = (
 				A6CFF60F1A54CCED00BBD8D3 /* IntroContentViewController.xib in Resources */,
 				A66076A81A4913AE0039B61D /* LaunchScreen.xib in Resources */,
+				A691A9981A7F9A700037CCF1 /* intro-background.png in Resources */,
 				A6657E5A1A5E574E00B64EDA /* incoming-avatar@2x.png in Resources */,
 				A66076A51A4913AE0039B61D /* Images.xcassets in Resources */,
 				A6CFF6031A53F4B900BBD8D3 /* Main.storyboard in Resources */,
+				A6F161951A8235880055359B /* ios7-close@2x.png in Resources */,
+				A6F161881A8047390055359B /* transparent-seated-logo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,15 +403,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A6F1618E1A809B950055359B /* UIImage+ImageEffects.m in Sources */,
 				A66076A01A4913AE0039B61D /* LoginViewController.swift in Sources */,
 				A6A240071A55262400E2327F /* PaymentViewController.swift in Sources */,
+				A691A9961A7F6CEB0037CCF1 /* UIColorExtension.swift in Sources */,
+				A6F161901A80A81F0055359B /* SeatedTextField.swift in Sources */,
+				A6F161931A821C3A0055359B /* UIImageExtension.swift in Sources */,
 				A6A2400B1A58004E00E2327F /* ConversationViewController.swift in Sources */,
 				A6657E5C1A5FB6E700B64EDA /* SettingsViewControllerTableViewController.swift in Sources */,
-				A6A240091A56A52700E2327F /* ResetPasswordViewController.swift in Sources */,
 				A660769E1A4913AE0039B61D /* AppDelegate.swift in Sources */,
 				A6657E551A5CE7C800B64EDA /* SeatedUser.swift in Sources */,
-				A613E6091A64E4E90089F62D /* UnsubscribedHelper.swift in Sources */,
+				A6F161971A8250A50055359B /* BlurBackgroundProtocol.swift in Sources */,
+				A613E6091A64E4E90089F62D /* SubscriptionHelper.swift in Sources */,
+				A6CB38881A8B7475004818EC /* TermPolicyViewController.swift in Sources */,
 				A66076C21A4EB5CD0039B61D /* SignUpViewController.swift in Sources */,
+				A62BCAF21A838FE3008AD5DE /* Subscription.swift in Sources */,
 				A652E6331A68BE28003F503F /* ConversationListViewController.swift in Sources */,
 				A652E6371A6CD6F4003F503F /* ConversationTableViewCell.swift in Sources */,
 				A6CFF60E1A54CCED00BBD8D3 /* IntroContentViewController.swift in Sources */,

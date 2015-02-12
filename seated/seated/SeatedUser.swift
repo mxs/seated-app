@@ -14,6 +14,16 @@ class SeatedUser: PFUser, PFSubclassing {
         self.registerSubclass()
     }
     
+    func update(user:SeatedUser) -> Void {
+        self.stripeCustomerId = user.stripeCustomerId
+        self.firstName = user.firstName
+        self.lastName = user.lastName
+        self.cardId = user.cardId
+        self.cardLabel = user.cardLabel
+        self.isAdmin = user.isAdmin
+        self.subscription = user.subscription
+    }
+    
     var stripeCustomerId:String {
         get {
             return self["stripeCustomerId"] as String
@@ -46,12 +56,21 @@ class SeatedUser: PFUser, PFSubclassing {
         return "\(self.firstName) \(self.lastName)"
     }
     
-    var subscriptionId:String {
+    var cardId:String? {
         get {
-            return self["subscriptionId"] as String
+            return self["card_id"] as String?
         }
         set {
-            self["subscriptionId"] = newValue
+            self["card_id"] = newValue
+        }
+    }
+    
+    var cardLabel:String? {
+        get {
+            return self["card_label"] as String?
+        }
+        set {
+            self["card_label"] = newValue
         }
     }
     
@@ -61,6 +80,15 @@ class SeatedUser: PFUser, PFSubclassing {
         }
         set {
             self["isAdmin"] = newValue
+        }
+    }
+    
+    var subscription:Subscription? {
+        get {
+            return self["subscription"] as? Subscription
+        }
+        set {
+            self["subscription"] = newValue
         }
     }
     

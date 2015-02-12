@@ -13,6 +13,7 @@ class ConversationViewController: JSQMessagesViewController {
     let kFirebaseServerValueTimestamp = [".sv":"timestamp"]
     let seatbotId = "seatbot"
     let welcomeMessage = "Hi there, welcome to seated!"
+    
     var stripeCustomerId:String!
     var conversationId:String!
     var messagesRef:Firebase!
@@ -23,10 +24,14 @@ class ConversationViewController: JSQMessagesViewController {
     var outgoingMessageBubbleImage:JSQMessagesBubbleImage!
     var incomingMessageBubbleImage:JSQMessagesBubbleImage!
     var incomingMessageAvatarImage:JSQMessagesAvatarImage!
-    var alertController: UIAlertController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var navBar = self.navigationController?.navigationBar
+        navBar?.barTintColor = UIColor.primaryColour()
+        navBar?.tintColor = UIColor.textColour()
+        navBar?.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.textColour()]
         
         Firebase.setOption("persistence", to: true)
         
@@ -44,21 +49,20 @@ class ConversationViewController: JSQMessagesViewController {
             self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSize(width:40.0, height:40.0)
             self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero
         }
-        
-        self.outgoingMessageBubbleImage = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
+
+        self.outgoingMessageBubbleImage = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(UIColor.primaryColour())
         self.incomingMessageBubbleImage = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
         self.inputToolbar.contentView.leftBarButtonItem = nil
         self.senderId = self.stripeCustomerId
         self.senderDisplayName = SeatedUser.currentUser().displayName
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.jsq_defaultTypingIndicatorImage(), style: UIBarButtonItemStyle.Bordered, target: self, action: "showSettings")
 
-        //User's subscription is no longer valid
-        if self.stripeCustomerId == "" {
-            self.alertController = UnsubscribedHelper.sharedInstance.userNoLongerSubscribed()
+        self.setupFirebase()
+        
+        if !SeatedUser.currentUser().isAdmin {
+            SubscriptionHelper.sharedInstance.fetchStripeSubscription(self)
         }
-        else {
-            self.setupFirebase()
-        }
+
     }
     
     override func didReceiveMemoryWarning() {
@@ -70,10 +74,6 @@ class ConversationViewController: JSQMessagesViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if let alertController = self.alertController {
-            self.presentViewController(alertController, animated: true, completion: nil)
-        }
-        
         clearUnreadCount()
     }
     
@@ -298,7 +298,7 @@ class ConversationViewController: JSQMessagesViewController {
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as JSQMessagesCollectionViewCell
         let message = self.messages[indexPath.item] as JSQMessage
         if message.senderId == self.senderId {
-            cell.textView.textColor = UIColor.whiteColor()
+            cell.textView.textColor = UIColor.textColour()
         }
         else {
             cell.textView.textColor = UIColor.blackColor()

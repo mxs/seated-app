@@ -47,7 +47,8 @@ install_resource()
       ;;
   esac
 }
-          install_resource "JSQMessagesViewController/JSQMessagesViewController/Assets/JSQMessagesAssets.bundle"
+          install_resource "DateTools/DateTools/DateTools.bundle"
+                    install_resource "JSQMessagesViewController/JSQMessagesViewController/Assets/JSQMessagesAssets.bundle"
                     install_resource "JSQMessagesViewController/JSQMessagesViewController/Assets/Strings/Base.lproj"
                     install_resource "JSQMessagesViewController/JSQMessagesViewController/Assets/Strings/de.lproj"
                     install_resource "JSQMessagesViewController/JSQMessagesViewController/Assets/Strings/en.lproj"
@@ -90,6 +91,7 @@ install_resource()
                     install_resource "PaymentKit/PaymentKit/Resources/gradient@2x.png"
                     install_resource "PaymentKit/PaymentKit/Resources/textfield.png"
                     install_resource "PaymentKit/PaymentKit/Resources/textfield@2x.png"
+                    install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
           
 rsync -avr --copy-links --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
 if [[ "${ACTION}" == "install" ]]; then

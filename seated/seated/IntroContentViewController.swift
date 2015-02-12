@@ -10,12 +10,15 @@ import UIKit
 
 class IntroContentViewController: UIViewController {
 
-    @IBOutlet weak var introLabel: UILabel!
+    @IBOutlet weak var introMainCopyLabel: UILabel!
+    @IBOutlet weak var introSubtextLabel: UILabel!
     
-    var introCopy:String?
+    var introMainCopy:String?
+    var introSubText:String?
     
     override func viewDidLoad() {
-        self.introLabel.text = self.introCopy
+        self.introMainCopyLabel.text = self.introMainCopy
+        self.introSubtextLabel.text = self.introSubText
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.

@@ -16,9 +16,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 
+        Parse.enableLocalDatastore()
         Parse.setApplicationId("m8LgO3jYklu06JwdSXqwDh0WpC4hQXei4iDRl5CO", clientKey: "Yz7k5c4YGQ0SGtCM0xFVVNJXwmor0E5c8x6tGh3V")
         Stripe.setDefaultPublishableKey("pk_test_p4io3YSiR5p1F4f5XsGmtxSN")
-
+        
         let userNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Sound | UIUserNotificationType.Badge
         let notificationSettings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
         application.registerUserNotificationSettings(notificationSettings)
@@ -26,36 +27,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var user = SeatedUser.currentUser()
         if (user != nil) {
+            
+            //always update user from Parse
+            user.fetchInBackgroundWithBlock({ (result, error) -> Void in
+                if error != nil {
+                    //TODO:Alert about fetch latest user info
+                }
+            })
+            
             let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
             var rootNavigationVC:UINavigationController
             if user.isAdmin {
                 rootNavigationVC = storyBoard.instantiateViewControllerWithIdentifier("conversationListNavigationController") as UINavigationController
             }
             else {
-                
-                PFCloud.callFunctionInBackground("checkSubscriptionStatus", withParameters: ["objectId": user.objectId, "stripeCustomerId":user.stripeCustomerId, "subscriptionId":user.subscriptionId], block: { (result, error) -> Void in
-                    
-                    if error == nil {
-                        //always update the user from server incase fields change from Parse Cloud function checkSubscriptionStatus call
-                        user.fetchInBackgroundWithBlock({ (fetchedUser, error) -> Void in
-                            //do nothing as the call it self will update local current user
-                        })
-                        
-                        //check if user is still subscribed by checkign for stripCustomerId field
-                        if result != nil && (result as SeatedUser).stripeCustomerId == "" {
-                            UnsubscribedHelper.sharedInstance.userNoLongerSubscribed()
-                        }
-                    }
-                    else {
-                        //TODO: show error here
-                        println(error)
-                    }
-                    
-                })
-
                 rootNavigationVC = storyBoard.instantiateViewControllerWithIdentifier("conversationNavigationController") as UINavigationController
             }
-            
             self.window?.rootViewController = rootNavigationVC
         }
         
@@ -94,11 +81,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(application: UIApplication) {
         var currentInstallation = PFInstallation.currentInstallation()
         currentInstallation.badge = 0
-        currentInstallation.saveEventually()
+        currentInstallation.saveEventually(nil)
     }
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }    
+    }
+    
 }
 

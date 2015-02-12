@@ -16,7 +16,7 @@ class RootViewController: UIViewController, UIPageViewControllerDataSource {
     let introMainCopyOne = "No more chasing dinner reservations."
     let introMainCopyTwo = "Need some ideas?"
     let introMainCopyThree = "Give it a try!"
-    let introSubtextOne = "Send us a message and we will get your booked."
+    let introSubtextOne = "Send us a message and we will get your table booked."
     let introSubtextTwo = "We can provide suggestions based on cuisine and location, always here to help."
     let introSubtextThree = "Help with something other than dinner reservations? You might be pleasantly surprised."
     var pageViewController:UIPageViewController?

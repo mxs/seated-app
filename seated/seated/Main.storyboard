@@ -58,7 +58,7 @@
                                     <constraint firstAttribute="width" constant="100" id="aBR-I1-6FA"/>
                                     <constraint firstAttribute="height" constant="45" id="saq-xG-qfH"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                 <state key="normal" title="Sign Up">
                                     <color key="titleColor" red="0.99909788369999997" green="0.88069087270000002" blue="0.4531151652" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -953,8 +953,8 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="jqp-f9-rnY"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Start!">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <state key="normal" title="Join">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1307,9 +1307,9 @@
         <image name="transparent-seated-logo.png" width="86" height="80"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="lhI-Ys-E09"/>
+        <segue reference="6KX-g2-JJs"/>
         <segue reference="YXN-d6-azq"/>
-        <segue reference="hPp-1l-ybO"/>
-        <segue reference="VqZ-xE-plc"/>
         <segue reference="MZQ-7A-heR"/>
     </inferredMetricsTieBreakers>
 </document>

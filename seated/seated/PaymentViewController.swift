@@ -100,11 +100,11 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
                         SeatedUser.currentUser().saveEventually(nil)
                     }
                 })
-                SVProgressHUD.showSuccessWithStatus("Updated!")
+                SVProgressHUD.showSuccessWithStatus("Updated")
                 self.performSegueWithIdentifier("unwindToSettingsSegue", sender: self)
             }
             else {
-                //TODO: handle create Stripe customer and subscription error
+                SVProgressHUD.showErrorWithStatus("Update Card Failed")
             }
         }
     }

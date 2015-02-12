@@ -125,21 +125,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate, BlurBackground
                 }
             }
         }
-        else {
-            println("hi")
-        }
     }
     
     func resetPassword() {
-        if PFUser.requestPasswordResetForEmail(self.emailTextField.text) {
-            let alertController = UIAlertController(title: "Password Reset", message: "Instructions sent to email.", preferredStyle: .Alert)
-            let okAction = UIAlertAction(title: "OK", style: .Cancel) { (action) in
-                self.toggleMode()
+        if self.emailTextField.validate() {
+            if PFUser.requestPasswordResetForEmail(self.emailTextField.text) {
+                let alertController = UIAlertController(title: "Password Reset", message: "Instructions sent to email.", preferredStyle: .Alert)
+                let okAction = UIAlertAction(title: "OK", style: .Cancel) { (action) in
+                    self.toggleMode()
+                }
+                alertController.addAction(okAction)
+                self.presentViewController(alertController, animated: true, completion: nil)
             }
-            alertController.addAction(okAction)
-            self.presentViewController(alertController, animated: true, completion: nil)
         }
-        
     }
 
     

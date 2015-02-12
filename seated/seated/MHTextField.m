@@ -326,7 +326,7 @@
     }
     
     [self selectInputView:textField];
-    [self setInputAccessoryView:toolbar];
+//    [self setInputAccessoryView:toolbar];
     
     [self setToolbarCommand:NO];
 }

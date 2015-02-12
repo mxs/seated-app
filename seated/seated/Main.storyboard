@@ -934,7 +934,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8wl-gi-4Is" customClass="SeatedTextField" customModule="seated" customModuleProvider="target">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password (min 8 characters)" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8wl-gi-4Is" customClass="SeatedTextField" customModule="seated" customModuleProvider="target">
                                 <rect key="frame" x="16" y="180" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="join"/>
@@ -1307,9 +1307,9 @@
         <image name="transparent-seated-logo.png" width="86" height="80"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hPp-1l-ybO"/>
-        <segue reference="YXN-d6-azq"/>
-        <segue reference="lhI-Ys-E09"/>
         <segue reference="MZQ-7A-heR"/>
+        <segue reference="lhI-Ys-E09"/>
+        <segue reference="6KX-g2-JJs"/>
+        <segue reference="YXN-d6-azq"/>
     </inferredMetricsTieBreakers>
 </document>

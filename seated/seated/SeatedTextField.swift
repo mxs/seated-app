@@ -9,7 +9,7 @@
 import UIKit
 
 class SeatedTextField: MHTextField {
-
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.backgroundColor = UIColor.whiteColor()
@@ -26,13 +26,40 @@ class SeatedTextField: MHTextField {
     
     override func setNeedsAppearance(sender: AnyObject!) {
         var textField = sender as MHTextField
-        println(textField)
         if textField.isValid {
             self.textColor = UIColor.textColour()
+            self.attributedPlaceholder = self.placeHolder(textField.placeholder, colour: UIColor.validPlaceholderColour())
         }
         else {
-            self.textColor = UIColor.redColor()
+            if textField.isEmailField {
+                self.textColor = UIColor.redColor()
+                if textField.text == "" {
+                    self.attributedPlaceholder = self.placeHolder(textField.placeholder, colour:UIColor.invalidPlaceholderColour())
+                }
+            }
+            else if textField.required {
+                self.attributedPlaceholder = self.placeHolder(textField.placeholder, colour:UIColor.invalidPlaceholderColour())
+            }
         }
     }
+    
+    override func validate() -> Bool {
+        var valid = super.validate()
+        if valid {
+            if self.secureTextEntry {
+                return countElements(self.text) >= 8
+            }
+        }
+        return valid
+    }
+    
+    func placeHolder(placeHolder:String?, colour:UIColor) -> NSAttributedString {
+        if let placeHolder = placeholder {
+            return NSAttributedString(string: placeHolder, attributes: [NSForegroundColorAttributeName:colour])
+        }
+        else {
+            return NSAttributedString(string: "", attributes: [NSForegroundColorAttributeName:UIColor.validPlaceholderColour()])
+        }
 
+    }
 }

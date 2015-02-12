@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SeatedTextField: UITextField {
+class SeatedTextField: MHTextField {
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -22,6 +22,17 @@ class SeatedTextField: UITextField {
 
     override func editingRectForBounds(bounds: CGRect) -> CGRect {
         return textRectForBounds(bounds)
+    }
+    
+    override func setNeedsAppearance(sender: AnyObject!) {
+        var textField = sender as MHTextField
+        println(textField)
+        if textField.isValid {
+            self.textColor = UIColor.textColour()
+        }
+        else {
+            self.textColor = UIColor.redColor()
+        }
     }
 
 }

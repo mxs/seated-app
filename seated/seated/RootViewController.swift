@@ -13,34 +13,45 @@ class RootViewController: UIViewController, UIPageViewControllerDataSource {
     @IBOutlet weak var pageControl: UIPageControl!
     @IBOutlet weak var signupButton: UIButton!
     
-    let introMainCopyOne = "No more chasing dinner reservations."
-    let introMainCopyTwo = "Need some ideas?"
-    let introMainCopyThree = "Give it a try!"
-    let introSubtextOne = "Send us a message and we will get your table booked."
-    let introSubtextTwo = "We can provide suggestions based on cuisine and location, always here to help."
-    let introSubtextThree = "Help with something other than dinner reservations? You might be pleasantly surprised."
+    var introMainCopyOne = "No more chasing dinner reservations."
+    var introMainCopyTwo = "Need some ideas?"
+    var introMainCopyThree = "Try for free."
+    var introSubtextOne = "Send us a message and we will get your table booked."
+    var introSubtextTwo = "We can provide suggestions based on cuisine and location, always here to help."
+    var introSubtextThree = "No credit card required to try, $5 a month after first month, cancel anytime."
     var pageViewController:UIPageViewController?
     var introContentVCs: [IntroContentViewController]!
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.introContentVCs = self.createIntroContentViewControllers()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.pageControl.numberOfPages = self.introContentVCs.count
-        if let pageVC = self.pageViewController {
-            pageVC.setViewControllers([self.introContentVCs[0]], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
-        }
         
         self.signupButton.setTitleColor(UIColor.textColour(), forState: UIControlState.Normal)
         self.signupButton.setBackgroundImage(UIImage.imageWithColor(UIColor.primaryColour()), forState: UIControlState.Normal)
         self.signupButton.layer.cornerRadius = 5.0
         self.signupButton.layer.masksToBounds = true
 
+        let config = PFConfig.currentConfig()
+        if config["intro_one_copy"] != nil {
+            updateIntros(config)
+        }
+        self.introContentVCs = self.createIntroContentViewControllers()
+        self.pageControl.numberOfPages = self.introContentVCs.count
+        if let pageVC = self.pageViewController {
+            pageVC.setViewControllers([self.introContentVCs[0]], direction: UIPageViewControllerNavigationDirection.Forward, animated: true, completion: nil)
+        }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("configUpdated"), name: "ConfigUpdated", object: nil)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
     // MARK: - UIPageViewControllerDataSource
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
@@ -121,6 +132,31 @@ class RootViewController: UIViewController, UIPageViewControllerDataSource {
         UIGraphicsEndImageContext()
         let blurImage = screenshot.applyBlurWithRadius(30, tintColor: UIColor.whiteColor().colorWithAlphaComponent(0.2), saturationDeltaFactor: 1.5, maskImage: nil)
         return blurImage
+    }
+    
+    func updateIntros(config:PFConfig) {
+        self.introMainCopyOne = config["intro_one_copy"] as String
+        self.introSubtextOne = config["intro_one_subtext"] as String
+        self.introMainCopyTwo = config["intro_two_copy"] as String
+        self.introSubtextTwo = config["intro_two_subtext"] as String
+        self.introMainCopyThree = config["intro_three_copy"] as String
+        self.introSubtextThree = config["intro_three_subtext"] as String
+    }
+    
+    func configUpdated() {
+        let config = PFConfig.currentConfig()
+        self.updateIntros(config)
+        let introMainCopies = [self.introMainCopyOne, self.introMainCopyTwo, self.introMainCopyThree]
+        let introSubtexts = [self.introSubtextOne, self.introSubtextTwo, self.introSubtextThree]
+        for var i = 0; i < introMainCopies.count; i++ {
+            let mainCopy = introMainCopies[i]
+            let subtext = introSubtexts[i]
+            println(mainCopy)
+            var introContentVC = self.introContentVCs[i] as IntroContentViewController
+            introContentVC.introMainCopy = mainCopy
+            introContentVC.introSubText = subtext
+            introContentVC.updateLabels()
+        }
     }
 
 }

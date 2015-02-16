@@ -26,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerUserNotificationSettings(notificationSettings)
         application.registerForRemoteNotifications()
         
+        self.updateParseConfig()
+        
         var user = SeatedUser.currentUser()
         if (user != nil) {
             
@@ -89,6 +91,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func updateParseConfig() {
+        var defaults = NSUserDefaults.standardUserDefaults()
+        let lastConfigUpdate = defaults.doubleForKey("lastConfigUpdate")
+        let now = NSDate()
+        var needToUpdate = lastConfigUpdate == 0.0 //key doesn't exist yet, first time user
+        
+        if !needToUpdate {
+            let lastConfigUpdatedDate = NSDate(timeIntervalSince1970: lastConfigUpdate)
+            needToUpdate = now.hoursFrom(lastConfigUpdatedDate) >= 12
+        }
+        
+        if needToUpdate {
+            PFConfig.getConfigInBackgroundWithBlock({ (config, error) -> Void in
+                defaults.setDouble(now.timeIntervalSince1970, forKey: "lastConfigUpdate")
+                let notificationCentre = NSNotificationCenter.defaultCenter()
+                notificationCentre.postNotificationName("ConfigUpdated", object: config)
+            })
+        }
     }
     
 }

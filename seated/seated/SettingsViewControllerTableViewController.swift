@@ -18,10 +18,12 @@ class SettingsViewControllerTableViewController: UITableViewController {
     @IBOutlet weak var subscriptionButton: UIButton!
     
     var nextBillingDate:String!
+    var subscriptionPrice:String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Settings"
+        self.subscriptionPrice = PFConfig.currentConfig()["price"] as String
         
         if let subscription = SeatedUser.currentUser().subscription {
             let dateFormat = NSDateFormatter()
@@ -38,7 +40,14 @@ class SettingsViewControllerTableViewController: UITableViewController {
         self.subscriptionDescriptionLabel.hidden = SeatedUser.currentUser().isAdmin
         self.cardDetailsLabel.hidden = SeatedUser.currentUser().isAdmin
         self.nextBillingDateLabel.hidden = SeatedUser.currentUser().isAdmin
-        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("configUpdated"), name: "ConfigUpdated", object: nil)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     @IBAction func logout(sender: AnyObject) {
@@ -144,18 +153,18 @@ class SettingsViewControllerTableViewController: UITableViewController {
             self.subscriptionButton.setTitle("Reactivate Subscription", forState: UIControlState.Normal)
             self.cardDetailsLabel.text = "No pending charges"
             self.cardDetailsLabel.textColor = UIColor.blackColor()
-            self.subscriptionDescriptionLabel.text = "$5 monthly subscription (\(subscription.status))"
+            self.subscriptionDescriptionLabel.text = "$\(self.subscriptionPrice) monthly subscription (\(subscription.status))"
         }
         else if self.isServiceCancelled() {
             self.nextBillingDateLabel.text = "Service ends on \(self.nextBillingDate)"
             self.cardDetailsLabel.text = "No pending charges"
             self.cardDetailsLabel.textColor = UIColor.blackColor()
-            self.subscriptionDescriptionLabel.text = "$5 monthly subscription (cancelled)"
+            self.subscriptionDescriptionLabel.text = "$\(self.subscriptionPrice) monthly subscription (cancelled)"
         }
         else {
             self.nextBillingDateLabel.text = "Next charge on \(self.nextBillingDate)"
             self.subscriptionButton.setTitle("Cancel Subscription", forState: UIControlState.Normal)
-            self.subscriptionDescriptionLabel.text = "$5 monthly subscription (\(subscription.status))"
+            self.subscriptionDescriptionLabel.text = "$\(self.subscriptionPrice) monthly subscription (\(subscription.status))"
             self.updatePaymentRequired()
         }
         var indexSet = NSMutableIndexSet(index: 0)
@@ -185,6 +194,13 @@ class SettingsViewControllerTableViewController: UITableViewController {
             let params = ["subscription_status":subscription.status, "current_period_end":subscription.currentPeriodEnd.description, "messages_sent":count]
             Flurry.logEvent("Subscription_Canceled", withParameters:params)
         })
+    }
+    
+    func configUpdated() {
+        self.subscriptionPrice = PFConfig.currentConfig()["price"] as String
+        if let subscription = SeatedUser.currentUser().subscription {
+            self.updateSubscriptionStatusLabels(subscription)
+        }
     }
     
     //hides and unhides the payment details cell

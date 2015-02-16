@@ -23,10 +23,14 @@ class IntroContentViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
+    func updateLabels() {
+        if self.introMainCopyLabel != nil {
+            self.introMainCopyLabel.text = self.introMainCopy
+        }
+        
+        if self.introSubtextLabel != nil {
+            self.introSubtextLabel.text = self.introSubText
+        }
+    }
 }

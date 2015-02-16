@@ -178,7 +178,21 @@ class ConversationViewController: JSQMessagesViewController {
         self.conversationRef.updateChildValues(["lastMessageTime": self.kFirebaseServerValueTimestamp])
         incrementUnreadCount()
         sendPushNotification(text)
+        incrementUserMessageCount()
         finishSendingMessage()
+        Flurry.logEvent("Message_Sent")
+    }
+    
+    func incrementUserMessageCount() {
+        let messagesCountRef = Firebase(url: "https://seatedapp.firebaseio.com/users/\(self.stripeCustomerId)/messagescount")
+        messagesCountRef.runTransactionBlock { (currentData) -> FTransactionResult! in
+            var value = currentData.value as? Int
+            if value == nil {
+                value = 0
+            }
+            currentData.value = value! + 1
+            return FTransactionResult.successWithValue(currentData)
+        }
     }
     
     func sendPushNotification(message:String) {

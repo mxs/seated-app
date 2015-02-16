@@ -19,6 +19,7 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol {
     
     var backgroundImageView:UIImageView!
     var backgroundImage:UIImage?
+    var textFields:[SeatedTextField]?
 
     var blurredBackgroundImage:UIImage? {
         get {
@@ -35,12 +36,19 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol {
         self.view.addSubview(self.backgroundImageView)
         self.view.sendSubviewToBack(self.backgroundImageView)
         
-        self.passwordTextField.secureTextEntry = true
-        
         self.nextButton.setTitleColor(UIColor.textColour(), forState: UIControlState.Normal)
         self.nextButton.setBackgroundImage(UIImage.imageWithColor(UIColor.primaryColour()), forState: UIControlState.Normal)
         self.nextButton.layer.cornerRadius = 5.0
         self.nextButton.layer.masksToBounds = true
+        
+        self.firstNameTextField.required = true
+        self.lastNameTextField.required = true
+        self.emailTextField.required = true
+        self.emailTextField.isEmailField = true
+        self.passwordTextField.secureTextEntry = true
+        self.passwordTextField.required = true
+        
+        self.textFields = [self.firstNameTextField, self.lastNameTextField, self.emailTextField, self.passwordTextField]
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -66,17 +74,18 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol {
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
-    }
     
     func validateFormLocally() -> Bool {
+        for textField in self.textFields! {
+            if !textField.validate() {
+                return false
+            }
+        }
         return true
     }
     
     func checkIfUserAlreadyExists(newUser:SeatedUser) -> Void {
         SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Black)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("performSuccessSegue"), name: "SVProgressHUDDidDisappearNotification", object: nil)
         
         var query = PFUser.query()
         query.whereKey("email", equalTo: self.emailTextField.text)
@@ -86,7 +95,7 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol {
                     self.createStripeCustomerAndTrialSubscription(newUser)
                 }
                 else {
-                    //TOOD: show alert
+                    SVProgressHUD.showErrorWithStatus("Email Already Exists")
                 }
             }
         }
@@ -99,11 +108,13 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol {
     }
     
     func createStripeCustomerAndTrialSubscription(newUser:SeatedUser) -> Void {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("performSuccessSegue"), name: "SVProgressHUDDidDisappearNotification", object: nil)
+
         var params = ["email": newUser.email]
         
         PFCloud.callFunctionInBackground("createCustomerAndSubscribe", withParameters: params) { (result, error) -> Void in
             if error != nil {
-                //TODO: handle create Strip customer and subscription error
+                SVProgressHUD.showErrorWithStatus("Sign Up Failed")
             }
             else {
                 
@@ -125,9 +136,12 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol {
                         })
                         self.setUpPushNotification(newUser.stripeCustomerId)
                         self.createFirebaseUser(newUser)
+                        let eventParams = ["stripeId":newUser.stripeCustomerId]
+                        Flurry.setUserID(newUser.email)
+                        Flurry.logEvent("Signup_To_Trial", withParameters:eventParams)
                     }
                     else {
-                        //TODO: handle create Parse customer error
+                        SVProgressHUD.showErrorWithStatus("Sign Up Failed")
                     }
                 })
             }

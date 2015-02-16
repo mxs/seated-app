@@ -36,13 +36,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate, BlurBackground
         self.view.addSubview(self.backgroundImageView)
         self.view.sendSubviewToBack(self.backgroundImageView)
         
-        self.passwordTextField.secureTextEntry = true
-        self.passwordTextField.delegate = self
-
         self.loginButton.setTitleColor(UIColor.textColour(), forState: UIControlState.Normal)
         self.loginButton.setBackgroundImage(UIImage.imageWithColor(UIColor.primaryColour()), forState: UIControlState.Normal)
         self.loginButton.layer.cornerRadius = 5.0
         self.loginButton.layer.masksToBounds = true
+        
+        self.passwordTextField.secureTextEntry = true
+        self.passwordTextField.delegate = self
+        self.passwordTextField.required = true
+
+        self.emailTextField.required = true
+        self.emailTextField.isEmailField = true
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -79,48 +83,61 @@ class LoginViewController: UIViewController, UITextFieldDelegate, BlurBackground
     }
 
     func login() {
-        SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Black)
-        PFUser.logInWithUsernameInBackground(self.emailTextField.text, password: self.passwordTextField.text) { (user, error) -> Void in
-            if error == nil {
-                let loggedInUser = user as SeatedUser
-                
-                loggedInUser.pinInBackgroundWithBlock({ (success, error) -> Void in
+        if self.emailTextField.validate() && self.passwordTextField.validate() {
+            SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Black)
+            PFUser.logInWithUsernameInBackground(self.emailTextField.text, password: self.passwordTextField.text) { (user, error) -> Void in
+                if error == nil {
+                    let loggedInUser = user as SeatedUser
                     
-                })
-                
-                let currentInstallation = PFInstallation.currentInstallation()
-                if currentInstallation.channels == nil {
-                    currentInstallation.channels = ["global"]
-                }
-                currentInstallation.channels.append(loggedInUser.stripeCustomerId)
-                currentInstallation.saveEventually(nil)
-                
-                SVProgressHUD.dismiss()
-                
-                if loggedInUser.isAdmin {
-                    self.performSegueWithIdentifier("adminLoginSuccessSegue", sender: self)
+                    loggedInUser.pinInBackgroundWithBlock({ (success, error) -> Void in
+                        
+                    })
+                    
+                    let currentInstallation = PFInstallation.currentInstallation()
+                    if currentInstallation.channels == nil {
+                        currentInstallation.channels = ["global"]
+                    }
+                    currentInstallation.channels.append(loggedInUser.stripeCustomerId)
+                    currentInstallation.saveEventually(nil)
+                    
+                    SVProgressHUD.dismiss()
+                    
+                    if loggedInUser.isAdmin {
+                        self.performSegueWithIdentifier("adminLoginSuccessSegue", sender: self)
+                    }
+                    else {
+                        self.performSegueWithIdentifier("customerLoginSuccessSegue", sender: self)
+                    }
+                    
                 }
                 else {
-                    self.performSegueWithIdentifier("customerLoginSuccessSegue", sender: self)
+                    var errorMessage = ""
+                    println(error.code)
+                    switch error.code {
+                    case kPFErrorConnectionFailed:
+                        errorMessage = "Connection Failed"
+                    case kPFErrorObjectNotFound:
+                        errorMessage = "Incorrect Credentials"
+                    default:
+                        errorMessage = "Please Try Again"
+                    }
+                    SVProgressHUD.showErrorWithStatus(errorMessage)
                 }
-                
-            }
-            else {
-                //TODO: handle login fail error
             }
         }
     }
     
     func resetPassword() {
-        if PFUser.requestPasswordResetForEmail(self.emailTextField.text) {
-            let alertController = UIAlertController(title: "Password Reset", message: "Instructions sent to email.", preferredStyle: .Alert)
-            let okAction = UIAlertAction(title: "OK", style: .Cancel) { (action) in
-                self.toggleMode()
+        if self.emailTextField.validate() {
+            if PFUser.requestPasswordResetForEmail(self.emailTextField.text) {
+                let alertController = UIAlertController(title: "Password Reset", message: "Instructions sent to email.", preferredStyle: .Alert)
+                let okAction = UIAlertAction(title: "OK", style: .Cancel) { (action) in
+                    self.toggleMode()
+                }
+                alertController.addAction(okAction)
+                self.presentViewController(alertController, animated: true, completion: nil)
             }
-            alertController.addAction(okAction)
-            self.presentViewController(alertController, animated: true, completion: nil)
         }
-        
     }
 
     

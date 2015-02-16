@@ -38,7 +38,7 @@ class SubscriptionHelper: NSObject {
         query.fromLocalDatastore()
         query.includeKey("subscription")
         query.getObjectInBackgroundWithId(SeatedUser.currentUser().objectId, block: { (fetchedUser, error) -> Void in
-            if error != nil && error.code == 120 {
+            if error != nil && error.code == kPFErrorCacheMiss {
                 //subscription object is not in the fetched and not pinned.
                 SeatedUser.currentUser().subscription?.fetchInBackgroundWithBlock({ (fetchedSubscription, error) -> Void in
                     fetchedSubscription.pinInBackgroundWithBlock() {(success, error) in
@@ -54,6 +54,8 @@ class SubscriptionHelper: NSObject {
                         if error == nil {
                             subscription.update(subscriptionData as NSDictionary)
                             subscription.saveEventually(nil)
+                            let params = ["subscription_status":subscription.status]
+                            Flurry.logEvent("Retrieved_Subscription", withParameters:params)
                             self.checkTrialValidity(user, presentingViewController: presentingViewController)
                         }
                         else {

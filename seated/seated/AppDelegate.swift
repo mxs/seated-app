@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.enableLocalDatastore()
         Parse.setApplicationId("m8LgO3jYklu06JwdSXqwDh0WpC4hQXei4iDRl5CO", clientKey: "Yz7k5c4YGQ0SGtCM0xFVVNJXwmor0E5c8x6tGh3V")
         Stripe.setDefaultPublishableKey("pk_test_p4io3YSiR5p1F4f5XsGmtxSN")
+        Flurry.startSession("DR4SFFSQVTN3BXXST3W7")
         
         let userNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Sound | UIUserNotificationType.Badge
         let notificationSettings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
@@ -27,6 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var user = SeatedUser.currentUser()
         if (user != nil) {
+            
+            Flurry.setUserID(user.email)
             
             //always update user from Parse
             user.fetchInBackgroundWithBlock({ (result, error) -> Void in

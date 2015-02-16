@@ -99,6 +99,10 @@ class RootViewController: UIViewController, UIPageViewControllerDataSource {
             var destVC = segue.destinationViewController as? BlurBackgroundProtocol
             destVC?.blurredBackgroundImage = takeSnapshotAndBlur(self.view)
         }
+        
+        if segue.identifier == "signupSegue" {
+            Flurry.logEvent("Signup_Pressed")
+        }
     }
     
     //Only used to unwind segues to this view controller

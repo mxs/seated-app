@@ -136,6 +136,9 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol {
                         })
                         self.setUpPushNotification(newUser.stripeCustomerId)
                         self.createFirebaseUser(newUser)
+                        let eventParams = ["stripeId":newUser.stripeCustomerId]
+                        Flurry.setUserID(newUser.email)
+                        Flurry.logEvent("Signup_To_Trial", withParameters:eventParams)
                     }
                     else {
                         SVProgressHUD.showErrorWithStatus("Sign Up Failed")

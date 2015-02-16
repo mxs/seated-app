@@ -51,4 +51,12 @@ extension UIColor {
         return UIColor(rgb: "#ffdb61")
     }
     
+    class func invalidPlaceholderColour() -> UIColor {
+        return UIColor(rgb: "#ffd4d6")
+    }
+    
+    class func validPlaceholderColour() -> UIColor {
+        return UIColor(rgb: "#c1c1c7")
+    }
+    
 }

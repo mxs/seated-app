@@ -71,7 +71,7 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
             
             STPAPIClient.sharedClient().createTokenWithCard(card, completion: { (token, error) -> Void in
                 if error != nil {
-                    //TODO: handle create Strip token with card error
+                    SVProgressHUD.showErrorWithStatus("Update Card Failed")
                 }
                 else {
                     if self.renewSubscription {
@@ -100,11 +100,22 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
                         SeatedUser.currentUser().saveEventually(nil)
                     }
                 })
-                SVProgressHUD.showSuccessWithStatus("Updated!")
+                
+                if let subscription = SeatedUser.currentUser().subscription {
+                    if let cardId = SeatedUser.currentUser().cardId {
+                        Flurry.logEvent("Card_Updated")
+                    }
+                    else {
+                        let params = ["days_until_trial_end": String(subscription.daysUntilTrialEnd)]
+                        Flurry.logEvent("Card_Added", withParameters:params)
+                    }
+                }
+
+                SVProgressHUD.showSuccessWithStatus("Updated")
                 self.performSegueWithIdentifier("unwindToSettingsSegue", sender: self)
             }
             else {
-                //TODO: handle create Stripe customer and subscription error
+                SVProgressHUD.showErrorWithStatus("Update Card Failed")
             }
         }
     }
@@ -126,6 +137,7 @@ class PaymentViewController: UIViewController, PTKViewDelegate {
                 user.cardLabel = subscriptionData["card_label"] as? String
                 user.saveEventually(nil)
 
+                Flurry.logEvent("Renewed_Subscription")
                 SVProgressHUD.showSuccessWithStatus("Subscription Renewed")
                 self.dismissViewControllerAnimated(true, completion: nil)
             }

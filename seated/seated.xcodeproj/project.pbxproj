@@ -27,6 +27,7 @@
 		A6A240071A55262400E2327F /* PaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A240061A55262400E2327F /* PaymentViewController.swift */; };
 		A6A2400B1A58004E00E2327F /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2400A1A58004E00E2327F /* ConversationViewController.swift */; };
 		A6CB38881A8B7475004818EC /* TermPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CB38871A8B7475004818EC /* TermPolicyViewController.swift */; };
+		A6CB388D1A8C6AC1004818EC /* MHTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CB388C1A8C6AC1004818EC /* MHTextField.m */; };
 		A6CFF6031A53F4B900BBD8D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6CFF6021A53F4B900BBD8D3 /* Main.storyboard */; };
 		A6CFF6051A53FB2E00BBD8D3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CFF6041A53FB2E00BBD8D3 /* RootViewController.swift */; };
 		A6CFF60E1A54CCED00BBD8D3 /* IntroContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CFF60C1A54CCED00BBD8D3 /* IntroContentViewController.swift */; };
@@ -77,6 +78,8 @@
 		A6A240061A55262400E2327F /* PaymentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentViewController.swift; sourceTree = "<group>"; };
 		A6A2400A1A58004E00E2327F /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		A6CB38871A8B7475004818EC /* TermPolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermPolicyViewController.swift; sourceTree = "<group>"; };
+		A6CB388B1A8C6AC1004818EC /* MHTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHTextField.h; sourceTree = "<group>"; };
+		A6CB388C1A8C6AC1004818EC /* MHTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHTextField.m; sourceTree = "<group>"; };
 		A6CFF6021A53F4B900BBD8D3 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A6CFF6041A53FB2E00BBD8D3 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		A6CFF60C1A54CCED00BBD8D3 /* IntroContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroContentViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +175,7 @@
 		A660769A1A4913AE0039B61D /* seated */ = {
 			isa = PBXGroup;
 			children = (
+				A6CB388A1A8C6AA1004818EC /* MHTextField */,
 				A62BCAF01A838FBF008AD5DE /* Parse Models */,
 				A6F161911A821C230055359B /* Extensions */,
 				A6F1618B1A809B7C0055359B /* Categories */,
@@ -242,6 +246,15 @@
 			);
 			name = Assets;
 			path = ../../assets;
+			sourceTree = "<group>";
+		};
+		A6CB388A1A8C6AA1004818EC /* MHTextField */ = {
+			isa = PBXGroup;
+			children = (
+				A6CB388B1A8C6AC1004818EC /* MHTextField.h */,
+				A6CB388C1A8C6AC1004818EC /* MHTextField.m */,
+			);
+			name = MHTextField;
 			sourceTree = "<group>";
 		};
 		A6F1618B1A809B7C0055359B /* Categories */ = {
@@ -420,6 +433,7 @@
 				A62BCAF21A838FE3008AD5DE /* Subscription.swift in Sources */,
 				A652E6331A68BE28003F503F /* ConversationListViewController.swift in Sources */,
 				A652E6371A6CD6F4003F503F /* ConversationTableViewCell.swift in Sources */,
+				A6CB388D1A8C6AC1004818EC /* MHTextField.m in Sources */,
 				A6CFF60E1A54CCED00BBD8D3 /* IntroContentViewController.swift in Sources */,
 				A6CFF6051A53FB2E00BBD8D3 /* RootViewController.swift in Sources */,
 				A652E6351A6C7C65003F503F /* Conversation.swift in Sources */,

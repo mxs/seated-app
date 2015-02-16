@@ -102,6 +102,7 @@ class SettingsViewControllerTableViewController: UITableViewController {
                     SVProgressHUD.showSuccessWithStatus("Subscription Cancelled")
                     subscription.cancelAtPeriodEnd = true
                     self.updateSubscriptionStatusLabels(subscription)
+                    self.trackCancellationInFlurry(subscription)
                 }
                 else {
                     SVProgressHUD.showErrorWithStatus("Cancellation Failed")
@@ -121,6 +122,8 @@ class SettingsViewControllerTableViewController: UITableViewController {
             SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Black)
             PFCloud.callFunctionInBackground("reactivateTrialSubscription", withParameters:params) { (result, error) in
                 if error == nil {
+                    let params = ["days_until_trial_end":subscription.daysUntilTrialEnd]
+                    Flurry.logEvent("Reactivated_Trial", withParameters:params)
                     SVProgressHUD.showSuccessWithStatus("Trial Subscription Reactivated")
                     subscription.cancelAtPeriodEnd = false
                     self.updateSubscriptionStatusLabels(subscription)
@@ -173,6 +176,15 @@ class SettingsViewControllerTableViewController: UITableViewController {
             return subscription.cancelAtPeriodEnd && subscription.status == "active"
         }
         return false
+    }
+    
+    func trackCancellationInFlurry(subscription:Subscription) {
+        let messagesCountRef = Firebase(url: "https://seatedapp.firebaseio.com/users/\(SeatedUser.currentUser().stripeCustomerId)/messagescount")
+        messagesCountRef.observeSingleEventOfType(FEventType.Value, withBlock: { (snapshot) -> Void in
+            let count = String(snapshot.value as Int)
+            let params = ["subscription_status":subscription.status, "current_period_end":subscription.currentPeriodEnd.description, "messages_sent":count]
+            Flurry.logEvent("Subscription_Canceled", withParameters:params)
+        })
     }
     
     //hides and unhides the payment details cell

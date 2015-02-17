@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		8EED7B460EA708EA1A8923B8 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2870EDA7E24441B6BE243479 /* libPods.a */; };
+		A611899D1A92B339006490C3 /* FirebaseExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A611899C1A92B339006490C3 /* FirebaseExtension.swift */; };
 		A613E6091A64E4E90089F62D /* SubscriptionHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A613E6081A64E4E90089F62D /* SubscriptionHelper.swift */; };
 		A62BCAF21A838FE3008AD5DE /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = A62BCAF11A838FE3008AD5DE /* Subscription.swift */; };
 		A652E6331A68BE28003F503F /* ConversationListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A652E6321A68BE28003F503F /* ConversationListViewController.swift */; };
@@ -54,6 +55,7 @@
 /* Begin PBXFileReference section */
 		237050A84A16FE74DB9A5323 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "../Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		2870EDA7E24441B6BE243479 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		A611899C1A92B339006490C3 /* FirebaseExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseExtension.swift; sourceTree = "<group>"; };
 		A613E6081A64E4E90089F62D /* SubscriptionHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionHelper.swift; sourceTree = "<group>"; };
 		A62BCAF11A838FE3008AD5DE /* Subscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
 		A652E6321A68BE28003F503F /* ConversationListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationListViewController.swift; sourceTree = "<group>"; };
@@ -271,6 +273,7 @@
 			children = (
 				A691A9951A7F6CEB0037CCF1 /* UIColorExtension.swift */,
 				A6F161921A821C3A0055359B /* UIImageExtension.swift */,
+				A611899C1A92B339006490C3 /* FirebaseExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -434,6 +437,7 @@
 				A652E6331A68BE28003F503F /* ConversationListViewController.swift in Sources */,
 				A652E6371A6CD6F4003F503F /* ConversationTableViewCell.swift in Sources */,
 				A6CB388D1A8C6AC1004818EC /* MHTextField.m in Sources */,
+				A611899D1A92B339006490C3 /* FirebaseExtension.swift in Sources */,
 				A6CFF60E1A54CCED00BBD8D3 /* IntroContentViewController.swift in Sources */,
 				A6CFF6051A53FB2E00BBD8D3 /* RootViewController.swift in Sources */,
 				A652E6351A6C7C65003F503F /* Conversation.swift in Sources */,
@@ -563,6 +567,7 @@
 				INFOPLIST_FILE = seated/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8f626f10-fec8-4fd8-93cc-ea64c5eb0565";
 				SWIFT_OBJC_BRIDGING_HEADER = "seated/seated-Bridging-Header.h";
@@ -586,6 +591,7 @@
 				INFOPLIST_FILE = seated/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "-DRELEASE";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "8f626f10-fec8-4fd8-93cc-ea64c5eb0565";
 				SWIFT_OBJC_BRIDGING_HEADER = "seated/seated-Bridging-Header.h";

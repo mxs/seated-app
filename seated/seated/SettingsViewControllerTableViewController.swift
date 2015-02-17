@@ -56,7 +56,7 @@ class SettingsViewControllerTableViewController: UITableViewController {
         let yesAction = UIAlertAction(title: "Log out", style: .Default) { (action) -> Void in
             SeatedUser.currentUser().unpin()
             PFUser.logOut()
-            Firebase(url: "https://seatedapp.firebaseio.com/").unauth()
+            Firebase(url: "https://\(Firebase.applicationName).firebaseio.com/").unauth()
             let storyBoard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
             let rootVC = storyBoard.instantiateInitialViewController() as UIViewController
             self.presentViewController(rootVC, animated: true, completion: nil)
@@ -188,7 +188,7 @@ class SettingsViewControllerTableViewController: UITableViewController {
     }
     
     func trackCancellationInFlurry(subscription:Subscription) {
-        let messagesCountRef = Firebase(url: "https://seatedapp.firebaseio.com/users/\(SeatedUser.currentUser().stripeCustomerId)/messagescount")
+        let messagesCountRef = Firebase(url: "https://\(Firebase.applicationName).firebaseio.com/users/\(SeatedUser.currentUser().stripeCustomerId)/messagescount")
         messagesCountRef.observeSingleEventOfType(FEventType.Value, withBlock: { (snapshot) -> Void in
             let count = String(snapshot.value as Int)
             let params = ["subscription_status":subscription.status, "current_period_end":subscription.currentPeriodEnd.description, "messages_sent":count]

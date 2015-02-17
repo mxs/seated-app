@@ -15,11 +15,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-
+        
         Parse.enableLocalDatastore()
         Parse.setApplicationId("m8LgO3jYklu06JwdSXqwDh0WpC4hQXei4iDRl5CO", clientKey: "Yz7k5c4YGQ0SGtCM0xFVVNJXwmor0E5c8x6tGh3V")
-        Stripe.setDefaultPublishableKey("pk_test_p4io3YSiR5p1F4f5XsGmtxSN")
-        Flurry.startSession("DR4SFFSQVTN3BXXST3W7")
+
+        #if DEBUG
+            Parse.setApplicationId("m8LgO3jYklu06JwdSXqwDh0WpC4hQXei4iDRl5CO", clientKey: "Yz7k5c4YGQ0SGtCM0xFVVNJXwmor0E5c8x6tGh3V")
+            Stripe.setDefaultPublishableKey("pk_test_p4io3YSiR5p1F4f5XsGmtxSN")
+            Flurry.startSession("DR4SFFSQVTN3BXXST3W7")
+        #elseif RELEASE
+            Parse.setApplicationId("rxecDiR7OD7gOBJTOlvqZpRif9WCdpV26o5g0l0N", clientKey: "UqeWgrFXMX0mOCx9tyFJnG3TLRt2KzplrZmy1I6x")
+            Stripe.setDefaultPublishableKey("pk_live_8y9cIkAmDim9L6Pz5mI56Gvz")
+            Flurry.startSession("F8KJYS9CXYNSBJRPY4VK")
+        #endif
         
         let userNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Sound | UIUserNotificationType.Badge
         let notificationSettings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)

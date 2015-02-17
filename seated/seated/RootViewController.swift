@@ -151,7 +151,6 @@ class RootViewController: UIViewController, UIPageViewControllerDataSource {
         for var i = 0; i < introMainCopies.count; i++ {
             let mainCopy = introMainCopies[i]
             let subtext = introSubtexts[i]
-            println(mainCopy)
             var introContentVC = self.introContentVCs[i] as IntroContentViewController
             introContentVC.introMainCopy = mainCopy
             introContentVC.introSubText = subtext

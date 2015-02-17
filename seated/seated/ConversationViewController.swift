@@ -79,7 +79,7 @@ class ConversationViewController: JSQMessagesViewController {
     
     // Sets up new user or starts listening to messages in current conversations
     func setupFirebase() -> Void {
-        let userConversationsRef = Firebase(url:"https://seatedapp.firebaseio.com/users/\(self.stripeCustomerId)/conversations")
+        let userConversationsRef = Firebase(url:"https://\(Firebase.applicationName).firebaseio.com/users/\(self.stripeCustomerId)/conversations")
         let authData = userConversationsRef.authData
         
         if authData == nil {
@@ -104,7 +104,7 @@ class ConversationViewController: JSQMessagesViewController {
                     if self.conversationId == nil && !SeatedUser.currentUser().isAdmin {
                         self.conversationId = (snapshot.value as NSDictionary).allKeys[0] as String
                     }
-                    self.conversationRef = Firebase(url: "https://seatedapp.firebaseio.com/conversations/\(self.conversationId)")
+                    self.conversationRef = Firebase(url: "https://\(Firebase.applicationName).firebaseio.com/conversations/\(self.conversationId)")
                     self.observeMessagesForConversation(self.conversationId)
                 }
                 else {
@@ -120,10 +120,10 @@ class ConversationViewController: JSQMessagesViewController {
         
         self.conversationId = self.generateConversationId(seatbotId)
         userConversationsRef.childByAppendingPath(self.conversationId).setValue(true)
-        let seatbotConversationRef = Firebase(url: "https://seatedapp.firebaseio.com/users/\(self.seatbotId)/conversations")
+        let seatbotConversationRef = Firebase(url: "https://\(Firebase.applicationName).firebaseio.com/users/\(self.seatbotId)/conversations")
         seatbotConversationRef.childByAppendingPath(self.conversationId).setValue(true)
         
-        self.conversationRef = Firebase(url: "https://seatedapp.firebaseio.com/conversations/\(self.conversationId)")
+        self.conversationRef = Firebase(url: "https://\(Firebase.applicationName).firebaseio.com/conversations/\(self.conversationId)")
         conversationRef.childByAppendingPath("/title").setValue(SeatedUser.currentUser().displayName)
         conversationRef.childByAppendingPath("/lastMessage").setValue(self.welcomeMessage)
         conversationRef.childByAppendingPath("/lastMessageTime").setValue(self.kFirebaseServerValueTimestamp)
@@ -140,7 +140,7 @@ class ConversationViewController: JSQMessagesViewController {
 
     
     func observeMessagesForConversation(conversationId:String) -> Firebase {
-        self.messagesRef = Firebase(url: "https://seatedapp.firebaseio.com/messages/\(conversationId)")
+        self.messagesRef = Firebase(url: "https://\(Firebase.applicationName).firebaseio.com/messages/\(conversationId)")
         self.messagesRef.observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) -> Void in
             let senderId = snapshot.value["sender"] as String
             let senderDisplayName = snapshot.value["senderDisplayName"] as String
@@ -156,7 +156,7 @@ class ConversationViewController: JSQMessagesViewController {
     }
     
     func observeUnreadCount() {
-        self.unreadCountRef = Firebase(url:"https://seatedapp.firebaseio.com/conversations/\(self.conversationId)/participants/\(self.stripeCustomerId)/unread-count")
+        self.unreadCountRef = Firebase(url:"https://\(Firebase.applicationName).firebaseio.com/conversations/\(self.conversationId)/participants/\(self.stripeCustomerId)/unread-count")
         self.unreadCountRef.observeEventType(FEventType.Value, withBlock: { (snapshot) -> Void in
             
             //only clear if current view is the top view and count is greater than zero
@@ -184,7 +184,7 @@ class ConversationViewController: JSQMessagesViewController {
     }
     
     func incrementUserMessageCount() {
-        let messagesCountRef = Firebase(url: "https://seatedapp.firebaseio.com/users/\(self.stripeCustomerId)/messagescount")
+        let messagesCountRef = Firebase(url: "https://\(Firebase.applicationName).firebaseio.com/users/\(self.stripeCustomerId)/messagescount")
         messagesCountRef.runTransactionBlock { (currentData) -> FTransactionResult! in
             var value = currentData.value as? Int
             if value == nil {

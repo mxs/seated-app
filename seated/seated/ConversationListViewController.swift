@@ -27,7 +27,7 @@ class ConversationListViewController: UITableViewController {
 
         Firebase.setOption("persistence", to: true)
         
-        self.conversationsRef = Firebase(url: "https://seatedapp.firebaseio.com/users/\(SeatedUser.currentUser().stripeCustomerId)/conversations")
+        self.conversationsRef = Firebase(url: "https://\(Firebase.applicationName).firebaseio.com/users/\(SeatedUser.currentUser().stripeCustomerId)/conversations")
         
         let authData = self.conversationsRef.authData
         if authData == nil {
@@ -58,7 +58,7 @@ class ConversationListViewController: UITableViewController {
     }
 
     func getConversation(conversationId:String) -> Void {
-        let conversationRef = Firebase(url: "https://seatedapp.firebaseio.com/conversations/\(conversationId)")
+        let conversationRef = Firebase(url: "https://\(Firebase.applicationName).firebaseio.com/conversations/\(conversationId)")
         conversationRef.observeEventType(FEventType.Value, withBlock: { (snapshot) -> Void in
             if snapshot.hasChildren() {
                 let title = snapshot.value["title"] as String

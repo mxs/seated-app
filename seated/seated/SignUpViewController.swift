@@ -149,7 +149,7 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol {
     }
     
     func createFirebaseUser(user:SeatedUser) -> Void {
-        let userRef = Firebase(url:"https://seatedapp.firebaseio.com/users/\(user.stripeCustomerId)")
+        let userRef = Firebase(url:"https://\(Firebase.applicationName).firebaseio.com/users/\(user.stripeCustomerId)")
         let userValues = [
             "email":user.email,
             "firstName":user["firstName"],
@@ -161,6 +161,9 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol {
                 if error == nil {
                     userRef.setValue(userValues)
                     SVProgressHUD.showSuccessWithStatus("You're In!")
+                }
+                else {
+                    println(error)
                 }
             })
         }

@@ -597,7 +597,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DRELEASE";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0f0cdffc-5804-4920-9c65-78a0e578320a";
+				PROVISIONING_PROFILE = "6f6901e8-494e-4c89-9325-e088d86e83f9";
 				SWIFT_OBJC_BRIDGING_HEADER = "seated/seated-Bridging-Header.h";
 			};
 			name = Release;

@@ -17,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         Parse.enableLocalDatastore()
-        Parse.setApplicationId("m8LgO3jYklu06JwdSXqwDh0WpC4hQXei4iDRl5CO", clientKey: "Yz7k5c4YGQ0SGtCM0xFVVNJXwmor0E5c8x6tGh3V")
 
         #if DEBUG
             Parse.setApplicationId("m8LgO3jYklu06JwdSXqwDh0WpC4hQXei4iDRl5CO", clientKey: "Yz7k5c4YGQ0SGtCM0xFVVNJXwmor0E5c8x6tGh3V")
@@ -73,6 +72,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         currentInstallation.saveInBackgroundWithBlock { (success, error) -> Void in
             if error != nil {
                 //TODO: handle error
+                println("can't save installation error: \(error)")
             }
         }
     }

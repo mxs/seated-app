@@ -203,7 +203,7 @@ class ConversationViewController: JSQMessagesViewController {
                     if participant != self.stripeCustomerId {
                         var push = PFPush()
                         push.setChannel(participant)
-                        push.setData(["alert":message, "badge":"Increment"])
+                        push.setData(["alert":message, "badge":"Increment", "sound":"clink.caf"])
                         push.sendPushInBackgroundWithBlock { (success, error) -> Void in
                             //success
                         }

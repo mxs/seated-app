@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-class SignUpViewController: UIViewController, BlurBackgroundProtocol {
+class SignUpViewController: UIViewController, BlurBackgroundProtocol, UITextFieldDelegate {
 
     @IBOutlet weak var firstNameTextField: SeatedTextField!
     @IBOutlet weak var lastNameTextField: SeatedTextField!
@@ -47,6 +47,7 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol {
         self.emailTextField.isEmailField = true
         self.passwordTextField.secureTextEntry = true
         self.passwordTextField.required = true
+        self.passwordTextField.delegate = self
         
         self.textFields = [self.firstNameTextField, self.lastNameTextField, self.emailTextField, self.passwordTextField]
     }
@@ -181,7 +182,12 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol {
         else {
             currentInstallation.channels = ["global"]
         }
-        currentInstallation.saveEventually(nil)
+        currentInstallation.saveInBackgroundWithBlock { (success, error) -> Void in
+            if error != nil {
+                currentInstallation.saveEventually(nil)
+            }
+        }
+
     }
     
     func performSuccessSegue() {
@@ -189,4 +195,10 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol {
         self.performSegueWithIdentifier("signupCompleteSegue", sender: self)
     }
     
+    //MARK: UITextFieldDelegate
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.validateSignup(self)
+        return false
+    }
+
 }

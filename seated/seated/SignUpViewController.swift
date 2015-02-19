@@ -111,7 +111,7 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol, UITextFiel
     func createStripeCustomerAndTrialSubscription(newUser:SeatedUser) -> Void {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("performSuccessSegue"), name: "SVProgressHUDDidDisappearNotification", object: nil)
 
-        var params = ["email": newUser.email]
+        var params = ["email": newUser.email, "first_name":newUser.firstName, "last_name":newUser.lastName]
         
         PFCloud.callFunctionInBackground("createCustomerAndSubscribe", withParameters: params) { (result, error) -> Void in
             if error != nil {

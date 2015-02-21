@@ -1,0 +1,18 @@
+{
+    "applications": {
+        "_default": {
+            "link": "seated-dev"
+        }, 
+        "seated-dev": {
+            "applicationId": "m8LgO3jYklu06JwdSXqwDh0WpC4hQXei4iDRl5CO", 
+            "masterKey": "KlRC0njEYIUDJW5Ygrceoy41YsCosRaf7ncbePxt"
+        }, 
+        "seated-prod": {
+            "applicationId": "rxecDiR7OD7gOBJTOlvqZpRif9WCdpV26o5g0l0N", 
+            "masterKey": "3Pf6vnj4FFydq52q6MsAMRjvwWfOtAdwlwxsz4Kw"
+        }
+    }, 
+    "global": {
+        "parseVersion": "1.3.3"
+    }
+}

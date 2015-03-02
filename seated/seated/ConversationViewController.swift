@@ -14,7 +14,7 @@ class ConversationViewController: JSQMessagesViewController {
     let seatbotId = "seatbot"
     let welcomeMessage = "Hi there, welcome to seated!"
     
-    var stripeCustomerId:String!
+    var user:SeatedUser!
     var conversationId:String!
     var messagesRef:Firebase!
     var conversationRef:Firebase!
@@ -35,8 +35,8 @@ class ConversationViewController: JSQMessagesViewController {
         
         Firebase.setOption("persistence", to: true)
         
-        self.stripeCustomerId = SeatedUser.currentUser().stripeCustomerId
-        if self.conversation != nil { //admin mode
+        self.user = SeatedUser.currentUser()
+        if self.user.isAdmin {
             self.title = self.conversation?.title
             self.conversationId = self.conversation?.id
             self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero
@@ -53,16 +53,12 @@ class ConversationViewController: JSQMessagesViewController {
         self.outgoingMessageBubbleImage = JSQMessagesBubbleImageFactory().outgoingMessagesBubbleImageWithColor(UIColor.primaryColour())
         self.incomingMessageBubbleImage = JSQMessagesBubbleImageFactory().incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
         self.inputToolbar.contentView.leftBarButtonItem = nil
-        self.senderId = self.stripeCustomerId
+        self.senderId = self.user.email
         self.senderDisplayName = SeatedUser.currentUser().displayName
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.jsq_defaultTypingIndicatorImage(), style: UIBarButtonItemStyle.Bordered, target: self, action: "showSettings")
 
         self.setupFirebase()
         
-        if !SeatedUser.currentUser().isAdmin {
-            SubscriptionHelper.sharedInstance.fetchStripeSubscription(self)
-        }
-
     }
     
     override func didReceiveMemoryWarning() {
@@ -79,7 +75,7 @@ class ConversationViewController: JSQMessagesViewController {
     
     // Sets up new user or starts listening to messages in current conversations
     func setupFirebase() -> Void {
-        let userConversationsRef = Firebase(url:"https://\(Firebase.applicationName).firebaseio.com/users/\(self.stripeCustomerId)/conversations")
+        let userConversationsRef = Firebase(url:"https://\(Firebase.applicationName).firebaseio.com/users/\(self.user.firebaseId)/conversations")
         let authData = userConversationsRef.authData
         
         if authData == nil {
@@ -127,9 +123,8 @@ class ConversationViewController: JSQMessagesViewController {
         conversationRef.childByAppendingPath("/title").setValue(SeatedUser.currentUser().displayName)
         conversationRef.childByAppendingPath("/lastMessage").setValue(self.welcomeMessage)
         conversationRef.childByAppendingPath("/lastMessageTime").setValue(self.kFirebaseServerValueTimestamp)
-        conversationRef.childByAppendingPath("/participants/\(self.stripeCustomerId)").setValue(["unread-count":0])
+        conversationRef.childByAppendingPath("/participants/\(self.user.firebaseId)").setValue(["unread-count":0])
         conversationRef.childByAppendingPath("/participants/\(self.seatbotId)").setValue(["unread-count":0])
-        
         
         //sets self.messagesRef
         self.observeMessagesForConversation(self.conversationId)
@@ -156,7 +151,7 @@ class ConversationViewController: JSQMessagesViewController {
     }
     
     func observeUnreadCount() {
-        self.unreadCountRef = Firebase(url:"https://\(Firebase.applicationName).firebaseio.com/conversations/\(self.conversationId)/participants/\(self.stripeCustomerId)/unread-count")
+        self.unreadCountRef = Firebase(url:"https://\(Firebase.applicationName).firebaseio.com/conversations/\(self.conversationId)/participants/\(self.user.firebaseId)/unread-count")
         self.unreadCountRef.observeEventType(FEventType.Value, withBlock: { (snapshot) -> Void in
             
             //only clear if current view is the top view and count is greater than zero
@@ -169,7 +164,7 @@ class ConversationViewController: JSQMessagesViewController {
     }
     
     func generateConversationId(otherUserId:String) -> String {
-        return self.stripeCustomerId < otherUserId ? "\(self.stripeCustomerId)-\(otherUserId)" : "\(otherUserId)-\(self.stripeCustomerId)"
+        return self.user.firebaseId < otherUserId ? "\(self.user.firebaseId)-\(otherUserId)" : "\(otherUserId)-\(self.user.firebaseId)"
     }
     
     func sendMessage(senderId:String!, text:String!, senderDisplayName:String!) -> Void {
@@ -184,7 +179,7 @@ class ConversationViewController: JSQMessagesViewController {
     }
     
     func incrementUserMessageCount() {
-        let messagesCountRef = Firebase(url: "https://\(Firebase.applicationName).firebaseio.com/users/\(self.stripeCustomerId)/messagescount")
+        let messagesCountRef = Firebase(url: "https://\(Firebase.applicationName).firebaseio.com/users/\(self.user.firebaseId)/messagescount")
         messagesCountRef.runTransactionBlock { (currentData) -> FTransactionResult! in
             var value = currentData.value as? Int
             if value == nil {
@@ -200,7 +195,7 @@ class ConversationViewController: JSQMessagesViewController {
             if snapshot.hasChildren() {
                 let participants = snapshot.value.allKeys as [String]
                 for participant in participants {
-                    if participant != self.stripeCustomerId {
+                    if participant != self.user.objectId {
                         var push = PFPush()
                         push.setChannel(participant)
                         push.setData(["alert":message, "badge":"Increment", "sound":"clink.caf"])
@@ -218,9 +213,9 @@ class ConversationViewController: JSQMessagesViewController {
     func incrementUnreadCount() -> Void {
         var recipientId:String?
         if self.conversation != nil { //admin mode
-            for stripeCustomerId in self.conversation!.participants.allKeys {
-                if stripeCustomerId as? String != self.stripeCustomerId {
-                    recipientId = stripeCustomerId as? String
+            for firebaseId in self.conversation!.participants.allKeys {
+                if firebaseId as? String != self.user.firebaseId {
+                    recipientId = firebaseId as? String
                 }
             }
         }

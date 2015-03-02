@@ -27,7 +27,7 @@ class ConversationListViewController: UITableViewController {
 
         Firebase.setOption("persistence", to: true)
         
-        self.conversationsRef = Firebase(url: "https://\(Firebase.applicationName).firebaseio.com/users/\(SeatedUser.currentUser().stripeCustomerId)/conversations")
+        self.conversationsRef = Firebase(url: "https://\(Firebase.applicationName).firebaseio.com/users/\(SeatedUser.currentUser().firebaseId)/conversations")
         
         let authData = self.conversationsRef.authData
         if authData == nil {
@@ -104,7 +104,7 @@ class ConversationListViewController: UITableViewController {
         cell.lastMessageLabel.text = conversation.lastMessage
         cell.titleLabel.text = conversation.title
         cell.timeStampLabel.text = conversation.lastMessageTimePretty
-        let unreadCount = conversation.unreadCountForParticipant(SeatedUser.currentUser().stripeCustomerId)
+        let unreadCount = conversation.unreadCountForParticipant(SeatedUser.currentUser().firebaseId)
         cell.unreadCountLabel.text = String(unreadCount)
         cell.unreadCountLabel.hidden = unreadCount == 0
         

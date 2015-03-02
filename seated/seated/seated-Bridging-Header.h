@@ -3,8 +3,6 @@
 //
 #import <Parse/Parse.h>
 #import <Firebase/Firebase.h>
-#import "PTKView.h"
-#import <Stripe/Stripe.h>
 #import <JSQMessagesViewController/JSQMessages.h>
 #import <JSQMessagesViewController/UIDevice+JSQMessages.h>
 #import <SVProgressHUD/SVProgressHUD.h>

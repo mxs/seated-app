@@ -70,11 +70,10 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol, UITextFiel
             newUser.firstName = firstNameTextField.text
             newUser.lastName = lastNameTextField.text
 
-            self.checkIfUserAlreadyExists(newUser)
+            self.signup(newUser)
             
         }
     }
-    
     
     func validateFormLocally() -> Bool {
         for textField in self.textFields! {
@@ -84,73 +83,30 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol, UITextFiel
         }
         return true
     }
-    
-    func checkIfUserAlreadyExists(newUser:SeatedUser) -> Void {
-        SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Black)
-        
-        var query = PFUser.query()
-        query.whereKey("email", equalTo: self.emailTextField.text)
-        query.findObjectsInBackgroundWithBlock { (results, error) -> Void in
-            if error == nil {
-                if results.count == 0 {
-                    self.createStripeCustomerAndTrialSubscription(newUser)
-                }
-                else {
-                    SVProgressHUD.showErrorWithStatus("Email Already Exists")
-                }
-            }
-        }
-    }
-    
-    func createSubscriptionObject(data:NSDictionary) -> Subscription {
-        var subscription:Subscription = Subscription()
-        subscription.update(data)
-        return subscription
-    }
-    
-    func createStripeCustomerAndTrialSubscription(newUser:SeatedUser) -> Void {
+
+    func signup(newUser:SeatedUser) {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("performSuccessSegue"), name: "SVProgressHUDDidDisappearNotification", object: nil)
 
-        var params = ["email": newUser.email, "first_name":newUser.firstName, "last_name":newUser.lastName]
-        
-        PFCloud.callFunctionInBackground("createCustomerAndSubscribe", withParameters: params) { (result, error) -> Void in
-            if error != nil {
-                SVProgressHUD.showErrorWithStatus("Sign Up Failed")
+        SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Black)
+        newUser.isAdmin = false
+        newUser.signUpInBackgroundWithBlock({ (success, error) -> Void in
+            if success {
+                newUser.pinInBackgroundWithBlock({ (success, error) -> Void in
+                })
+                self.setUpPushNotification(newUser.objectId)
+                self.createFirebaseUser(newUser)
+                Flurry.setUserID(newUser.email)
+                Flurry.logEvent("Signup")
             }
             else {
-                
-                newUser.stripeCustomerId = result["id"] as String
-                newUser.isAdmin = false
-                let subscriptions = result["subscriptions"] as NSDictionary
-                
-                if let dataArray = subscriptions["data"] as? NSArray {
-                    if dataArray.count > 0 {
-                        if let data = dataArray[0] as? NSDictionary {
-                            newUser.subscription = self.createSubscriptionObject(data)
-                        }
-                    }
-                }
-                
-                newUser.signUpInBackgroundWithBlock({ (success, error) -> Void in
-                    if success {
-                        newUser.pinInBackgroundWithBlock({ (success, error) -> Void in
-                        })
-                        self.setUpPushNotification(newUser.stripeCustomerId)
-                        self.createFirebaseUser(newUser)
-                        let eventParams = ["stripeId":newUser.stripeCustomerId]
-                        Flurry.setUserID(newUser.email)
-                        Flurry.logEvent("Signup_To_Trial", withParameters:eventParams)
-                    }
-                    else {
-                        SVProgressHUD.showErrorWithStatus("Sign Up Failed")
-                    }
-                })
+                //TOOD: check for user name taken error code
+                SVProgressHUD.showErrorWithStatus("Sign Up Failed")
             }
-        }
+        })
     }
     
     func createFirebaseUser(user:SeatedUser) -> Void {
-        let userRef = Firebase(url:"https://\(Firebase.applicationName).firebaseio.com/users/\(user.stripeCustomerId)")
+        let userRef = Firebase(url:"https://\(Firebase.applicationName).firebaseio.com/users/\(user.firebaseId)")
         let userValues = [
             "email":user.email,
             "firstName":user["firstName"],
@@ -174,10 +130,10 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol, UITextFiel
         }
     }
     
-    func setUpPushNotification(stripeCustomerId:String) {
+    func setUpPushNotification(objectId:String) {
         let currentInstallation = PFInstallation.currentInstallation()
         if currentInstallation.channels != nil {
-            currentInstallation.channels.append(stripeCustomerId)
+            currentInstallation.channels.append(objectId)
         }
         else {
             currentInstallation.channels = ["global"]

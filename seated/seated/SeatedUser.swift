@@ -15,23 +15,9 @@ class SeatedUser: PFUser, PFSubclassing {
     }
     
     func update(user:SeatedUser) -> Void {
-        self.stripeCustomerId = user.stripeCustomerId
         self.firstName = user.firstName
         self.lastName = user.lastName
-        self.cardId = user.cardId
-        self.cardLabel = user.cardLabel
         self.isAdmin = user.isAdmin
-        self.subscription = user.subscription
-    }
-    
-    var stripeCustomerId:String {
-        get {
-            return self["stripeCustomerId"] as String
-        }
-        
-        set {
-            self["stripeCustomerId"] = newValue
-        }
     }
 
     var firstName:String {
@@ -56,24 +42,6 @@ class SeatedUser: PFUser, PFSubclassing {
         return "\(self.firstName) \(self.lastName)"
     }
     
-    var cardId:String? {
-        get {
-            return self["card_id"] as String?
-        }
-        set {
-            self["card_id"] = newValue
-        }
-    }
-    
-    var cardLabel:String? {
-        get {
-            return self["card_label"] as String?
-        }
-        set {
-            self["card_label"] = newValue
-        }
-    }
-    
     var isAdmin:Bool {
         get {
             return self["isAdmin"] as Bool
@@ -83,12 +51,12 @@ class SeatedUser: PFUser, PFSubclassing {
         }
     }
     
-    var subscription:Subscription? {
-        get {
-            return self["subscription"] as? Subscription
+    var firebaseId:String {
+        if self.isAdmin {
+            return "\(self.firstName)\(self.lastName)".lowercaseString
         }
-        set {
-            self["subscription"] = newValue
+        else {
+            return self.objectId
         }
     }
     

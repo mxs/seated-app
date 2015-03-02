@@ -97,7 +97,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, BlurBackground
                     if currentInstallation.channels == nil {
                         currentInstallation.channels = ["global"]
                     }
-                    currentInstallation.channels.append(loggedInUser.objectId)
+                    currentInstallation.channels.append(loggedInUser.firebaseId)
                     currentInstallation.saveEventually(nil)
                     
                     SVProgressHUD.dismiss()

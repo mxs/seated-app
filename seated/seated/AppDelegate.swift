@@ -64,9 +64,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         currentInstallation.setDeviceTokenFromData(deviceToken)
         currentInstallation.channels = ["global"]
         if SeatedUser.currentUser() != nil {
-            currentInstallation.channels.append(SeatedUser.currentUser().objectId)
+            currentInstallation.channels.append(SeatedUser.currentUser().firebaseId)
         }
-        
+
         currentInstallation.saveInBackgroundWithBlock { (success, error) -> Void in
             if error != nil {
                 //TODO: handle error

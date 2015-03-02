@@ -93,7 +93,7 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol, UITextFiel
             if success {
                 newUser.pinInBackgroundWithBlock({ (success, error) -> Void in
                 })
-                self.setUpPushNotification(newUser.objectId)
+                self.setUpPushNotification(newUser.firebaseId)
                 self.createFirebaseUser(newUser)
                 Flurry.setUserID(newUser.email)
                 Flurry.logEvent("Signup")
@@ -130,10 +130,10 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol, UITextFiel
         }
     }
     
-    func setUpPushNotification(objectId:String) {
+    func setUpPushNotification(firebaseId:String) {
         let currentInstallation = PFInstallation.currentInstallation()
         if currentInstallation.channels != nil {
-            currentInstallation.channels.append(objectId)
+            currentInstallation.channels.append(firebaseId)
         }
         else {
             currentInstallation.channels = ["global"]

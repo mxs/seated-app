@@ -17,6 +17,8 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol, UITextFiel
     @IBOutlet weak var passwordTextField: SeatedTextField!
     @IBOutlet weak var nextButton: UIButton!
     
+    let signupSuccessMessage = "You're In!"
+    
     var backgroundImageView:UIImageView!
     var backgroundImage:UIImage?
     var textFields:[SeatedTextField]?
@@ -85,22 +87,28 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol, UITextFiel
     }
 
     func signup(newUser:SeatedUser) {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("performSuccessSegue"), name: "SVProgressHUDDidDisappearNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("hudDisappeared:"), name: "SVProgressHUDDidDisappearNotification", object: nil)
 
         SVProgressHUD.showWithMaskType(SVProgressHUDMaskType.Black)
         newUser.isAdmin = false
         newUser.signUpInBackgroundWithBlock({ (success, error) -> Void in
+            Flurry.setUserID(newUser.email)
             if success {
+                Flurry.logEvent("Signup_Success")
                 newUser.pinInBackgroundWithBlock({ (success, error) -> Void in
                 })
                 self.setUpPushNotification(newUser.firebaseId)
                 self.createFirebaseUser(newUser)
-                Flurry.setUserID(newUser.email)
-                Flurry.logEvent("Signup")
             }
             else {
-                //TOOD: check for user name taken error code
-                SVProgressHUD.showErrorWithStatus("Sign Up Failed")
+                Flurry.logEvent("Signup_Failed")
+                if error.code == kPFErrorUsernameTaken {
+                    SVProgressHUD.showErrorWithStatus("User Already Exists")
+                }
+                else {
+                    SVProgressHUD.showErrorWithStatus("Sign Up Failed")
+                }
+
             }
         })
     }
@@ -117,7 +125,7 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol, UITextFiel
             userRef.authAnonymouslyWithCompletionBlock({ (error, authData) -> Void in
                 if error == nil {
                     userRef.setValue(userValues)
-                    SVProgressHUD.showSuccessWithStatus("You're In!")
+                    SVProgressHUD.showSuccessWithStatus(self.signupSuccessMessage)
                 }
                 else {
                     println(error)
@@ -126,7 +134,7 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol, UITextFiel
         }
         else {
             userRef.setValue(userValues)
-            SVProgressHUD.showSuccessWithStatus("You're In!")
+            SVProgressHUD.showSuccessWithStatus(self.signupSuccessMessage)
         }
     }
     
@@ -146,9 +154,13 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol, UITextFiel
 
     }
     
-    func performSuccessSegue() {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: "SVProgressHUDDidDisappearNotification", object: nil)
-        self.performSegueWithIdentifier("signupCompleteSegue", sender: self)
+    func hudDisappeared(notification:NSNotification) {
+        if let userInfo = notification.userInfo as? Dictionary<String,String> {
+            if userInfo["SVProgressHUDStatusUserInfoKey"] == self.signupSuccessMessage {
+                NSNotificationCenter.defaultCenter().removeObserver(self, name: "SVProgressHUDDidDisappearNotification", object: nil)
+                self.performSegueWithIdentifier("signupCompleteSegue", sender: self)
+            }
+        }
     }
     
     //MARK: UITextFieldDelegate

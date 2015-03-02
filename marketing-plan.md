@@ -10,6 +10,7 @@ Include:
   * Should of built the app later on
   * Define marketing channels earlier on
 - Ask for feedback on:
+  * Free or Paid?
   * Idea
   * Design
   * Copy
@@ -17,6 +18,7 @@ Include:
 ### Reddit r/Entrepreneur
 
 ### Fastlane Forums
+[Link to post ](http://www.thefastlaneforum.com/community/threads/restaurant-booking-app.58738/)
 
 ### Hacker News
 
@@ -41,7 +43,7 @@ Include:
 
 ## Inbound
 
-Need to use myself as the persona rather than seated generate content. Hence will need to clean up my social media profiles. A brand persona will help too?
+Need to use myself as the persona rather than Seated to generate content. Hence will need to clean up my social media profiles. A brand persona will help too?
 
 ### Facebook groups
 * Busy professions

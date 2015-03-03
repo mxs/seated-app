@@ -192,7 +192,7 @@ class ConversationViewController: JSQMessagesViewController {
             if snapshot.hasChildren() {
                 let participants = snapshot.value.allKeys as [String]
                 for participant in participants {
-                    if participant != self.user.objectId {
+                    if participant != self.user.firebaseId {
                         var push = PFPush()
                         push.setChannel(participant)
                         push.setData(["alert":message, "badge":"Increment", "sound":"clink.caf"])

@@ -25,6 +25,7 @@
 		A6657E5C1A5FB6E700B64EDA /* SettingsViewControllerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6657E5B1A5FB6E700B64EDA /* SettingsViewControllerTableViewController.swift */; };
 		A691A9961A7F6CEB0037CCF1 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A691A9951A7F6CEB0037CCF1 /* UIColorExtension.swift */; };
 		A691A9981A7F9A700037CCF1 /* intro-background.png in Resources */ = {isa = PBXBuildFile; fileRef = A691A9971A7F9A700037CCF1 /* intro-background.png */; };
+		A69B78D61AA5C72A00A9E4B6 /* FirebaseAuthObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = A69B78D51AA5C72A00A9E4B6 /* FirebaseAuthObserver.swift */; };
 		A6A2400B1A58004E00E2327F /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2400A1A58004E00E2327F /* ConversationViewController.swift */; };
 		A6CB38881A8B7475004818EC /* TermPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CB38871A8B7475004818EC /* TermPolicyViewController.swift */; };
 		A6CB388D1A8C6AC1004818EC /* MHTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CB388C1A8C6AC1004818EC /* MHTextField.m */; };
@@ -76,6 +77,7 @@
 		A6768CAA1A5123C30089DC80 /* seated-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "seated-Bridging-Header.h"; sourceTree = "<group>"; };
 		A691A9951A7F6CEB0037CCF1 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		A691A9971A7F9A700037CCF1 /* intro-background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro-background.png"; sourceTree = "<group>"; };
+		A69B78D51AA5C72A00A9E4B6 /* FirebaseAuthObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseAuthObserver.swift; sourceTree = "<group>"; };
 		A6A2400A1A58004E00E2327F /* ConversationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		A6CB38871A8B7475004818EC /* TermPolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermPolicyViewController.swift; sourceTree = "<group>"; };
 		A6CB388B1A8C6AC1004818EC /* MHTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHTextField.h; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				A6F1618F1A80A81F0055359B /* SeatedTextField.swift */,
 				A6F161961A8250A50055359B /* BlurBackgroundProtocol.swift */,
 				A6CB38871A8B7475004818EC /* TermPolicyViewController.swift */,
+				A69B78D51AA5C72A00A9E4B6 /* FirebaseAuthObserver.swift */,
 			);
 			path = seated;
 			sourceTree = "<group>";
@@ -417,6 +420,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A69B78D61AA5C72A00A9E4B6 /* FirebaseAuthObserver.swift in Sources */,
 				A6F1618E1A809B950055359B /* UIImage+ImageEffects.m in Sources */,
 				A66076A01A4913AE0039B61D /* LoginViewController.swift in Sources */,
 				A691A9961A7F6CEB0037CCF1 /* UIColorExtension.swift in Sources */,

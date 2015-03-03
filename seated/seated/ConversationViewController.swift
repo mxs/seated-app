@@ -57,8 +57,7 @@ class ConversationViewController: JSQMessagesViewController {
         self.senderDisplayName = SeatedUser.currentUser().displayName
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.jsq_defaultTypingIndicatorImage(), style: UIBarButtonItemStyle.Bordered, target: self, action: "showSettings")
         
-        self.checkValidFirebaseSession()
-
+        self.checkFirebaseAuth()
     }
     
     override func didReceiveMemoryWarning() {
@@ -70,23 +69,18 @@ class ConversationViewController: JSQMessagesViewController {
         super.viewDidAppear(animated)
         clearUnreadCount()
     }
-    
-    func checkValidFirebaseSession() {
-        let ref = Firebase(url: "https://\(Firebase.applicationName).firebaseio.com")
-        let handle = ref.observeAuthEventWithBlock({ authData in
-            if authData != nil {
-                self.removeFirebaseObservers()
-                self.setupFirebase()
-            }
-            else {
-                ref.authAnonymouslyWithCompletionBlock({ (error, authData) -> Void in
-                })
-            }
-        })
+        
+    func checkFirebaseAuth() {
+        if FirebaseAuthObserver.sharedInstance.isAuthenticated {
+            self.setupFirebase()
+        }
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("setupFirebase"), name: FirebaseAuthObserver.sharedInstance.kFirebaseConnected, object: nil)
+        FirebaseAuthObserver.sharedInstance.startObserver()
     }
     
     // Sets up new user or starts listening to messages in current conversations
     func setupFirebase() -> Void {
+        self.removeFirebaseObservers()
         let userConversationsRef = Firebase(url:"https://\(Firebase.applicationName).firebaseio.com/users/\(self.user.firebaseId)/conversations")
         var firstRun = true
         userConversationsRef.observeEventType(FEventType.Value, withBlock: { (snapshot) -> Void in

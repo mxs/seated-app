@@ -14,6 +14,7 @@ class ConversationListViewController: UITableViewController {
     var conversationsRef:Firebase!
     var conversations = [Conversation]()
     var conversationCount:Int = 0
+    var firebaseRefs = [Firebase]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,34 +28,40 @@ class ConversationListViewController: UITableViewController {
 
         Firebase.setOption("persistence", to: true)
         
-        self.conversationsRef = Firebase(url: "https://\(Firebase.applicationName).firebaseio.com/users/\(SeatedUser.currentUser().firebaseId)/conversations")
-        
-        let authData = self.conversationsRef.authData
-        if authData == nil {
-            self.conversationsRef.authAnonymouslyWithCompletionBlock({ (error, authData) -> Void in
-                if error == nil {
-                    self.observeConversationValueEvent()
-                }
-            })
-        }
-        else {
-            self.observeConversationValueEvent()
-        }
+        self.checkFirebaseAuth()
     }
     
-    func observeConversationValueEvent() -> Void {
+    func checkFirebaseAuth() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("setupFirebase"), name: FirebaseAuthObserver.sharedInstance.kFirebaseConnected, object: nil)
+        FirebaseAuthObserver.sharedInstance.startObserver()
+    }
+    
+    func removeFirebaseObservers() {
+        if !self.firebaseRefs.isEmpty {
+            for ref in self.firebaseRefs {
+                ref.removeAllObservers()
+            }
+            self.firebaseRefs = [Firebase]()
+        }
+    }
+
+    func setupFirebase() {
+        self.removeFirebaseObservers()
+        self.conversationsRef = Firebase(url: "https://\(Firebase.applicationName).firebaseio.com/users/\(SeatedUser.currentUser().firebaseId)/conversations")
+        
         self.conversationsRef.observeEventType(FEventType.Value, withBlock: { (snapshot) -> Void in
             if snapshot.hasChildren() {
                 
                 let dic = snapshot.value as NSDictionary
                 let keys = dic.allKeys
                 self.conversationCount = keys.count
-
+                
                 for conversationId in keys {
                     self.getConversation(conversationId as String)
                 }
             }
         })
+        self.firebaseRefs.append(self.conversationsRef)
     }
 
     func getConversation(conversationId:String) -> Void {
@@ -89,6 +96,7 @@ class ConversationListViewController: UITableViewController {
                 }
             }
         })
+        self.firebaseRefs.append(conversationRef)
     }
     
     //MARK: - UITableViewDataSource

@@ -56,16 +56,14 @@ class ConversationViewController: JSQMessagesViewController {
         self.senderId = self.user.email
         self.senderDisplayName = SeatedUser.currentUser().displayName
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.jsq_defaultTypingIndicatorImage(), style: UIBarButtonItemStyle.Bordered, target: self, action: "showSettings")
-
-        self.setupFirebase()
         
+        self.checkValidFirebaseSession()
+
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        self.messagesRef.removeAllObservers()
-        self.conversationRef.removeAllObservers()
-        self.unreadCountRef.removeAllObservers()
+        self.removeFirebaseObservers()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -73,24 +71,23 @@ class ConversationViewController: JSQMessagesViewController {
         clearUnreadCount()
     }
     
+    func checkValidFirebaseSession() {
+        let ref = Firebase(url: "https://\(Firebase.applicationName).firebaseio.com")
+        let handle = ref.observeAuthEventWithBlock({ authData in
+            if authData != nil {
+                self.removeFirebaseObservers()
+                self.setupFirebase()
+            }
+            else {
+                ref.authAnonymouslyWithCompletionBlock({ (error, authData) -> Void in
+                })
+            }
+        })
+    }
+    
     // Sets up new user or starts listening to messages in current conversations
     func setupFirebase() -> Void {
         let userConversationsRef = Firebase(url:"https://\(Firebase.applicationName).firebaseio.com/users/\(self.user.firebaseId)/conversations")
-        let authData = userConversationsRef.authData
-        
-        if authData == nil {
-            userConversationsRef.authAnonymouslyWithCompletionBlock({ (error, authData) -> Void in
-                if error == nil {
-                    self.getUserConversations(userConversationsRef)
-                }
-            })
-        }
-        else {
-            self.getUserConversations(userConversationsRef)
-        }
-    }
-    
-    func getUserConversations(userConversationsRef:Firebase) -> Void {
         var firstRun = true
         userConversationsRef.observeEventType(FEventType.Value, withBlock: { (snapshot) -> Void in
             if firstRun { //HACK to get around this: http://stackoverflow.com/a/24516952/919533
@@ -249,26 +246,25 @@ class ConversationViewController: JSQMessagesViewController {
         self.performSegueWithIdentifier("settingsSegue", sender: self)
     }
 
+    func removeFirebaseObservers() {
+        if self.messagesRef != nil {
+            self.messagesRef.removeAllObservers()
+        }
+
+        if self.conversationRef != nil {
+            self.conversationRef.removeAllObservers()
+        }
+        
+        if self.unreadCountRef != nil {
+            self.unreadCountRef.removeAllObservers()
+        }
+    }
     
     //MARK: - JSQMessageViewController Overrides
     
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
-        
-        let authData = self.messagesRef.authData
-        if authData != nil {
-            self.sendMessage(senderId, text: text, senderDisplayName: senderDisplayName)
-        }
-        else {
-            
-            //firebase session expired, very rare.
-            self.messagesRef.authAnonymouslyWithCompletionBlock({ (error, authData) -> Void in
-                if error == nil {
-                    self.observeMessagesForConversation(self.conversationId)
-                    self.sendMessage(senderId, text: text, senderDisplayName: senderDisplayName)
-                }
-            })
-        }
+        self.sendMessage(senderId, text: text, senderDisplayName: senderDisplayName)
     }
     
     

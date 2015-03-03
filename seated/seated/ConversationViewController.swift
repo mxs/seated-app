@@ -43,7 +43,7 @@ class ConversationViewController: JSQMessagesViewController {
             self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero
         }
         else {
-            self.title = "Lets get you seated!"
+            self.updateTitle()
            
             self.incomingMessageAvatarImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(UIImage(named: "incoming-avatar"), diameter: 40)
             self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSize(width:40.0, height:40.0)
@@ -58,18 +58,24 @@ class ConversationViewController: JSQMessagesViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage.jsq_defaultTypingIndicatorImage(), style: UIBarButtonItemStyle.Bordered, target: self, action: "showSettings")
         
         self.checkFirebaseAuth()
+        
+        if !self.user.isAdmin {
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateTitle"), name: "ConfigUpdated", object: nil)
+        }
+
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         self.removeFirebaseObservers()
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         clearUnreadCount()
     }
-        
+    
     func checkFirebaseAuth() {
         if FirebaseAuthObserver.sharedInstance.isAuthenticated {
             self.setupFirebase()
@@ -252,6 +258,13 @@ class ConversationViewController: JSQMessagesViewController {
         if self.unreadCountRef != nil {
             self.unreadCountRef.removeAllObservers()
         }
+    }
+    
+    func updateTitle() {
+        let config = PFConfig.currentConfig()
+        let titles = config["conversation_titles"] as NSArray
+        let index = arc4random_uniform(UInt32(titles.count))
+        self.title = titles[Int(index)] as? String
     }
     
     //MARK: - JSQMessageViewController Overrides

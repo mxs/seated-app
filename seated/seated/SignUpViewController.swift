@@ -97,6 +97,7 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol, UITextFiel
                 Flurry.logEvent("Signup_Success")
                 newUser.pinInBackgroundWithBlock({ (success, error) -> Void in
                 })
+                self.sendWelcomeEmail(newUser)
                 self.setUpPushNotification(newUser.firebaseId)
                 self.createFirebaseUser(newUser)
             }
@@ -148,6 +149,15 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol, UITextFiel
             }
         }
 
+    }
+    
+    func sendWelcomeEmail(newUser:SeatedUser) {
+        let params = ["email":newUser.email, "fullname":newUser.displayName]
+        PFCloud.callFunctionInBackground("sendWelcomeEmail", withParameters: params) { (result, error) -> Void in
+            if error != nil {
+                println("Send welcome email faile: \(error)")
+            }
+        }
     }
     
     func hudDisappeared(notification:NSNotification) {

@@ -51,13 +51,17 @@ class SeatedUser: PFUser, PFSubclassing {
         }
     }
     
+    //firebase Id (keys) cannot contain special characters so lets remove them
+    //this id is also used as channel in Parse for push notificaiton values for 
+    //channels must be alpha numeric and start with a character
     var firebaseId:String {
         if self.isAdmin {
             return "\(self.firstName)\(self.lastName)".lowercaseString
         }
         else {
-            return self.objectId
+            return "FIRE" + self.objectId
         }
+        
     }
     
 }

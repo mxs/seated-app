@@ -90,15 +90,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate, BlurBackground
                     let loggedInUser = user as SeatedUser
                     
                     loggedInUser.pinInBackgroundWithBlock({ (success, error) -> Void in
-                        
                     })
                     
-                    let currentInstallation = PFInstallation.currentInstallation()
-                    if currentInstallation.channels == nil {
-                        currentInstallation.channels = ["global"]
-                    }
-                    currentInstallation.channels.append(loggedInUser.firebaseId)
-                    currentInstallation.saveEventually(nil)
+                    self.setupPushNotification(loggedInUser.firebaseId)
                     
                     SVProgressHUD.dismiss()
                     
@@ -138,6 +132,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate, BlurBackground
                 self.presentViewController(alertController, animated: true, completion: nil)
             }
         }
+    }
+    
+    func setupPushNotification(firebaseId:String) {
+        let currentInstallation = PFInstallation.currentInstallation()
+        currentInstallation.addUniqueObject("global", forKey: "channels")
+        currentInstallation.addUniqueObject(firebaseId, forKey: "channels")
+        currentInstallation.saveInBackgroundWithBlock({ (success, error) -> Void in
+            if !success {
+                currentInstallation.saveEventually(nil)
+            }
+        })
+
     }
 
     

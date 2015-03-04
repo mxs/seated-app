@@ -140,12 +140,8 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol, UITextFiel
     
     func setUpPushNotification(firebaseId:String) {
         let currentInstallation = PFInstallation.currentInstallation()
-        if currentInstallation.channels != nil {
-            currentInstallation.channels.append(firebaseId)
-        }
-        else {
-            currentInstallation.channels = ["global"]
-        }
+        currentInstallation.addUniqueObject("global", forKey: "channels")
+        currentInstallation.addUniqueObject(firebaseId, forKey: "channels")
         currentInstallation.saveInBackgroundWithBlock { (success, error) -> Void in
             if error != nil {
                 currentInstallation.saveEventually(nil)

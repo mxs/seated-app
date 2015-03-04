@@ -16,6 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        //This MUST come before Parse.setApplicationId
         Parse.enableLocalDatastore()
 
         #if DEBUG
@@ -62,14 +63,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         var currentInstallation = PFInstallation.currentInstallation()
         currentInstallation.setDeviceTokenFromData(deviceToken)
-        currentInstallation.channels = ["global"]
-        if SeatedUser.currentUser() != nil {
-            currentInstallation.channels.append(SeatedUser.currentUser().firebaseId)
-        }
+//        currentInstallation.channels = ["global"]
+//        if SeatedUser.currentUser() != nil {
+//            currentInstallation.channels.append(SeatedUser.currentUser().firebaseId)
+//        }
 
         currentInstallation.saveInBackgroundWithBlock { (success, error) -> Void in
             if error != nil {
-                //TODO: handle error
                 println("can't save installation error: \(error)")
             }
         }
@@ -91,8 +91,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationDidBecomeActive(application: UIApplication) {
         var currentInstallation = PFInstallation.currentInstallation()
-        currentInstallation.badge = 0
-        currentInstallation.saveEventually(nil)
+        if currentInstallation.badge != 0 {
+            currentInstallation.badge = 0
+            currentInstallation.saveEventually(nil)
+        }
     }
 
     func applicationWillTerminate(application: UIApplication) {

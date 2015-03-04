@@ -188,6 +188,7 @@ class ConversationViewController: JSQMessagesViewController {
     }
     
     func sendPushNotification(message:String) {
+                
         self.conversationRef.childByAppendingPath("/participants").observeSingleEventOfType(FEventType.Value, withBlock: { (snapshot) -> Void in
             if snapshot.hasChildren() {
                 let participants = snapshot.value.allKeys as [String]

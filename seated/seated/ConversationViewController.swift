@@ -12,7 +12,7 @@ class ConversationViewController: JSQMessagesViewController {
     
     let kFirebaseServerValueTimestamp = [".sv":"timestamp"]
     let seatbotId = "seatbot"
-    let welcomeMessage = "Hi there, welcome to seated!"
+    let welcomeMessage = "Hi there, welcome to Seated!"
     
     var user:SeatedUser!
     var conversationId:String!
@@ -24,6 +24,7 @@ class ConversationViewController: JSQMessagesViewController {
     var outgoingMessageBubbleImage:JSQMessagesBubbleImage!
     var incomingMessageBubbleImage:JSQMessagesBubbleImage!
     var incomingMessageAvatarImage:JSQMessagesAvatarImage!
+    var participants:[String] = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -144,6 +145,8 @@ class ConversationViewController: JSQMessagesViewController {
         
         self.observeUnreadCount()
         
+        self.setParticipants()
+        
         return self.messagesRef
     }
     
@@ -188,24 +191,16 @@ class ConversationViewController: JSQMessagesViewController {
     }
     
     func sendPushNotification(message:String) {
-                
-        self.conversationRef.childByAppendingPath("/participants").observeSingleEventOfType(FEventType.Value, withBlock: { (snapshot) -> Void in
-            if snapshot.hasChildren() {
-                let participants = snapshot.value.allKeys as [String]
-                for participant in participants {
-                    if participant != self.user.firebaseId {
-                        var push = PFPush()
-                        push.setChannel(participant)
-                        push.setData(["alert":message, "badge":"Increment", "sound":"clink.caf"])
-                        push.sendPushInBackgroundWithBlock { (success, error) -> Void in
-                            //success
-                        }
-                        
-                    }
+        for participant in self.participants {
+            if participant != self.user.firebaseId {
+                var push = PFPush()
+                push.setChannel(participant)
+                push.setData(["alert":message, "badge":"Increment", "sound":"clink.caf"])
+                push.sendPushInBackgroundWithBlock { (success, error) -> Void in
+                    //success
                 }
             }
-        })
-
+        }
     }
     
     func incrementUnreadCount() -> Void {
@@ -266,6 +261,14 @@ class ConversationViewController: JSQMessagesViewController {
         let titles = config["conversation_titles"] as NSArray
         let index = arc4random_uniform(UInt32(titles.count))
         self.title = titles[Int(index)] as? String
+    }
+    
+    func setParticipants() {
+        self.conversationRef.childByAppendingPath("/participants").observeSingleEventOfType(FEventType.Value, withBlock: { (snapshot) -> Void in
+            if snapshot.hasChildren() {
+                self.participants = snapshot.value.allKeys as [String]
+            }
+        })
     }
     
     //MARK: - JSQMessageViewController Overrides

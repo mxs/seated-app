@@ -63,10 +63,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         var currentInstallation = PFInstallation.currentInstallation()
         currentInstallation.setDeviceTokenFromData(deviceToken)
-//        currentInstallation.channels = ["global"]
-//        if SeatedUser.currentUser() != nil {
-//            currentInstallation.channels.append(SeatedUser.currentUser().firebaseId)
-//        }
 
         currentInstallation.saveInBackgroundWithBlock { (success, error) -> Void in
             if error != nil {

@@ -178,6 +178,18 @@ class ConversationViewController: JSQMessagesViewController {
         Flurry.logEvent("Message_Sent")
     }
     
+    //This version doesn't reload the scroll view compared to the super version, nor does it scroll to the bottom.
+    //Those calls are unnecessary since using Firebase with persistence turned will fire the observer immediately and in the receiving code
+    //the collection view reloading and scrolling happens.
+    override func finishSendingMessageAnimated(animate:Bool) {
+        var textView = self.inputToolbar.contentView.textView
+        textView.text = nil
+        textView.undoManager?.removeAllActions()
+        
+        self.inputToolbar.toggleSendButtonEnabled()
+        NSNotificationCenter.defaultCenter().postNotificationName(UITextViewTextDidChangeNotification, object: textView)
+    }
+    
     func incrementUserMessageCount() {
         let messagesCountRef = Firebase(url: "https://\(Firebase.applicationName).firebaseio.com/users/\(self.user.firebaseId)/messagescount")
         messagesCountRef.runTransactionBlock { (currentData) -> FTransactionResult! in

@@ -29,6 +29,8 @@
 		A6A2400B1A58004E00E2327F /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6A2400A1A58004E00E2327F /* ConversationViewController.swift */; };
 		A6CB38881A8B7475004818EC /* TermPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CB38871A8B7475004818EC /* TermPolicyViewController.swift */; };
 		A6CB388D1A8C6AC1004818EC /* MHTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = A6CB388C1A8C6AC1004818EC /* MHTextField.m */; };
+		A6CBB2411AC15D1200AC310F /* intro@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A6CBB2401AC15D1200AC310F /* intro@2x.png */; };
+		A6CBB2491AC22FC100AC310F /* overlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = A6CBB2481AC22FC100AC310F /* overlay.xib */; };
 		A6CFF6031A53F4B900BBD8D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A6CFF6021A53F4B900BBD8D3 /* Main.storyboard */; };
 		A6CFF6051A53FB2E00BBD8D3 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CFF6041A53FB2E00BBD8D3 /* RootViewController.swift */; };
 		A6CFF60E1A54CCED00BBD8D3 /* IntroContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CFF60C1A54CCED00BBD8D3 /* IntroContentViewController.swift */; };
@@ -82,6 +84,8 @@
 		A6CB38871A8B7475004818EC /* TermPolicyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermPolicyViewController.swift; sourceTree = "<group>"; };
 		A6CB388B1A8C6AC1004818EC /* MHTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHTextField.h; sourceTree = "<group>"; };
 		A6CB388C1A8C6AC1004818EC /* MHTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHTextField.m; sourceTree = "<group>"; };
+		A6CBB2401AC15D1200AC310F /* intro@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "intro@2x.png"; sourceTree = "<group>"; };
+		A6CBB2481AC22FC100AC310F /* overlay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = overlay.xib; sourceTree = "<group>"; };
 		A6CFF6021A53F4B900BBD8D3 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		A6CFF6041A53FB2E00BBD8D3 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		A6CFF60C1A54CCED00BBD8D3 /* IntroContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroContentViewController.swift; sourceTree = "<group>"; };
@@ -240,11 +244,13 @@
 		A6657E561A5E503700B64EDA /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				A6CBB2401AC15D1200AC310F /* intro@2x.png */,
 				A611899E1A92F838006490C3 /* clink.caf */,
 				A6F161941A8235880055359B /* ios7-close@2x.png */,
 				A6F161871A8047390055359B /* transparent-seated-logo@2x.png */,
 				A691A9971A7F9A700037CCF1 /* intro-background.png */,
 				A6657E591A5E574E00B64EDA /* incoming-avatar@2x.png */,
+				A6CBB2481AC22FC100AC310F /* overlay.xib */,
 			);
 			name = Assets;
 			path = ../../assets;
@@ -365,6 +371,8 @@
 				A6CFF60F1A54CCED00BBD8D3 /* IntroContentViewController.xib in Resources */,
 				A66076A81A4913AE0039B61D /* LaunchScreen.xib in Resources */,
 				A691A9981A7F9A700037CCF1 /* intro-background.png in Resources */,
+				A6CBB2411AC15D1200AC310F /* intro@2x.png in Resources */,
+				A6CBB2491AC22FC100AC310F /* overlay.xib in Resources */,
 				A6657E5A1A5E574E00B64EDA /* incoming-avatar@2x.png in Resources */,
 				A66076A51A4913AE0039B61D /* Images.xcassets in Resources */,
 				A6CFF6031A53F4B900BBD8D3 /* Main.storyboard in Resources */,

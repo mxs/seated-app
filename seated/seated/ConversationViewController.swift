@@ -63,7 +63,8 @@ class ConversationViewController: JSQMessagesViewController {
         if !self.user.isAdmin {
             NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateTitle"), name: "ConfigUpdated", object: nil)
         }
-
+     
+        self.setupFirstTimerOverlay()
     }
     
     override func didReceiveMemoryWarning() {
@@ -250,10 +251,6 @@ class ConversationViewController: JSQMessagesViewController {
         }
     }
     
-    func showSettings() {
-        self.performSegueWithIdentifier("settingsSegue", sender: self)
-    }
-
     func removeFirebaseObservers() {
         if self.messagesRef != nil {
             self.messagesRef.removeAllObservers()
@@ -266,13 +263,6 @@ class ConversationViewController: JSQMessagesViewController {
         if self.unreadCountRef != nil {
             self.unreadCountRef.removeAllObservers()
         }
-    }
-    
-    func updateTitle() {
-        let config = PFConfig.currentConfig()
-        let titles = config["conversation_titles"] as NSArray
-        let index = arc4random_uniform(UInt32(titles.count))
-        self.title = titles[Int(index)] as? String
     }
     
     func setParticipants() {
@@ -335,6 +325,40 @@ class ConversationViewController: JSQMessagesViewController {
         cell.textView.linkTextAttributes = [NSForegroundColorAttributeName: cell.textView.textColor, NSUnderlineStyleAttributeName:1] //NSUnderlineStyle.StyleSingle
         
         return cell
+    }
+    
+    //MARK: - Misc
+    func setupFirstTimerOverlay() {
+        
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let shownOverlay = defaults.boolForKey("shown_intro_overlay")
+        
+        if !shownOverlay {
+            let loadedViews = NSBundle.mainBundle().loadNibNamed("overlay", owner: self, options: nil)
+            let v = loadedViews.last as UIView
+            let touch = UITapGestureRecognizer(target: self, action: Selector("dismissOverlay:"))
+            v.addGestureRecognizer(touch)
+            
+            v.frame = self.navigationController!.view.bounds
+            self.navigationController?.view.addSubview(v)
+            
+            defaults.setBool(true, forKey: "shown_intro_overlay")
+        }
+    }
+    
+    func dismissOverlay(gesture:UIGestureRecognizer) {
+        gesture.view?.removeFromSuperview()
+    }
+    
+    func showSettings() {
+        self.performSegueWithIdentifier("settingsSegue", sender: self)
+    }
+
+    func updateTitle() {
+        let config = PFConfig.currentConfig()
+        let titles = config["conversation_titles"] as NSArray
+        let index = arc4random_uniform(UInt32(titles.count))
+        self.title = titles[Int(index)] as? String
     }
     
     

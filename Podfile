@@ -1,8 +1,10 @@
 xcodeproj 'seated/seated.xcodeproj'
 
 pod 'Parse', '~> 1.6'
+#pod 'Parse', '1.6.2'
 pod 'Firebase', '>= 2.1.0'
 pod 'JSQMessagesViewController'
 pod 'SVProgressHUD'
 pod 'DateTools'
 pod 'FlurrySDK', '6.0'
+pod 'Wit', '~> 4.0.0'

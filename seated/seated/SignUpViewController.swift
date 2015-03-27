@@ -103,7 +103,7 @@ class SignUpViewController: UIViewController, BlurBackgroundProtocol, UITextFiel
             }
             else {
                 Flurry.logEvent("Signup_Failed")
-                if error.code == kPFErrorUsernameTaken {
+                if error.code == PFErrorCode.ErrorUsernameTaken.rawValue {
                     SVProgressHUD.showErrorWithStatus("User Already Exists")
                 }
                 else {

@@ -106,13 +106,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate, BlurBackground
                 }
                 else {
                     var errorMessage = ""
-                    println(error.code)
-                    switch error.code {
-                    case kPFErrorConnectionFailed:
-                        errorMessage = "Connection Failed"
-                    case kPFErrorObjectNotFound:
-                        errorMessage = "Incorrect Credentials"
-                    default:
+                    if let code = PFErrorCode(rawValue: error.code) {
+                        switch code {
+                        case .ErrorConnectionFailed:
+                            errorMessage = "Connection Failed"
+                        case .ErrorObjectNotFound:
+                            errorMessage = "Incorrect Credentials"
+                        default:
+                            errorMessage = "Please Try Again"
+                        }
+                        
+                    }
+                    else {
                         errorMessage = "Please Try Again"
                     }
                     SVProgressHUD.showErrorWithStatus(errorMessage)

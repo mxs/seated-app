@@ -111,8 +111,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             needToUpdate = now.hoursFrom(lastConfigUpdatedDate) >= 2
         }
         
-        needToUpdate = true
-        
         if needToUpdate {
             PFConfig.getConfigInBackgroundWithBlock({ (config, error) -> Void in
                 defaults.setDouble(now.timeIntervalSince1970, forKey: "lastConfigUpdate")

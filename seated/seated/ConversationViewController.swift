@@ -27,7 +27,7 @@ class ConversationViewController: JSQMessagesViewController, WitDelegate {
     var incomingMessageBubbleImage:JSQMessagesBubbleImage!
     var incomingMessageAvatarImage:JSQMessagesAvatarImage!
     var participants:[String] = [String]()
-    var autoResponse = false
+    var autoResponse = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -182,7 +182,9 @@ class ConversationViewController: JSQMessagesViewController, WitDelegate {
         incrementUserMessageCount()
         finishSendingMessage()
         
-        Wit.sharedInstance().interpretString(text, customData: nil)
+        if senderId != self.seatbotEmail {
+            Wit.sharedInstance().interpretString(text, customData: nil)
+        }
         
         Flurry.logEvent("Message_Sent")
     }

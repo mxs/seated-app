@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Flurry.startSession("F8KJYS9CXYNSBJRPY4VK")
         #endif
         
+        Wit.sharedInstance().accessToken = "6JTGWBFHF2EWFDBHLF2XQR7X3QKHOJWZ"
+        
         let userNotificationTypes = UIUserNotificationType.Alert | UIUserNotificationType.Sound | UIUserNotificationType.Badge
         let notificationSettings = UIUserNotificationSettings(forTypes: userNotificationTypes, categories: nil)
         application.registerUserNotificationSettings(notificationSettings)
@@ -97,6 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    //updates config every 2hrs
     func updateParseConfig() {
         var defaults = NSUserDefaults.standardUserDefaults()
         let lastConfigUpdate = defaults.doubleForKey("lastConfigUpdate")
@@ -105,8 +108,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if !needToUpdate {
             let lastConfigUpdatedDate = NSDate(timeIntervalSince1970: lastConfigUpdate)
-            needToUpdate = now.hoursFrom(lastConfigUpdatedDate) >= 12
+            needToUpdate = now.hoursFrom(lastConfigUpdatedDate) >= 2
         }
+        
+        needToUpdate = true
         
         if needToUpdate {
             PFConfig.getConfigInBackgroundWithBlock({ (config, error) -> Void in

@@ -8,9 +8,10 @@
 
 import UIKit
 
-class ConversationViewController: JSQMessagesViewController {
+class ConversationViewController: JSQMessagesViewController, WitDelegate {
     
     let kFirebaseServerValueTimestamp = [".sv":"timestamp"]
+    let kIntentGreeting = "greeting"
     let seatbotId = "seatbot"
     let welcomeMessage = "Hi there, welcome to Seated!"
     
@@ -25,6 +26,7 @@ class ConversationViewController: JSQMessagesViewController {
     var incomingMessageBubbleImage:JSQMessagesBubbleImage!
     var incomingMessageAvatarImage:JSQMessagesAvatarImage!
     var participants:[String] = [String]()
+    var autoResponse = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,6 +35,8 @@ class ConversationViewController: JSQMessagesViewController {
         navBar?.barTintColor = UIColor.primaryColour()
         navBar?.tintColor = UIColor.textColour()
         navBar?.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.textColour()]
+        
+        Wit.sharedInstance().delegate = self
         
         Firebase.setOption("persistence", to: true)
         
@@ -61,7 +65,7 @@ class ConversationViewController: JSQMessagesViewController {
         self.checkFirebaseAuth()
         
         if !self.user.isAdmin {
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateTitle"), name: "ConfigUpdated", object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("configUpdated"), name: "ConfigUpdated", object: nil)
         }
      
         self.setupFirstTimerOverlay()
@@ -129,7 +133,7 @@ class ConversationViewController: JSQMessagesViewController {
         self.observeMessagesForConversation(self.conversationId)
         
         //Send first welcome message
-        self.messagesRef.childByAutoId().setValue(["sender":self.seatbotId, "text":self.welcomeMessage, "senderDisplayName":"Seat Bot", "timestamp":self.kFirebaseServerValueTimestamp])
+        self.sendMessageFromSeatBot(self.welcomeMessage)
     }
 
     
@@ -176,6 +180,9 @@ class ConversationViewController: JSQMessagesViewController {
         sendPushNotification(text)
         incrementUserMessageCount()
         finishSendingMessage()
+        
+        Wit.sharedInstance().interpretString(text, customData: nil)
+        
         Flurry.logEvent("Message_Sent")
     }
     
@@ -327,7 +334,34 @@ class ConversationViewController: JSQMessagesViewController {
         return cell
     }
     
+    //MARK: - Wit delegate
+    func witDidGraspIntent(outcomes: [AnyObject]!, messageId: String!, customData: AnyObject!, error e: NSError!) {
+        if !outcomes.isEmpty {
+            let outcome = outcomes[0] as NSDictionary
+            println(outcome)
+            let intent = outcome["intent"] as String
+            if self.autoResponse {
+                if intent == kIntentGreeting {
+                    self.sendMessageFromSeatBot(self.getGreetingResponse())
+                }
+            }
+        }
+
+    }
+    
     //MARK: - Misc
+    
+    func sendMessageFromSeatBot(message:String) {
+        self.messagesRef.childByAutoId().setValue(["sender":self.seatbotId, "text":message, "senderDisplayName":"Seat Bot", "timestamp":self.kFirebaseServerValueTimestamp])
+    }
+    
+    func getGreetingResponse() -> String {
+        let config = PFConfig.currentConfig()
+        let greetings = config["greeting_responses"] as NSArray
+        let index = arc4random_uniform(UInt32(greetings.count))
+        return greetings[Int(index)] as String
+    }
+    
     func setupFirstTimerOverlay() {
         
         let defaults = NSUserDefaults.standardUserDefaults()
@@ -354,11 +388,18 @@ class ConversationViewController: JSQMessagesViewController {
         self.performSegueWithIdentifier("settingsSegue", sender: self)
     }
 
+    func configUpdated() {
+        self.updateTitle()
+        let config = PFConfig.currentConfig()
+        self.autoResponse = config["auto_response"] as Bool
+    }
+    
     func updateTitle() {
         let config = PFConfig.currentConfig()
         let titles = config["conversation_titles"] as NSArray
         let index = arc4random_uniform(UInt32(titles.count))
         self.title = titles[Int(index)] as? String
+
     }
     
     

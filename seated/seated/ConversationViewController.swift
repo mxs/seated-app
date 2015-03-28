@@ -13,6 +13,7 @@ class ConversationViewController: JSQMessagesViewController, WitDelegate {
     let kFirebaseServerValueTimestamp = [".sv":"timestamp"]
     let kIntentGreeting = "greeting"
     let seatbotId = "seatbot"
+    let seatbotEmail = "seated.app@gmail.com"
     let welcomeMessage = "Hi there, welcome to Seated!"
     
     var user:SeatedUser!
@@ -352,7 +353,7 @@ class ConversationViewController: JSQMessagesViewController, WitDelegate {
     //MARK: - Misc
     
     func sendMessageFromSeatBot(message:String) {
-        self.messagesRef.childByAutoId().setValue(["sender":self.seatbotId, "text":message, "senderDisplayName":"Seat Bot", "timestamp":self.kFirebaseServerValueTimestamp])
+        self.messagesRef.childByAutoId().setValue(["sender":self.seatbotEmail, "text":message, "senderDisplayName":"Seat Bot", "timestamp":self.kFirebaseServerValueTimestamp])
     }
     
     func getGreetingResponse() -> String {

@@ -28,6 +28,7 @@ class ConversationViewController: JSQMessagesViewController, WitDelegate {
     var incomingMessageAvatarImage:JSQMessagesAvatarImage!
     var participants:[String] = [String]()
     var autoResponse = true
+    var greetingIntentConfidence = 0.500
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -341,10 +342,10 @@ class ConversationViewController: JSQMessagesViewController, WitDelegate {
     func witDidGraspIntent(outcomes: [AnyObject]!, messageId: String!, customData: AnyObject!, error e: NSError!) {
         if !outcomes.isEmpty {
             let outcome = outcomes[0] as NSDictionary
-            println(outcome)
             let intent = outcome["intent"] as String
+            let confidence = outcome["confidence"] as Double
             if self.autoResponse {
-                if intent == kIntentGreeting {
+                if intent == kIntentGreeting && confidence > self.greetingIntentConfidence {
                     self.sendMessageFromSeatBot(self.getGreetingResponse())
                 }
             }
@@ -395,6 +396,7 @@ class ConversationViewController: JSQMessagesViewController, WitDelegate {
         self.updateTitle()
         let config = PFConfig.currentConfig()
         self.autoResponse = config["auto_response"] as Bool
+        self.greetingIntentConfidence = config["greeting_intent_confidence"] as Double
     }
     
     func updateTitle() {
